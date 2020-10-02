@@ -1,0 +1,28 @@
+Hau 2 use?!?
+PHP Code:
+List<FirefoxCookie> firefoxCookies = Firefox.Cookies();
+List<FirefoxPassword> firefoxPasswords = Firefox.Passwords(); 
+
+
+
+
+public partial class Form1 : Form
+    {
+        List<FirefoxPassword> firePW = new List<FirefoxPassword>();
+
+        public Form1()
+        {
+            InitializeComponent();
+
+            firePW.Add(new FirefoxPassword() { Username = "Username1", Password="Password1" });
+            firePW.Add(new FirefoxPassword() { Username = "Username2", Password = "Password2" });
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            foreach (FirefoxPassword fpw in firePW)
+            {
+                richTextBox1.AppendText(fpw.Username.ToString() + "\n");
+                richTextBox1.AppendText(fpw.Password.ToString() + "\n");
+            }
+        }

@@ -1,0 +1,277 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F281B4CA-1D83-4532-AEA6-13373647D7B8}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Vicious Stealer Stub</RootNamespace>
+    <AssemblyName>Vicious Stealer Stub</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ApplicationIcon>Vicious Stealer Stub.ico</ApplicationIcon>
+    <StartupObject>Form0</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System" />
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="System.Drawing" />
+  </ItemGroup>
+  <ItemGroup>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="-Module-.cs" />
+    <Compile Include="Class0.cs" />
+    <Compile Include="Class1.cs" />
+    <Compile Include="Class10.cs" />
+    <Compile Include="Class10.Designer.cs">
+      <DependentUpon>Class10.settings</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Class11.cs" />
+    <Compile Include="Class3.cs" />
+    <Compile Include="Class4.cs" />
+    <Compile Include="Class5.cs" />
+    <Compile Include="Class7.cs" />
+    <Compile Include="Class9.cs" />
+    <Compile Include="dummy\{012d094f-f4f6-4963-aeab-b4b6e122753b}.cs" />
+    <Compile Include="dummy\{0222ac69-4079-475b-a0df-11963c27e718}.cs" />
+    <Compile Include="dummy\{0230fa29-997f-4ecc-8d91-6bdeecb79fd7}.cs" />
+    <Compile Include="dummy\{04abe86f-0953-42a7-af29-85ffa887d421}.cs" />
+    <Compile Include="dummy\{068f2e48-7b43-4785-b730-49bcb6eec356}.cs" />
+    <Compile Include="dummy\{0811b3bf-859b-4d81-b43e-a8fac1dd4e86}.cs" />
+    <Compile Include="dummy\{096ab5b2-6024-4101-90d0-7783fb56d113}.cs" />
+    <Compile Include="dummy\{0d0920cd-ee3b-48ba-98a8-2f3b196897ce}.cs" />
+    <Compile Include="dummy\{0d51cff7-f561-4509-ad84-65841e5a5f77}.cs" />
+    <Compile Include="dummy\{0d963e8e-5e49-44ac-8040-4da1750113e0}.cs" />
+    <Compile Include="dummy\{0dd15371-9760-487d-a23c-0079efb903d4}.cs" />
+    <Compile Include="dummy\{0ec18a2a-4967-457d-a0b5-06330fd00b6a}.cs" />
+    <Compile Include="dummy\{0fe69d27-6fed-46fd-89fe-5a3a3c21dc34}.cs" />
+    <Compile Include="dummy\{12787628-cccc-44d7-be5b-4c689d85099f}.cs" />
+    <Compile Include="dummy\{13acd79b-9a38-4c90-adfe-93b5e523cd5d}.cs" />
+    <Compile Include="dummy\{144de64f-c596-4eb0-a5b7-4259a68c2d3e}.cs" />
+    <Compile Include="dummy\{1918804e-64f5-450c-a069-70ed5ae5af16}.cs" />
+    <Compile Include="dummy\{1993b8c9-0c64-42cc-bb63-e2cd54e43dd7}.cs" />
+    <Compile Include="dummy\{19ba7780-b053-4bd1-8b3b-770c96e34dfd}.cs" />
+    <Compile Include="dummy\{1a101c84-750c-427e-b3ce-4b134a7fea87}.cs" />
+    <Compile Include="dummy\{1b0be5be-6296-442d-9158-55253a0432c5}.cs" />
+    <Compile Include="dummy\{1cd94c0a-f763-44cb-b519-7743c5a6b822}.cs" />
+    <Compile Include="dummy\{1f6893f1-e66b-4ae6-8b11-e5f4391db9c9}.cs" />
+    <Compile Include="dummy\{21e5d4d1-5c63-47d6-b04a-ef98bb3121c5}.cs" />
+    <Compile Include="dummy\{26572fa3-8870-47d0-a416-372544416cdd}.cs" />
+    <Compile Include="dummy\{27b02f5f-e745-4751-ba29-40670a18e068}.cs" />
+    <Compile Include="dummy\{28d3d3b3-b858-40d5-8b07-cfdf1523dcc3}.cs" />
+    <Compile Include="dummy\{2a165843-bbc8-47c5-81ec-1386158dae16}.cs" />
+    <Compile Include="dummy\{2a656780-3f3c-499c-b4ec-c640bbcfe447}.cs" />
+    <Compile Include="dummy\{2d0ca772-84e3-4da0-85ef-7c60b04686bd}.cs" />
+    <Compile Include="dummy\{2e927f75-8848-494a-a582-489ea9cf57da}.cs" />
+    <Compile Include="dummy\{30e5561c-87c0-4339-85a1-c9c888e177b4}.cs" />
+    <Compile Include="dummy\{3183b9a7-e71c-41cb-a4cb-24f5ff655e2f}.cs" />
+    <Compile Include="dummy\{33df4337-f42b-4bab-ae37-2bd7fe07f2a5}.cs" />
+    <Compile Include="dummy\{358a71df-c999-4ce9-9c3d-0b8d31362a38}.cs" />
+    <Compile Include="dummy\{3d44d411-e713-413f-8cc5-cab981375faf}.cs" />
+    <Compile Include="dummy\{3db28b68-1c61-42fc-8712-2e6e26366bf4}.cs" />
+    <Compile Include="dummy\{3e347547-16ab-4a8c-b419-e1f4ff5e10c0}.cs" />
+    <Compile Include="dummy\{3e5a2753-1ba0-4afb-af31-1378b4c71740}.cs" />
+    <Compile Include="dummy\{3eb13ef3-deae-4a65-9c30-438054fdd941}.cs" />
+    <Compile Include="dummy\{3ecd47c0-1948-4b25-aa5b-a837482dc985}.cs" />
+    <Compile Include="dummy\{3f4f0b0a-7e9a-4160-a9c0-f35963272387}.cs" />
+    <Compile Include="dummy\{402f406e-9da6-4924-8207-2bf166c30794}.cs" />
+    <Compile Include="dummy\{41d54089-f400-4f3a-9187-bd9d254a006f}.cs" />
+    <Compile Include="dummy\{4376775e-a632-4814-ae4f-fcb9fccb5d60}.cs" />
+    <Compile Include="dummy\{4a0d38d1-0d20-4a5e-8169-0ff8529515ce}.cs" />
+    <Compile Include="dummy\{4e07e4b7-9c9c-41d1-8bf1-f649d8003ff6}.cs" />
+    <Compile Include="dummy\{4f791514-b95d-4a20-96fb-aa8f9d098f16}.cs" />
+    <Compile Include="dummy\{50d72f9f-f2eb-4474-9167-f87161faa7ec}.cs" />
+    <Compile Include="dummy\{5398ecd9-cb73-472d-8201-5912bddee0e6}.cs" />
+    <Compile Include="dummy\{54682c69-1c09-414d-8200-dbab14756365}.cs" />
+    <Compile Include="dummy\{5594c2e1-5d01-4758-af83-e474fb8382da}.cs" />
+    <Compile Include="dummy\{56bb75bc-3fa6-4070-a32e-6c9b6d6422c1}.cs" />
+    <Compile Include="dummy\{5831770c-beb3-4ae7-a4bf-9defa85beb3b}.cs" />
+    <Compile Include="dummy\{589f9acc-da70-4601-b510-c68efd0822ab}.cs" />
+    <Compile Include="dummy\{58cee355-6262-42f2-b59e-cfefe0e87632}.cs" />
+    <Compile Include="dummy\{5aa3090e-3e74-4876-a5b8-d1242d40d202}.cs" />
+    <Compile Include="dummy\{5ada5552-7e6c-49be-8a5a-729309d9dbbf}.cs" />
+    <Compile Include="dummy\{5b6b17ad-aede-480d-a5af-565ef3769e89}.cs" />
+    <Compile Include="dummy\{5b890d87-e051-464f-a6a7-1981e9c5913d}.cs" />
+    <Compile Include="dummy\{5bfa6334-d992-42ea-b34f-a70686bb17d8}.cs" />
+    <Compile Include="dummy\{5c29b4f9-62b3-4ca3-bda6-d8048f575059}.cs" />
+    <Compile Include="dummy\{5c8be084-e114-4043-aa7d-3062044aa9b1}.cs" />
+    <Compile Include="dummy\{5d89e44e-3fb7-489e-b030-848336cd4dff}.cs" />
+    <Compile Include="dummy\{5fdd0e74-1a8f-4c83-8bd9-cd355596869c}.cs" />
+    <Compile Include="dummy\{6092ce5f-a36d-44d1-a7a8-57e7d5459e8e}.cs" />
+    <Compile Include="dummy\{60944139-50f3-44f2-bac3-23bf1bc055cf}.cs" />
+    <Compile Include="dummy\{60b2be40-d9ae-4745-9b29-c6afad6b5853}.cs" />
+    <Compile Include="dummy\{62dea6d7-cac8-43a7-a71f-3c113ac82c1b}.cs" />
+    <Compile Include="dummy\{64504485-3efe-4dec-a886-f631de2eb10e}.cs" />
+    <Compile Include="dummy\{670dddb3-bcae-41cf-b237-d46e154269e8}.cs" />
+    <Compile Include="dummy\{67356263-9dd6-4ae0-bff4-43227aa7fa5d}.cs" />
+    <Compile Include="dummy\{673f870e-1b47-4fa6-87a0-1bd06d9dd3b1}.cs" />
+    <Compile Include="dummy\{683d6ba5-fa0e-4168-b3d9-5de6374470f2}.cs" />
+    <Compile Include="dummy\{6885f885-8f8e-4c4b-a4f7-f2855491a590}.cs" />
+    <Compile Include="dummy\{68ac5d77-def8-47cf-9c5b-9864faf8ec5a}.cs" />
+    <Compile Include="dummy\{6ac72232-247e-4e19-9b5e-87ac2b413fe6}.cs" />
+    <Compile Include="dummy\{6b65f5e6-d733-4d8e-83d8-346db860cad0}.cs" />
+    <Compile Include="dummy\{6c436e83-47b2-486f-a5ba-1a3b7b2f737a}.cs" />
+    <Compile Include="dummy\{6c4e84fc-63af-4552-8a85-aafbde4b0d7f}.cs" />
+    <Compile Include="dummy\{6dfa22ee-1123-469c-b301-520f204def40}.cs" />
+    <Compile Include="dummy\{6f6979d2-dc19-4fdd-8e58-aabf4876fa65}.cs" />
+    <Compile Include="dummy\{7112c3ed-08d2-492a-8450-4fc154ac3b69}.cs" />
+    <Compile Include="dummy\{7270c552-f712-445a-804f-735028b2f63b}.cs" />
+    <Compile Include="dummy\{74252c15-7ad4-414a-83a2-03811a339618}.cs" />
+    <Compile Include="dummy\{74ef7c4d-d7e8-4cbd-be0a-c62417706f33}.cs" />
+    <Compile Include="dummy\{75e9b85d-9f16-41af-8849-d0967afe8773}.cs" />
+    <Compile Include="dummy\{7695d164-8237-443e-984b-bb1ccc745b89}.cs" />
+    <Compile Include="dummy\{7a5e94d9-5a9c-40d2-87ca-f0b99e0f4498}.cs" />
+    <Compile Include="dummy\{7ad831df-6a0f-4379-960c-157d6748112d}.cs" />
+    <Compile Include="dummy\{7d4221dc-53f8-4e16-ace7-6cbc0f469a19}.cs" />
+    <Compile Include="dummy\{7e36aa2a-6d3e-4420-b5dc-acc63f73481b}.cs" />
+    <Compile Include="dummy\{7fe6dc67-0400-4285-a39b-147a53d0458f}.cs" />
+    <Compile Include="dummy\{7ff33c79-2b21-448a-91b9-2b1c81fd3ec6}.cs" />
+    <Compile Include="dummy\{80141c59-9a91-4ff0-abb0-5d5b7147078a}.cs" />
+    <Compile Include="dummy\{8051455f-2b06-40d6-9721-ef0fad0d95c7}.cs" />
+    <Compile Include="dummy\{823dab85-c786-4cc6-a36d-1136950a4cef}.cs" />
+    <Compile Include="dummy\{84cd49f5-d020-4f58-83ee-e0dfbbf96c59}.cs" />
+    <Compile Include="dummy\{865e4374-41da-4d59-bb24-afcc4fb4acb1}.cs" />
+    <Compile Include="dummy\{86a8320d-ccd9-4f83-a35f-ae9a8de6caf2}.cs" />
+    <Compile Include="dummy\{883e9f30-d9a2-4977-b108-2f11b1822289}.cs" />
+    <Compile Include="dummy\{88c433f9-f321-40d6-9d81-3c6d0a6f1a60}.cs" />
+    <Compile Include="dummy\{89085631-b607-44e6-a6ee-bcacc03241e6}.cs" />
+    <Compile Include="dummy\{8c97ccd1-81c4-4ae5-a9b3-8ee4954922f9}.cs" />
+    <Compile Include="dummy\{8da9c80a-68cd-42c8-a28d-47dc6b06380e}.cs" />
+    <Compile Include="dummy\{8e687138-4018-4f35-985f-a73106db1297}.cs" />
+    <Compile Include="dummy\{938a593d-c435-4e5c-aa27-d33d8beb3cac}.cs" />
+    <Compile Include="dummy\{962b7faf-21a3-4ef0-8f88-bdc1cff90514}.cs" />
+    <Compile Include="dummy\{99bf29b7-7433-42f5-ab59-8c3a564cfb72}.cs" />
+    <Compile Include="dummy\{9ab06a44-2309-4ba1-bee7-424ad80a3287}.cs" />
+    <Compile Include="dummy\{9c1a9c00-a759-46f2-854c-84cb2cbd2e20}.cs" />
+    <Compile Include="dummy\{9cb3faa1-064e-4da6-b5b0-f386e7c15c72}.cs" />
+    <Compile Include="dummy\{9ccb4468-b50f-4cac-9079-1a849a7bbc0d}.cs" />
+    <Compile Include="dummy\{9d4b2b24-4d6d-4495-8f93-d75a1f27e65e}.cs" />
+    <Compile Include="dummy\{9e42699d-29cd-488f-ae59-451c28cb5314}.cs" />
+    <Compile Include="dummy\{9e758ade-1f54-4c53-a001-e52da7404661}.cs" />
+    <Compile Include="dummy\{9f414486-ef80-43c6-95b2-6176cc5dbaf1}.cs" />
+    <Compile Include="dummy\{9f7da5fd-318a-496a-9013-d0a34d674d54}.cs" />
+    <Compile Include="dummy\{9f93573d-da46-46f5-b66b-69265293700a}.cs" />
+    <Compile Include="dummy\{a1f8ac9b-ef69-4dc2-baeb-cb9a2d0224dc}.cs" />
+    <Compile Include="dummy\{a22f7dd4-cbae-4584-9d9f-852dfe0b0365}.cs" />
+    <Compile Include="dummy\{a4b6aaa1-e529-45f7-9133-32b8ec43f8b3}.cs" />
+    <Compile Include="dummy\{a7b90bdb-5ba9-4f9a-beba-2aac2491f548}.cs" />
+    <Compile Include="dummy\{a9b98da5-7ab8-49e8-be24-230778a0f667}.cs" />
+    <Compile Include="dummy\{acf52a19-5646-4c78-9459-41a34374b7ce}.cs" />
+    <Compile Include="dummy\{ad568c45-6fbd-4c36-aa27-c742ad9a43b3}.cs" />
+    <Compile Include="dummy\{b0175d5e-148c-4f59-9c21-0ab36fc5dfe3}.cs" />
+    <Compile Include="dummy\{b1ac845e-dc47-4303-b9ce-119df21bed71}.cs" />
+    <Compile Include="dummy\{b2dbf7f8-b445-41df-9404-5ae0f4006443}.cs" />
+    <Compile Include="dummy\{b30b8f60-113d-46c7-8269-41fa2132316b}.cs" />
+    <Compile Include="dummy\{b39f2eba-231b-496d-b010-ec54aeca9b38}.cs" />
+    <Compile Include="dummy\{b5d248c5-a342-49c8-87b9-a281bdb2d4a4}.cs" />
+    <Compile Include="dummy\{bdf15d24-f22f-46b9-9178-4806211f3b1d}.cs" />
+    <Compile Include="dummy\{be7b8c5f-04f4-4898-a1b3-aef42a835f78}.cs" />
+    <Compile Include="dummy\{bedd205f-e850-4a24-86f5-77ed56c84301}.cs" />
+    <Compile Include="dummy\{c0a2b597-ad9a-4ff0-bc25-e8574ce84e7a}.cs" />
+    <Compile Include="dummy\{c2d5fcce-d993-4a30-bf80-8af8fff4b4b3}.cs" />
+    <Compile Include="dummy\{c2fd3bf5-08c0-4bd8-9c6e-65d27decb448}.cs" />
+    <Compile Include="dummy\{c36a1fbf-3eb2-493f-bbc2-05a906ab1dc8}.cs" />
+    <Compile Include="dummy\{c37ba313-67f0-49e4-98f8-9dc8ec1a61fc}.cs" />
+    <Compile Include="dummy\{c3a75b00-3075-4d89-af59-a37949c2d72f}.cs" />
+    <Compile Include="dummy\{c412c07f-2a75-4bdb-ab59-d3228a7d11c9}.cs" />
+    <Compile Include="dummy\{c91915bd-4dc5-4095-841d-54154d9a9423}.cs" />
+    <Compile Include="dummy\{ca5731c3-3083-448e-a83c-5c0a4c1a6ec6}.cs" />
+    <Compile Include="dummy\{cb855345-2212-4fc7-8e4c-be7e033f7281}.cs" />
+    <Compile Include="dummy\{cb95d3f4-8383-446b-b8ae-5ded526f2a3a}.cs" />
+    <Compile Include="dummy\{ceeac8d7-449f-46f1-8a23-0e204a6cec14}.cs" />
+    <Compile Include="dummy\{cfcb1f8f-487f-4555-9597-97e1dc5a6ccc}.cs" />
+    <Compile Include="dummy\{d034359e-1f4b-4c42-ad3e-a34583a4e00f}.cs" />
+    <Compile Include="dummy\{d192b102-d1b6-4b72-a6e3-c98ad950d1ad}.cs" />
+    <Compile Include="dummy\{d2b22a01-aeb9-479c-a6f8-779ab846abfd}.cs" />
+    <Compile Include="dummy\{d43dd6ad-512b-4b32-a047-1c06b98eb089}.cs" />
+    <Compile Include="dummy\{d981a097-d499-4d78-b47f-e8070a3dfdf6}.cs" />
+    <Compile Include="dummy\{da594e6b-5a43-45cb-8039-9921b90769bf}.cs" />
+    <Compile Include="dummy\{db7da21f-c4fb-40e7-9634-256c4198389c}.cs" />
+    <Compile Include="dummy\{de783842-900f-4a02-9461-8944e5ce7e89}.cs" />
+    <Compile Include="dummy\{df4ddc9a-27cd-4609-afcc-479ee0e84687}.cs" />
+    <Compile Include="dummy\{df676417-5b7a-4812-abff-36ea75e0c611}.cs" />
+    <Compile Include="dummy\{e16b1f90-23a6-4915-a92e-126860205958}.cs" />
+    <Compile Include="dummy\{e3dfc91f-0a13-40b1-bf1f-e8803a12a9e9}.cs" />
+    <Compile Include="dummy\{e41aa19b-a46f-4848-a9f2-7b6c2eef4f2f}.cs" />
+    <Compile Include="dummy\{e4861479-ba7d-4caa-a935-b6af34563e27}.cs" />
+    <Compile Include="dummy\{e51e82e8-4fab-4b36-9513-88fd8440b09e}.cs" />
+    <Compile Include="dummy\{e573f912-fa34-48dd-a124-34b4673c154f}.cs" />
+    <Compile Include="dummy\{e685bbb4-99cc-4b45-830e-08b40d0ae8ce}.cs" />
+    <Compile Include="dummy\{eae309bf-34ab-4b2c-b67b-39e92ff056b3}.cs" />
+    <Compile Include="dummy\{ee34457f-0add-4e50-92c8-318ac9eb7ad3}.cs" />
+    <Compile Include="dummy\{ee5a8adf-f92e-4055-8b62-f99c34c5fffa}.cs" />
+    <Compile Include="dummy\{ef8af189-bdab-4338-8b18-2cfd1175df0d}.cs" />
+    <Compile Include="dummy\{efdb7b90-7148-480d-8897-28c81d51d485}.cs" />
+    <Compile Include="dummy\{efdd3609-d62b-459b-a4ee-9dcfbd37b06c}.cs" />
+    <Compile Include="dummy\{f227acad-78ec-4011-b652-928f66dca820}.cs" />
+    <Compile Include="dummy\{f4fd682d-b936-40c4-9e73-44c2a2055914}.cs" />
+    <Compile Include="dummy\{f598e2fb-2f03-42d3-87db-e11112c02452}.cs" />
+    <Compile Include="dummy\{f729515c-5676-445f-8ef5-9dc2863c7486}.cs" />
+    <Compile Include="dummy\{fa3fdcb1-b4bd-4a7b-b5c9-c236fe1e964c}.cs" />
+    <Compile Include="dummy\{fd517351-e4a9-4d29-b017-bf37e0562ff7}.cs" />
+    <Compile Include="dummy\{fedfdc4d-6b5c-4e08-b4c4-06a7709be33f}.cs" />
+    <Compile Include="dummy_ptr\{09f636e7-2d22-485f-8f71-798981a748e6}.cs" />
+    <Compile Include="dummy_ptr\{51b1a2d8-cea5-4e3b-8786-0fdad67f3606}.cs" />
+    <Compile Include="Form0.cs" />
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GClass0.cs" />
+    <Compile Include="GClass1.cs" />
+    <Compile Include="GClass2.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Vicious_Stealer_Stub\My\Resources\Vicious_Stealer_Stub.Resources.Designer.cs">
+      <DependentUpon>Vicious_Stealer_Stub.Resources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vicious_Stealer_Stub\My\Resources\Vicious_Stealer_Stub.Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Vicious_Stealer_Stub.Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.manifest" />
+    <None Include="Class10.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Class10.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

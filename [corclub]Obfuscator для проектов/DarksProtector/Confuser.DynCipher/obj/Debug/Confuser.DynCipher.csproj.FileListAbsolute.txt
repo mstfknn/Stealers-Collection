@@ -1,0 +1,14 @@
+C:\Users\admin\Desktop\DarksProtector\DarksProtector\Debug\bin\Confuser.DynCipher.dll
+C:\Users\admin\Desktop\DarksProtector\DarksProtector\Debug\bin\Confuser.DynCipher.pdb
+C:\Users\admin\Desktop\DarksProtector\DarksProtector\Confuser.DynCipher\obj\Debug\Confuser.DynCipher.csprojAssemblyReference.cache
+C:\Users\admin\Desktop\DarksProtector\DarksProtector\Confuser.DynCipher\obj\Debug\Confuser.DynCipher.csproj.CoreCompileInputs.cache
+C:\Users\admin\Desktop\DarksProtector\DarksProtector\Confuser.DynCipher\obj\Debug\Confuser.DynCipher.csproj.CopyComplete
+C:\Users\admin\Desktop\DarksProtector\DarksProtector\Confuser.DynCipher\obj\Debug\Confuser.DynCipher.dll
+C:\Users\admin\Desktop\DarksProtector\DarksProtector\Confuser.DynCipher\obj\Debug\Confuser.DynCipher.pdb
+D:\Файлы с браузеров\[In4.Bz] DarksProtector\DarksProtector\Debug\bin\Confuser.DynCipher.dll
+D:\Файлы с браузеров\[In4.Bz] DarksProtector\DarksProtector\Debug\bin\Confuser.DynCipher.pdb
+D:\Файлы с браузеров\[In4.Bz] DarksProtector\DarksProtector\Confuser.DynCipher\obj\Debug\Confuser.DynCipher.csprojAssemblyReference.cache
+D:\Файлы с браузеров\[In4.Bz] DarksProtector\DarksProtector\Confuser.DynCipher\obj\Debug\Confuser.DynCipher.csproj.CoreCompileInputs.cache
+D:\Файлы с браузеров\[In4.Bz] DarksProtector\DarksProtector\Confuser.DynCipher\obj\Debug\Confuser.DynCipher.csproj.CopyComplete
+D:\Файлы с браузеров\[In4.Bz] DarksProtector\DarksProtector\Confuser.DynCipher\obj\Debug\Confuser.DynCipher.dll
+D:\Файлы с браузеров\[In4.Bz] DarksProtector\DarksProtector\Confuser.DynCipher\obj\Debug\Confuser.DynCipher.pdb

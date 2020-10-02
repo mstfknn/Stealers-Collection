@@ -1,0 +1,33 @@
+class Program
+{
+    static void Main()
+    {
+
+        const string PATH_TO_DATABASE = @"C:\Users\Boris\Desktop\TEMP\cookies.sqlite";
+        const string CONNECTION_STRING = @"Data Source=" + PATH_TO_DATABASE;
+
+        if (!File.Exists(PATH_TO_DATABASE)) return;
+
+        using (SQLiteConnection connection = new SQLiteConnection(CONNECTION_STRING))
+        {
+            connection.Open();
+            using (SQLiteCommand command = new SQLiteCommand("SELECT id, name, host, path FROM moz_cookies", connection))
+            {
+                using (SQLiteDataReader read = command.ExecuteReader())
+                {
+                    while (read.Read())
+                    {
+                        string id = read[0].ToString();
+                        string name = read[1].ToString();
+                        string host = read[2].ToString();
+                        string path = read[3].ToString();
+                        Console.WriteLine("ID: " + id);
+                        Console.WriteLine("Name: " + name);
+                        Console.WriteLine("Host: " + host);
+                        Console.WriteLine("Path: " + path);
+                    }
+                }
+            }
+        }
+    }
+}

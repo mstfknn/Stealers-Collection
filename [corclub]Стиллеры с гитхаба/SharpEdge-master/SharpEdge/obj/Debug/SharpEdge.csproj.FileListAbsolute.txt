@@ -1,0 +1,7 @@
+D:\Файлы с браузеров\SharpEdge-master\SharpEdge-master\SharpEdge\bin\Debug\SharpEdge.exe.config
+D:\Файлы с браузеров\SharpEdge-master\SharpEdge-master\SharpEdge\bin\Debug\SharpEdge.exe
+D:\Файлы с браузеров\SharpEdge-master\SharpEdge-master\SharpEdge\bin\Debug\SharpEdge.pdb
+D:\Файлы с браузеров\SharpEdge-master\SharpEdge-master\SharpEdge\obj\Debug\SharpEdge.csprojAssemblyReference.cache
+D:\Файлы с браузеров\SharpEdge-master\SharpEdge-master\SharpEdge\obj\Debug\SharpEdge.csproj.CoreCompileInputs.cache
+D:\Файлы с браузеров\SharpEdge-master\SharpEdge-master\SharpEdge\obj\Debug\SharpEdge.exe
+D:\Файлы с браузеров\SharpEdge-master\SharpEdge-master\SharpEdge\obj\Debug\SharpEdge.pdb

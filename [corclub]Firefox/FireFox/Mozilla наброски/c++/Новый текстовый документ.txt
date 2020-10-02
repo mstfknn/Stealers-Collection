@@ -1,0 +1,126 @@
+#include<Windows.h>
+#include<atlenc.h>
+
+
+typedef enum {
+    siBuffer = 0,
+    siClearDataBuffer = 1,
+    siCipherDataBuffer = 2,
+    siDERCertBuffer = 3,
+    siEncodedCertBuffer = 4,
+    siDERNameBuffer = 5,
+    siEncodedNameBuffer = 6,
+    siAsciiNameString = 7,
+    siAsciiString = 8,
+    siDEROID = 9,
+    siUnsignedInteger = 10,
+    siUTCTime = 11,
+    siGeneralizedTime = 12,
+    siVisibleString = 13,
+    siUTF8String = 14,
+    siBMPString = 15
+} SECItemType;
+
+typedef struct SECItemStr SECItem;
+
+struct SECItemStr {
+    SECItemType type;
+    unsigned char *data;
+    unsigned int len;
+};
+
+typedef enum _SECStatus {
+    SECWouldBlock = -2,
+    SECFailure = -1,
+    SECSuccess = 0
+} SECStatus;
+
+typedef int PRBool;
+typedef unsigned int PRUint32;
+/* /security/nss/lib/pk11wrap/secmodti.h */
+/* /security/nss/lib/softoken/secmodt.h*/
+/* typedef struct PK11SlotInfoStr PK11SlotInfo; */
+typedef void PK11SlotInfo;      /* self defined */
+
+/* /security/nss/lib/nss/nss.h */
+typedef SECStatus (__cdecl *NSS_InitFunc)(const char *configdir);
+typedef SECStatus (__cdecl *NSS_ShutdownFunc)(void);
+/* /security/nss/lib/pk11wrap/pk11pub.h */
+typedef PK11SlotInfo *(__cdecl *PK11_GetInternalKeySlotFunc)(void);
+typedef void (__cdecl *PK11_FreeSlotFunc)(PK11SlotInfo *slot);
+typedef SECStatus (__cdecl *PK11_AuthenticateFunc)(PK11SlotInfo *slot, PRBool loadCerts, void *wincx);
+/* /security/nss/lib/pk11wrap/pk11sdr.h */
+typedef SECStatus (__cdecl *PK11SDR_DecryptFunc)(SECItem *data, SECItem *result, void *cx);
+/* /security/nss/lib/pk11wrap/pk11pub.h */
+typedef SECStatus (__cdecl *PK11_CheckUserPasswordFunc)(PK11SlotInfo *slot, const char *pw);
+/* /security/nss/lib/util/secitem.h */
+typedef void (__cdecl *SECITEM_ZfreeItemFunc)(SECItem *zap, PRBool freeit);
+
+typedef void (*SECITEM_AllocItem)(SECItem & item, int len);
+
+
+void decryptFirefoxPassword(char *dest,const char *encoded_cred)
+{
+    // Check to see if the library was loaded successfully 
+    HINSTANCE nss3_handle;
+    HINSTANCE glueLib;
+
+    glueLib = LoadLibrary(L"C:\\Program Files\\Mozilla Firefox\\mozglue.dll");
+    nss3_handle = LoadLibrary(L"C:\\Program Files\\Mozilla Firefox\\nss3.dll");
+    // Check to see if the library was loaded successfully 
+    if(glueLib && nss3_handle)
+    {
+        SECStatus init_status;
+        if ((NSS_Init = (NSS_InitFunc)
+            GetProcAddress(nss3_handle, "NSS_Init")) &&
+            (NSS_Shutdown = (NSS_ShutdownFunc)
+            GetProcAddress(nss3_handle, "NSS_Shutdown")) &&
+            (PK11_GetInternalKeySlot = (PK11_GetInternalKeySlotFunc)
+            GetProcAddress(nss3_handle, "PK11_GetInternalKeySlot")) &&
+            (PK11_FreeSlot = (PK11_FreeSlotFunc)
+            GetProcAddress(nss3_handle, "PK11_FreeSlot")) &&
+            (PK11_Authenticate = (PK11_AuthenticateFunc)
+            GetProcAddress(nss3_handle, "PK11_Authenticate")) &&
+            (PK11SDR_Decrypt = (PK11SDR_DecryptFunc)
+            GetProcAddress(nss3_handle, "PK11SDR_Decrypt")) &&
+            (PK11_CheckUserPassword = (PK11_CheckUserPasswordFunc)
+            GetProcAddress(nss3_handle, "PK11_CheckUserPassword")) &&
+            (SECITEM_ZfreeItem = (SECITEM_ZfreeItemFunc)
+            GetProcAddress(nss3_handle, "SECITEM_ZfreeItem")))
+        {
+            init_status = NSS_Init(m_strDefaultProfilePath.toStdString().c_str());
+
+            if(init_status == SECSuccess)
+            {
+                size_t cred_len;
+                int pnDestLen=MAX_CRED_LENGTH;
+                unsigned char decoded_cred[MAX_CRED_LENGTH];
+
+                PK11SlotInfo *slot;
+
+
+                cred_len = strlen(encoded_cred);
+                if (! Base64Decode(encoded_cred,cred_len,decoded_cred,&pnDestLen))
+                    return;
+
+                if (!(slot = PK11_GetInternalKeySlot()))
+                    return;
+                if (PK11_Authenticate(slot, TRUE, NULL) == SECSuccess)
+                {
+                    SECItem data, result;
+                    result.data = NULL;
+                    result.len = 0;
+                    data.data = decoded_cred;
+                    data.len = decoded_size(encoded_cred);
+
+                    if (PK11SDR_Decrypt(&data, &result, NULL) == SECSuccess) 
+                    {
+                        strncpy_s(dest, MAX_CRED_LENGTH, (char *)result.data, result.len);
+                        SECITEM_ZfreeItem(&result, FALSE);
+                    }
+                }
+                PK11_FreeSlot(slot);
+            }
+        }
+    }
+}

@@ -1,0 +1,92 @@
+private List<String> DirSearch(string sDir)
+{
+    List<String> files = new List<String>();
+    try
+    {
+        foreach (string f in Directory.GetFiles(sDir))
+        {
+            files.Add(f);
+        }
+        foreach (string d in Directory.GetDirectories(sDir))
+        {
+            files.AddRange(DirSearch(d));
+        }
+    }
+    catch (System.Exception excpt)
+    {
+        MessageBox.Show(excpt.Message);
+    }
+
+    return files;
+}
+
+
+2
+
+
+Simply use this:
+
+public static List<String> GetAllFiles(String directory)
+{
+    return Directory.GetFiles(directory, "*.*", SearchOption.AllDirectories).ToList();
+}
+And if you want every file, even extensionless ones:
+
+public static List<String> GetAllFiles(String directory)
+{
+    return Directory.GetFiles(directory, "*", SearchOption.AllDirectories).ToList();
+}
+
+
+3
+
+string [] filePaths = Directory.GetFiles(path, "*.*", SearchOption.AllDirectories);
+
+
+4
+
+class Program { static void Main(string[] args) {
+
+        getfiles get = new getfiles();
+        List<string> files =  get.GetAllFiles(@"D:\Rishi");
+
+        foreach(string f in files)
+        {
+            Console.WriteLine(f);
+        }
+
+
+        Console.Read();
+    }
+
+
+}
+
+class getfiles
+{
+    public List<string> GetAllFiles(string sDirt)
+    {
+        List<string> files = new List<string>();
+
+        try
+        {
+            foreach (string file in Directory.GetFiles(sDirt))
+            {
+                files.Add(file);
+            }
+            foreach (string fl in Directory.GetDirectories(sDirt))
+            {
+                files.AddRange(GetAllFiles(fl));
+            }
+        }
+        catch (Exception ex)
+        {
+
+            Console.WriteLine(ex.Message);
+        }
+
+
+
+        return files;
+    }
+}

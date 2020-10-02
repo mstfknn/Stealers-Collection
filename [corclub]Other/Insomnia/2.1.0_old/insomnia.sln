@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "insomnia", "insomnia.csproj", "{A52C5DA8-D221-4655-8978-9D7ADD2B5CE7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A52C5DA8-D221-4655-8978-9D7ADD2B5CE7}.Debug|x86.ActiveCfg = Release|x86
+		{A52C5DA8-D221-4655-8978-9D7ADD2B5CE7}.Debug|x86.Build.0 = Release|x86
+		{A52C5DA8-D221-4655-8978-9D7ADD2B5CE7}.Release|x86.ActiveCfg = Release|x86
+		{A52C5DA8-D221-4655-8978-9D7ADD2B5CE7}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

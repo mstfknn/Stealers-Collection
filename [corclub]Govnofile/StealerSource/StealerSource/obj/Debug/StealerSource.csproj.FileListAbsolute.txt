@@ -1,0 +1,7 @@
+c:\users\d.lejn\documents\visual studio 2015\Projects\StealerSource\StealerSource\bin\Debug\StealerSource.exe
+c:\users\d.lejn\documents\visual studio 2015\Projects\StealerSource\StealerSource\bin\Debug\StealerSource.pdb
+c:\users\d.lejn\documents\visual studio 2015\Projects\StealerSource\StealerSource\obj\Debug\StealerSource.exe
+c:\users\d.lejn\documents\visual studio 2015\Projects\StealerSource\StealerSource\obj\Debug\StealerSource.pdb
+C:\Users\D.Lejn\Documents\Visual Studio 2015\Projects\StealerSource\StealerSource\obj\Debug\StealerSource.csprojResolveAssemblyReference.cache
+C:\Users\D.Lejn\Desktop\StealerSource\obj\Debug\StealerSource.exe
+C:\Users\D.Lejn\Desktop\StealerSource\obj\Debug\StealerSource.pdb

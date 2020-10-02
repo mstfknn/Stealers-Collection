@@ -1,0 +1,7 @@
+C:\Users\Родители\Desktop\NoFile\obj\x86\Debug\NoFile.csprojResolveAssemblyReference.cache
+C:\Users\Родители\Desktop\NoFile\obj\x86\Debug\NoFile.csproj.CoreCompileInputs.cache
+C:\Users\Родители\Desktop\NoFile\bin\Debug\NoFile.exe.config
+C:\Users\Родители\Desktop\NoFile\bin\Debug\NoFile.exe
+C:\Users\Родители\Desktop\NoFile\bin\Debug\NoFile.pdb
+C:\Users\Родители\Desktop\NoFile\obj\x86\Debug\NoFile.exe
+C:\Users\Родители\Desktop\NoFile\obj\x86\Debug\NoFile.pdb

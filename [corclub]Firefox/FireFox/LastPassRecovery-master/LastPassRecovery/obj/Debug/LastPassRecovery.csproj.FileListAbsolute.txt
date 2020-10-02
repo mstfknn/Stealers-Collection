@@ -1,0 +1,7 @@
+C:\Users\Antlion\Desktop\[c#] Все стиллеры паролей - Сборка\FireFox-Mozilla\LastPassRecovery-master\LastPassRecovery\bin\Debug\LastPassRecovery.exe.config
+C:\Users\Antlion\Desktop\[c#] Все стиллеры паролей - Сборка\FireFox-Mozilla\LastPassRecovery-master\LastPassRecovery\bin\Debug\LastPassRecovery.exe
+C:\Users\Antlion\Desktop\[c#] Все стиллеры паролей - Сборка\FireFox-Mozilla\LastPassRecovery-master\LastPassRecovery\bin\Debug\LastPassRecovery.pdb
+C:\Users\Antlion\Desktop\[c#] Все стиллеры паролей - Сборка\FireFox-Mozilla\LastPassRecovery-master\LastPassRecovery\obj\Debug\LastPassRecovery.csprojAssemblyReference.cache
+C:\Users\Antlion\Desktop\[c#] Все стиллеры паролей - Сборка\FireFox-Mozilla\LastPassRecovery-master\LastPassRecovery\obj\Debug\LastPassRecovery.csproj.CoreCompileInputs.cache
+C:\Users\Antlion\Desktop\[c#] Все стиллеры паролей - Сборка\FireFox-Mozilla\LastPassRecovery-master\LastPassRecovery\obj\Debug\LastPassRecovery.exe
+C:\Users\Antlion\Desktop\[c#] Все стиллеры паролей - Сборка\FireFox-Mozilla\LastPassRecovery-master\LastPassRecovery\obj\Debug\LastPassRecovery.pdb

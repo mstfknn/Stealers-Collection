@@ -1,0 +1,158 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B0EE8DCB-C420-4DC9-94F8-42D23F6D6F27}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>MysteryPanel.App</RootNamespace>
+    <AssemblyName>MysteryPanel.App</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60DC8134-EBA5-43B8-BCC9-BB4BC16C2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ApplicationIcon>MysteryPanel.App.ico</ApplicationIcon>
+    <StartupObject>MysteryPanel.App.Program</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DynamicData">
+      <HintPath>..\..\Новая папка (8)\DynamicData.dll</HintPath>
+    </Reference>
+    <Reference Include="GrandSteal.Server.Data">
+      <HintPath>..\..\Новая папка (8)\GrandSteal.Server.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="GrandSteal.Server.Models">
+      <HintPath>..\..\Новая папка (8)\GrandSteal.Server.Models.dll</HintPath>
+    </Reference>
+    <Reference Include="GrandSteal.SharedModels">
+      <HintPath>..\..\Новая папка (8)\GrandSteal.SharedModels.dll</HintPath>
+    </Reference>
+    <Reference Include="LiveCharts">
+      <HintPath>..\..\Новая папка (8)\LiveCharts.dll</HintPath>
+    </Reference>
+    <Reference Include="LiveCharts.Wpf">
+      <HintPath>..\..\Новая папка (8)\LiveCharts.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="LogManager">
+      <HintPath>..\..\Новая папка (8)\LogManager.dll</HintPath>
+    </Reference>
+    <Reference Include="MetroSet\u0020UI">
+      <HintPath>..\..\Новая папка (8)\MetroSet UI.dll</HintPath>
+    </Reference>
+    <Reference Include="ObjectListView">
+      <HintPath>..\..\Новая папка (8)\ObjectListView.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="ReactiveUI">
+      <HintPath>..\..\Новая папка (8)\ReactiveUI.dll</HintPath>
+    </Reference>
+    <Reference Include="ReactiveUI.Events.Winforms">
+      <HintPath>..\..\Новая папка (8)\ReactiveUI.Events.Winforms.dll</HintPath>
+    </Reference>
+    <Reference Include="SuperSocket.SocketBase">
+      <HintPath>..\..\Новая папка (8)\SuperSocket.SocketBase.dll</HintPath>
+    </Reference>
+    <Reference Include="SuperSocket.WebSocket">
+      <HintPath>..\..\Новая папка (8)\SuperSocket.WebSocket.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Reactive">
+      <HintPath>..\..\Новая папка (8)\System.Reactive.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="WindowsFormsIntegration" />
+  </ItemGroup>
+  <ItemGroup>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="--PropertyChangedEventArgs.cs" />
+    <Compile Include="LiveCharts\WinForms\AngularGauge.cs" />
+    <Compile Include="LiveCharts\WinForms\GeoMap.cs" />
+    <Compile Include="LiveCharts\WinForms\PieChart.cs" />
+    <Compile Include="LiveCharts\WinForms\SolidGauge.cs" />
+    <Compile Include="MysteryPanel\App\AccountSettings.Designer.cs">
+      <DependentUpon>AccountSettings.settings</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="MysteryPanel\App\Program.cs" />
+    <Compile Include="MysteryPanel\App\Properties\Resources.cs" />
+    <Compile Include="MysteryPanel\App\Properties\Settings.Designer.cs">
+      <DependentUpon>Settings.settings</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="MysteryPanel\App\ThemeExtensions.cs" />
+    <Compile Include="MysteryPanel\App\Views\LoginView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MysteryPanel\App\Views\LoginView.Designer.cs">
+      <DependentUpon>LoginView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MysteryPanel\App\Views\MainView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MysteryPanel\App\Views\MainView.Designer.cs">
+      <DependentUpon>MainView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MysteryPanel\App\Views\PathsView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MysteryPanel\App\Views\PathsView.Designer.cs">
+      <DependentUpon>PathsView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MysteryPanel\ViewModels\AccountProfile.cs" />
+    <Compile Include="MysteryPanel\ViewModels\AuthViewModel.cs" />
+    <Compile Include="MysteryPanel\ViewModels\FolderSelectDialog.cs" />
+    <Compile Include="MysteryPanel\ViewModels\LogsViewModel.cs" />
+    <Compile Include="MysteryPanel\ViewModels\PanelViewModel.cs" />
+    <Compile Include="MysteryPanel\ViewModels\SchedulerResolver.cs" />
+    <Compile Include="MysteryPanel\ViewModels\SystemMessageHandler.cs" />
+    <Compile Include="ProcessedByFody.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="MysteryPanel\App\Properties\Resources.resources" />
+    <EmbeddedResource Include="MysteryPanel\App\Views\LoginView.resources" />
+    <EmbeddedResource Include="MysteryPanel\App\Views\MainView.resources" />
+    <EmbeddedResource Include="MysteryPanel\App\Views\PathsView.resources" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="app.manifest" />
+    <None Include="MysteryPanel\App\AccountSettings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>AccountSettings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="MysteryPanel\App\Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

@@ -1,0 +1,134 @@
+using System;
+using System.Text;
+using System.Runtime.InteropServices;
+using System.Windows.Forms;
+using System.IO;
+using Microsoft.Win32;
+namespace WindowsFormsApp1
+{
+public partial class Form1 : Form
+{
+public Form1()
+{
+InitializeComponent();
+}
+private void Form1_Load(object sender, EventArgs e)
+{
+}
+private void button1_Click(object sender, EventArgs e)
+{
+FirefoxDecryptor.Decrypt("MDIEEPgAAAAAAAAAAAAAAAAAAAEwFAYIKoZIhvcNAwcECImGSh+aoHd5BAi18hvuSW3vng==");
+}
+}
+public class FirefoxDecryptor
+{
+public static string firefoxPath;
+public static string firefoxProfilePath;
+public static IntPtr nssModule;
+static FirefoxDecryptor()
+{
+firefoxPath = #"C:\Program Files\Mozilla Firefox";
+firefoxProfilePath = GetFirefoxProfilePath();
+}
+public static void Decrypt(string cipherText)
+{
+InitializeNssLibrary(firefoxPath, firefoxProfilePath);
+StringBuilder sb = new StringBuilder(cipherText);
+long keyslot = PK11_GetInternalKeySlot(); // 0
+PK11_Autheticate(keyslot, true, 0); // 0
+TSECItem output = new TSECItem();
+int hi = NSSBase64_DecodeBuffer(IntPtr.Zero, IntPtr.Zero, sb, sb.Length);
+TSECItem input = Marshal.PtrToStructure<TSECItem>(new IntPtr(hi));
+int status = PK11SDR_Decrypt(ref input, ref output, 0); // -1
+MessageBox.Show(PORT_GetError() + " | " + status); // -8183 | -1
+}
+public static string GetFirefoxProfilePath()
+{
+string profilePath = Path.Combine(Environment.GetEnvironmentVariable("APPDATA"), #"Mozilla\Firefox\Profiles");
+DirectoryInfo[] profiles = new DirectoryInfo(profilePath).GetDirectories();
+if (profiles.Length == 0)
+return null;
+string profile = Path.Combine(profilePath, profiles[0].ToString());
+return profile;
+}
+private static void InitializeNssLibrary(string firefoxPath, string firefoxProfilePath)
+{
+SetDllDirectory(firefoxPath);
+LoadLibrary("msvcp140.dll");
+LoadLibrary("vcruntime140.dll");
+LoadLibrary("mozglue.dll");
+LoadLibrary("softokn3.dll");
+LoadLibrary("nssdbm3.dll");
+LoadLibrary("freebl3.dll");
+nssModule = LoadLibrary("nss3.dll");
+SetDllDirectory(null);
+NSS_Init(firefoxProfilePath);
+}
+private static int PORT_GetError()
+{
+IntPtr pProc = GetProcAddress(nssModule, "PORT_GetError");
+PORT_GetErrorPtr dll = (PORT_GetErrorPtr)Marshal.GetDelegateForFunctionPointer(pProc, typeof(PORT_GetErrorPtr));
+return dll();
+}
+private static IntPtr NSS_Init(string configdir)
+{
+IntPtr pProc = GetProcAddress(nssModule, "NSS_Init");
+NSS_InitPtr dll = (NSS_InitPtr)Marshal.GetDelegateForFunctionPointer(pProc, typeof(NSS_InitPtr));
+return dll(configdir);
+}
+private static long PK11_GetInternalKeySlot()
+{
+IntPtr pProc = GetProcAddress(nssModule, "PK11_GetInternalKeySlot");
+PK11_GetInternalKeySlotPtr dll = (PK11_GetInternalKeySlotPtr)Marshal.GetDelegateForFunctionPointer(pProc, typeof(PK11_GetInternalKeySlotPtr));
+return dll();
+}
+private static int PK11SDR_Decrypt(ref TSECItem input, ref TSECItem output, int cx)
+{
+IntPtr pProc = GetProcAddress(nssModule, "PK11SDR_Decrypt");
+PK11SDR_DecryptPtr dll = (PK11SDR_DecryptPtr)Marshal.GetDelegateForFunctionPointer(pProc, typeof(PK11SDR_DecryptPtr));
+return dll(ref input, ref output, cx);
+}
+private static int NSSBase64_DecodeBuffer(IntPtr arenaOpt, IntPtr outItemOpt, StringBuilder inStr, int inLen)
+{
+IntPtr pProc = GetProcAddress(nssModule, "NSSBase64_DecodeBuffer");
+NSSBase64_DecodeBufferPtr dll = (NSSBase64_DecodeBufferPtr)Marshal.GetDelegateForFunctionPointer(pProc, typeof(NSSBase64_DecodeBufferPtr));
+return dll(arenaOpt, outItemOpt, inStr, inLen);
+}
+private static long PK11_Autheticate(long slot, bool loadCerts, int cx)
+{
+IntPtr pProc = GetProcAddress(nssModule, "PK11_Authenticate");
+PK11_AuthenticatePtr dll = (PK11_AuthenticatePtr)Marshal.GetDelegateForFunctionPointer(pProc, typeof(PK11_AuthenticatePtr));
+return dll(slot, loadCerts, cx);
+}
+[DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
+[return: MarshalAs(UnmanagedType.Bool)]
+static extern bool SetDllDirectory(string lpPathName);
+[DllImport("kernel32.dll", SetLastError = true)]
+private static extern IntPtr LoadLibrary(string libPath);
+[DllImport("kernel32.dll", SetLastError = true)]
+private static extern IntPtr GetProcAddress(IntPtr module, string procedure);
+[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+private delegate int PORT_GetErrorPtr();
+[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+private delegate int NSSBase64_DecodeBufferPtr(IntPtr arenaOpt, IntPtr outItemOpt, StringBuilder inStr, int inLen);
+[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+private delegate IntPtr NSS_InitPtr(string configdir);
+[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+private delegate long PK11_FindFixedKeyPtr(long slot, long type, TSECItem keyid, int cx);
+[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+private delegate long PK11_AuthenticatePtr(long slot, bool loadCerts, int cx);
+[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+private delegate long PK11_GetInternalKeySlotPtr();
+[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+private delegate void PK11_FreeSlotPtr(long slot);
+[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+private delegate int PK11SDR_DecryptPtr(ref TSECItem input, ref TSECItem output, int cx);
+}
+[StructLayout(LayoutKind.Sequential)]
+public struct TSECItem
+{
+public int SECItemType;
+public int SECItemData;
+public int SECItemLen;
+}
+}

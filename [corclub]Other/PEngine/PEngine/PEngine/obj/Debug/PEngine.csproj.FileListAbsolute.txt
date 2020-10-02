@@ -1,0 +1,10 @@
+E:\Project\PEngine\PEngine\bin\Debug\PEngine.exe.config
+E:\Project\PEngine\PEngine\bin\Debug\PEngine.exe
+E:\Project\PEngine\PEngine\bin\Debug\PEngine.pdb
+E:\Project\PEngine\PEngine\obj\Debug\PEngine.Updater.resources
+E:\Project\PEngine\PEngine\obj\Debug\PEngine.Properties.Resources.resources
+E:\Project\PEngine\PEngine\obj\Debug\PEngine.csproj.GenerateResource.cache
+E:\Project\PEngine\PEngine\obj\Debug\PEngine.csproj.CoreCompileInputs.cache
+E:\Project\PEngine\PEngine\obj\Debug\PEngine.exe
+E:\Project\PEngine\PEngine\obj\Debug\PEngine.pdb
+E:\Project\PEngine\PEngine\obj\Debug\PEngine.csprojAssemblyReference.cache

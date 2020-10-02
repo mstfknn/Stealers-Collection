@@ -1,0 +1,30 @@
+c:\users\администратор\documents\visual studio 2015\Projects\ConsoleApplication19\ConsoleApplication19\bin\Debug\ConsoleApplication19.exe
+c:\users\администратор\documents\visual studio 2015\Projects\ConsoleApplication19\ConsoleApplication19\bin\Debug\ConsoleApplication19.pdb
+c:\users\администратор\documents\visual studio 2015\Projects\ConsoleApplication19\ConsoleApplication19\obj\Debug\ConsoleApplication19.csprojResolveAssemblyReference.cache
+c:\users\администратор\documents\visual studio 2015\Projects\ConsoleApplication19\ConsoleApplication19\obj\Debug\ConsoleApplication19.exe
+c:\users\администратор\documents\visual studio 2015\Projects\ConsoleApplication19\ConsoleApplication19\obj\Debug\ConsoleApplication19.pdb
+c:\users\администратор\documents\visual studio 2015\Projects\ConsoleApplication19\ConsoleApplication19\bin\Debug\ConsoleApplication19.exe.config
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\Steal+send\ConsoleApplication19\bin\Debug\ConsoleApplication19.exe.config
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\Steal+send\ConsoleApplication19\obj\Debug\ConsoleApplication19.exe
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\Steal+send\ConsoleApplication19\obj\Debug\ConsoleApplication19.pdb
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\Steal+send\ConsoleApplication19\bin\Debug\ConsoleApplication19.exe
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\Steal+send\ConsoleApplication19\bin\Debug\ConsoleApplication19.pdb
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\Steal+send\ConsoleApplication19\obj\Debug\ConsoleApplication19.csprojResolveAssemblyReference.cache
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\Steal+send — копия+Firefox\ConsoleApplication19\bin\Debug\ConsoleApplication19.exe.config
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\Steal+send — копия+Firefox\ConsoleApplication19\obj\Debug\ConsoleApplication19.exe
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\Steal+send — копия+Firefox\ConsoleApplication19\obj\Debug\ConsoleApplication19.pdb
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\Steal+send — копия+Firefox\ConsoleApplication19\bin\Debug\ConsoleApplication19.exe
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\Steal+send — копия+Firefox\ConsoleApplication19\bin\Debug\ConsoleApplication19.pdb
+C:\Users\Администратор\Documents\Visual Studio 2015\Projects\Steal+send — копия+Firefox\ConsoleApplication19\obj\Debug\ConsoleApplication19.csprojResolveAssemblyReference.cache
+E:\Program\Мои\Steal+send — копия+Firefox\ConsoleApplication19\bin\Debug\workout.exe.config
+E:\Program\Мои\Steal+send — копия+Firefox\ConsoleApplication19\bin\Debug\workout.exe
+E:\Program\Мои\Steal+send — копия+Firefox\ConsoleApplication19\bin\Debug\workout.pdb
+E:\Program\Мои\Steal+send — копия+Firefox\ConsoleApplication19\obj\Debug\ConsoleApplication19.csprojResolveAssemblyReference.cache
+E:\Program\Мои\Steal+send — копия+Firefox\ConsoleApplication19\obj\Debug\workout.exe
+E:\Program\Мои\Steal+send — копия+Firefox\ConsoleApplication19\obj\Debug\workout.pdb
+E:\Program\Мои\Stealer\ConsoleApplication19\bin\Debug\workout.exe.config
+E:\Program\Мои\Stealer\ConsoleApplication19\obj\Debug\workout.exe
+E:\Program\Мои\Stealer\ConsoleApplication19\obj\Debug\workout.pdb
+E:\Program\Мои\Stealer\ConsoleApplication19\bin\Debug\workout.exe
+E:\Program\Мои\Stealer\ConsoleApplication19\bin\Debug\workout.pdb
+E:\Program\Мои\Stealer\ConsoleApplication19\obj\Debug\ConsoleApplication19.csprojResolveAssemblyReference.cache

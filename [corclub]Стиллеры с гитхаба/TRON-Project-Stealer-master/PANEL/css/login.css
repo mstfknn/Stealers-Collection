@@ -1,0 +1,36 @@
+input[type=password] {
+	background-color: #111;
+	width: 100%;
+	padding: 10px 5px;
+	margin: 8px 0;
+	display: flex;
+	border: 1px solid #15adce;
+	box-sizing: border-box;
+	color: #15adce;
+	font-family: 'TRON LEGACY', sans-serif;
+	font-size: 15pt;
+}
+
+input[type=submit] {
+	background-color: #111;
+	border: 1px solid #15adce;
+	margin: 15px 0 0;
+	color: #15adce;
+	font-family: 'TRON LEGACY', sans-serif;
+	font-size: 20pt;
+	padding: 5px 10px;
+	box-sizing: border-box;
+        letter-spacing: 2px;
+}
+
+input[type=submit]:hover {
+	box-shadow: 0 0 10px #15adce;
+}
+
+#login-form {
+	padding: 20px 20px;
+	border: 1px solid #15adce;
+	border-radius: 6px;
+	text-align: center;
+	box-shadow: 0 0 10px #15adce;
+}

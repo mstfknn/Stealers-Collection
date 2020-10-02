@@ -1,0 +1,13 @@
+D:\VSProjects\Visual Studio 2015\Projects\PassStealer\PassStealer\bin\Debug\TalkTeam.exe.config
+D:\VSProjects\Visual Studio 2015\Projects\PassStealer\PassStealer\bin\Debug\TalkTeam.exe
+D:\VSProjects\Visual Studio 2015\Projects\PassStealer\PassStealer\bin\Debug\TalkTeam.pdb
+D:\VSProjects\Visual Studio 2015\Projects\PassStealer\PassStealer\obj\Debug\TalkTeam.exe
+D:\VSProjects\Visual Studio 2015\Projects\PassStealer\PassStealer\obj\Debug\TalkTeam.pdb
+D:\VSProjects\Visual Studio 2015\Projects\PassStealer\PassStealer\bin\Debug\System.Data.SQLite.dll
+D:\VSProjects\Visual Studio 2015\Projects\PassStealer\PassStealer\obj\Debug\PassStealer.csprojResolveAssemblyReference.cache
+C:\Users\TriX\AppData\Roaming\Skype\My Skype Received Files\PassStealer\PassStealer\PassStealer\bin\Debug\TalkTeam.exe.config
+C:\Users\TriX\AppData\Roaming\Skype\My Skype Received Files\PassStealer\PassStealer\PassStealer\obj\Debug\TalkTeam.exe
+C:\Users\TriX\AppData\Roaming\Skype\My Skype Received Files\PassStealer\PassStealer\PassStealer\obj\Debug\TalkTeam.pdb
+C:\Users\TriX\AppData\Roaming\Skype\My Skype Received Files\PassStealer\PassStealer\PassStealer\bin\Debug\TalkTeam.exe
+C:\Users\TriX\AppData\Roaming\Skype\My Skype Received Files\PassStealer\PassStealer\PassStealer\bin\Debug\TalkTeam.pdb
+C:\Users\TriX\AppData\Roaming\Skype\My Skype Received Files\PassStealer\PassStealer\PassStealer\bin\Debug\System.Data.SQLite.dll

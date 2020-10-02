@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!--Project was exported from assembly: C:\Users\ZetSving\Desktop\На разбор Стиллеров\Tht Stealer\Tht Stealer.exe-->
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{AAF414A6-37F4-492B-9734-5CFB0147BCCE}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AssemblyName>Tht Stealer</AssemblyName>
+    <ApplicationVersion>1.0.0.0</ApplicationVersion>
+    <RootNamespace>Tht_Stealer</RootNamespace>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System" />
+    <Reference Include="System.Drawing" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AnaForm.cs" />
+    <Compile Include="IconInjector.cs" />
+    <Compile Include="Helpers.cs" />
+    <Compile Include="MouseState.cs" />
+    <Compile Include="FormSkin.cs" />
+    <Compile Include="FlatClose.cs" />
+    <Compile Include="FlatMax.cs" />
+    <Compile Include="FlatMini.cs" />
+    <Compile Include="FlatColorPalette.cs" />
+    <Compile Include="FlatGroupBox.cs" />
+    <Compile Include="FlatButton.cs" />
+    <Compile Include="FlatToggle.cs" />
+    <Compile Include="RadioButton.cs" />
+    <Compile Include="FlatCheckBox.cs" />
+    <Compile Include="FlatTextBox.cs" />
+    <Compile Include="FlatTabControl.cs" />
+    <Compile Include="FlatAlertBox.cs" />
+    <Compile Include="FlatProgressBar.cs" />
+    <Compile Include="FlatComboBox.cs" />
+    <Compile Include="FlatStickyButton.cs" />
+    <Compile Include="FlatNumeric.cs" />
+    <Compile Include="FlatListBox.cs" />
+    <Compile Include="FlatContextMenuStrip.cs" />
+    <Compile Include="FlatTrackBar.cs" />
+    <Compile Include="FlatStatusBar.cs" />
+    <Compile Include="FlatLabel.cs" />
+    <Compile Include="FlatTreeView.cs" />
+    <Compile Include="My\MyApplication.cs" />
+    <Compile Include="My\MyComputer.cs" />
+    <Compile Include="My\MyProject.cs" />
+    <Compile Include="My\MySettings.cs" />
+    <Compile Include="My\MySettingsProperty.cs" />
+    <Compile Include="My\Resources\Resources.cs" />
+    <Compile Include="AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="AnaForm.resx" />
+    <EmbeddedResource Include="Resources.resx" />
+    <EmbeddedResource Include="stub.exe" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+</Project>

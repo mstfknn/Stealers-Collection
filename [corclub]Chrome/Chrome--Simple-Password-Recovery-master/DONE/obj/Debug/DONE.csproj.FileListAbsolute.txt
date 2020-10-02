@@ -1,0 +1,9 @@
+c:\users\admin\documents\visual studio 2015\Projects\DONE\DONE\bin\Debug\DONE.exe
+c:\users\admin\documents\visual studio 2015\Projects\DONE\DONE\bin\Debug\DONE.pdb
+c:\users\admin\documents\visual studio 2015\Projects\DONE\DONE\obj\Debug\DONE.csprojResolveAssemblyReference.cache
+c:\users\admin\documents\visual studio 2015\Projects\DONE\DONE\obj\Debug\DONE.exe
+c:\users\admin\documents\visual studio 2015\Projects\DONE\DONE\obj\Debug\DONE.pdb
+c:\users\admin\documents\visual studio 2015\Projects\DONE\DONE\bin\Debug\DONE.exe.config
+C:\Users\Admin\Desktop\Pwrec\DONE\bin\Debug\DONE.exe.config
+C:\Users\Admin\Desktop\Pwrec\DONE\obj\Debug\DONE.exe
+C:\Users\Admin\Desktop\Pwrec\DONE\obj\Debug\DONE.pdb

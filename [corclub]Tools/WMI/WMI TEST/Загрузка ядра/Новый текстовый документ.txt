@@ -1,0 +1,32 @@
+PerformanceCounter pc = new PerformanceCounter("Процессор", "% загруженности процессора", "_Total");
+            PerformanceCounter pc2 = new PerformanceCounter("Процессор", "% загруженности процессора", "0");
+            PerformanceCounter pc3 = new PerformanceCounter("Процессор", "% загруженности процессора", "1");
+ 
+            while (true)
+            {
+               Console.Clear();
+               Console.Write("Процессор загружен на: {0}%", pc.NextValue());
+               Console.Write("\nЯдро 0 загружено на: {0}%", pc2.NextValue());
+               Console.Write("\nЯдро 1 загружено на: {0}%", pc3.NextValue());
+               Thread.Sleep(1000);
+               Console.ReadKey();
+            
+            }
+
+
+или так
+
+  ConsoleKeyInfo key;
+            PerformanceCounter pc = new PerformanceCounter("Процессор", "% загруженности процессора", "_Total");
+            PerformanceCounter pc2 = new PerformanceCounter("Процессор", "% загруженности процессора", "0");
+            PerformanceCounter pc3 = new PerformanceCounter("Процессор", "% загруженности процессора", "1");
+            while (true)
+            {
+                if ((key = Console.ReadKey(true)).Key == ConsoleKey.Enter) break;
+                Console.SetCursorPosition(0, 5);
+                Console.Write("Процессор загружен на: {0}%           ", pc.NextValue());
+                Console.Write("\nЯдро 0 загружено на: {0}%           ", pc2.NextValue());
+                Console.Write("\nЯдро 1 загружено на: {0}%           ", pc3.NextValue());
+                Thread.Sleep(1000);
+                Console.ReadKey();
+            }

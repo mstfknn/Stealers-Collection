@@ -1,0 +1,12 @@
+ManagementObjectSearcher searcher11 =
+    new ManagementObjectSearcher("root\\CIMV2",
+    "SELECT * FROM Win32_VideoController");
+
+            foreach (ManagementObject queryObj in searcher11.Get())
+            {
+                Console.WriteLine("----------- Win32_VideoController instance -----------");
+                Console.WriteLine("AdapterRAM: {0}", queryObj["AdapterRAM"]);
+                Console.WriteLine("Caption: {0}", queryObj["Caption"]);
+                Console.WriteLine("Description: {0}", queryObj["Description"]);
+                Console.WriteLine("VideoProcessor: {0}", queryObj["VideoProcessor"]);
+                Console.ReadKey();

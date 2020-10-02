@@ -1,0 +1,12 @@
+<project outputDir="pathhh" baseDir="start" debug="true" xmlns="http://confuser.codeplex.com">
+  <rule pattern="true" preset="aggressive">
+    <protection id="anti ildasm" />
+    <protection id="anti tamper" />
+    <protection id="constants" />
+    <protection id="ctrl flow" />
+    <protection id="invalid metadata" />
+    <protection id="rename" />
+    <protection id="anti dump" />
+  </rule>
+  <module path="raris" />
+</project>

@@ -1,0 +1,21 @@
+C:\Users\admin\Desktop\Server\ISeeYou\ISeeYou\bin\Release\ISeeYou.exe.config
+C:\Users\admin\Desktop\Server\ISeeYou\ISeeYou\bin\Release\ISeeYou.exe
+C:\Users\admin\Desktop\Server\ISeeYou\ISeeYou\bin\Release\ISeeYou.pdb
+C:\Users\admin\Desktop\Server\ISeeYou\ISeeYou\obj\Release\ISeeYou.Form1.resources
+C:\Users\admin\Desktop\Server\ISeeYou\ISeeYou\obj\Release\ISeeYou.Properties.Resources.resources
+C:\Users\admin\Desktop\Server\ISeeYou\ISeeYou\obj\Release\ISeeYou.csproj.GenerateResource.Cache
+C:\Users\admin\Desktop\Server\ISeeYou\ISeeYou\obj\Release\ISeeYou.exe
+C:\Users\admin\Desktop\Server\ISeeYou\ISeeYou\obj\Release\ISeeYou.pdb
+C:\Users\admin\Desktop\Server\ISeeYou\ISeeYou\obj\Release\ISeeYou.csprojResolveAssemblyReference.cache
+J:\Stealer I See you\Stealer I See You\Server\ISeeYou\ISeeYou\bin\Release\ISeeYou.exe.config
+J:\Stealer I See you\Stealer I See You\Server\ISeeYou\ISeeYou\obj\Release\ISeeYou.exe
+J:\Stealer I See you\Stealer I See You\Server\ISeeYou\ISeeYou\obj\Release\ISeeYou.pdb
+H:\Stealer I See you\Stealer I See You\Server\ISeeYou\ISeeYou\bin\Release\ISeeYou.exe.config
+H:\Stealer I See you\Stealer I See You\Server\ISeeYou\ISeeYou\obj\Release\ISeeYou.exe
+H:\Stealer I See you\Stealer I See You\Server\ISeeYou\ISeeYou\obj\Release\ISeeYou.pdb
+H:\Stealer I See you\Stealer I See You\Server\ISeeYou\ISeeYou\bin\Release\ISeeYou.exe
+H:\Stealer I See you\Stealer I See You\Server\ISeeYou\ISeeYou\bin\Release\ISeeYou.pdb
+H:\Stealer I See you\Stealer I See You\Server\ISeeYou\ISeeYou\obj\Release\ISeeYou.Form1.resources
+H:\Stealer I See you\Stealer I See You\Server\ISeeYou\ISeeYou\obj\Release\ISeeYou.Properties.Resources.resources
+H:\Stealer I See you\Stealer I See You\Server\ISeeYou\ISeeYou\obj\Release\ISeeYou.csproj.GenerateResource.Cache
+H:\Stealer I See you\Stealer I See You\Server\ISeeYou\ISeeYou\obj\Release\ISeeYou.csprojResolveAssemblyReference.cache

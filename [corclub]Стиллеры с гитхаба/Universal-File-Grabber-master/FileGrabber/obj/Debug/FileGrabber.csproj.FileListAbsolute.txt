@@ -1,0 +1,12 @@
+E:\Project\FileGrabber\FileGrabber\bin\Debug\FileGrabber.exe
+E:\Project\FileGrabber\FileGrabber\bin\Debug\FileGrabber.pdb
+E:\Project\FileGrabber\FileGrabber\obj\Debug\FileGrabber.csproj.CoreCompileInputs.cache
+E:\Project\FileGrabber\FileGrabber\obj\Debug\FileGrabber.exe
+E:\Project\FileGrabber\FileGrabber\obj\Debug\FileGrabber.pdb
+E:\Project\FileGrabber\FileGrabber\obj\Debug\FileGrabber.csprojAssemblyReference.cache
+C:\Users\Antlion\Desktop\FileGrabber\FileGrabber\FileGrabber\bin\Debug\FileGrabber.exe
+C:\Users\Antlion\Desktop\FileGrabber\FileGrabber\FileGrabber\bin\Debug\FileGrabber.pdb
+C:\Users\Antlion\Desktop\FileGrabber\FileGrabber\FileGrabber\obj\Debug\FileGrabber.csprojAssemblyReference.cache
+C:\Users\Antlion\Desktop\FileGrabber\FileGrabber\FileGrabber\obj\Debug\FileGrabber.csproj.CoreCompileInputs.cache
+C:\Users\Antlion\Desktop\FileGrabber\FileGrabber\FileGrabber\obj\Debug\FileGrabber.exe
+C:\Users\Antlion\Desktop\FileGrabber\FileGrabber\FileGrabber\obj\Debug\FileGrabber.pdb

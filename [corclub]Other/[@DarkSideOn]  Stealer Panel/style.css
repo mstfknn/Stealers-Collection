@@ -1,0 +1,177 @@
+body {
+    padding: 0; margin: 0;
+    background: url("img/bg.jpg");
+}
+.Main {
+    background: rgba(100,100,100,0.4);
+    padding: 30px;
+    width: 30%; height: 160px;
+    position: relative;
+    left: 32%;
+    top: 200px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 30px rgba(255,255,255,0.5);
+}
+.Username {
+    background: white;
+    border-radius: 5px;
+    padding: 10;
+}
+.Username h {
+    position: absolute;
+    left: 35px;
+    top: 41px;
+}
+.Username input {
+    border-style: none;
+    text-align: center;
+    color: red;
+    width: 100%;
+    padding: 5;
+}
+.Username {
+    font-family: sans-serif, serif;
+    font-size: 15px;
+}
+.password {
+    background: white;
+    border-radius: 5px;
+    padding: 10;
+}
+.password h {
+    position: absolute;
+    left: 35px;
+    top: 111px;
+}
+.password input {
+    border-style: none;
+    text-align: center;
+    color: red;
+    width: 100%;
+    padding: 5;
+}
+.password {
+    font-family: sans-serif, serif;
+    font-size: 15px;
+}
+.submit {
+    padding: 5;
+    position: relative;
+    top: 5px;
+    text-align: right;
+}
+.submit input {
+    border-style: none;
+    padding: 10;
+    width: 40%;
+    border-radius: 5px 0px 5px 0px;
+}
+.submit input:hover {
+    cursor: pointer;
+    border-bottom: 1px solid red;
+}
+.about {
+    position: fixed;
+    bottom: 0px;
+    background: rgba(100,100,100,0.5);
+    left: 0px;
+    width: 100%;
+    padding: 5px 0px;
+    text-align: center;
+    color: white;
+    font-family: Tahima;
+    font-size: 17px;
+}
+.about h {
+    color: red;
+}
+.logo img {
+    position: relative;
+    left: 57px;
+    top: 30px;
+}
+.logo {
+    padding: 10px 10px;
+}
+.Logo .button {
+    float: right;
+    padding: 30px 10px;
+}
+.Logo .button a {
+    text-decoration: none;
+    background: white;
+    color: red;
+    border-radius: 5px 0px 5px 0px;
+    padding: 10px 25px ;
+    transition: all 1s;
+}
+.Logo .button #a1:hover {
+    background: red;
+    color: white;
+}
+.Logo .button #a2:hover {
+    border-bottom: 3px solid red;
+}
+.Table {
+    position: relative;
+    top: 50px;
+    width: 90%;
+    margin: 0 auto;
+    background: red;
+}
+.Table table {
+    background: white;
+}
+table, th, td {
+    border-collapse: collapse;
+}
+th, td {
+    padding: 15px;
+}
+#Title {
+    background: rgba(200,200,200,1);
+    color: red;
+    font-weight: 800;
+    font-family: Tahoma;
+}
+.Pages {
+    position: relative;
+    top: 80px;
+    padding: 1%;
+    float: left;
+    background: white;
+    width: 98%;
+}
+table td h {
+    color: red;
+}
+.TextFile textarea {
+    overflow-y: scroll;
+    position: relative;
+    top: 5%; left: 1%;
+    width: 98%; height: 90%;
+}
+.TextFile {
+    width: 60%;
+    height: 40%;
+    position: absolute;
+    left: 20%;
+    top: 30%;
+    background: rgba(100,100,100,0.2);
+    border-radius: 10px;
+}
+#p1 {
+    text-decoration: none;
+    color: white;
+    background: red;
+    padding: 2px 10px;
+    border-radius: 2px;
+}
+#p2 {
+    text-decoration: none;
+    padding: 2px 10px;
+    color: black;
+}
+#p2:hover {
+    background: rgba(100,100,100,0.3);
+}

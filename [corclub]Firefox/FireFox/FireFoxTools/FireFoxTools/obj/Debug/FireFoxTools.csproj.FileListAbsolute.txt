@@ -1,0 +1,7 @@
+E:\Project\FireFoxTools\FireFoxTools\bin\Debug\FireFoxTools.exe.config
+E:\Project\FireFoxTools\FireFoxTools\bin\Debug\FireFoxTools.exe
+E:\Project\FireFoxTools\FireFoxTools\bin\Debug\FireFoxTools.pdb
+E:\Project\FireFoxTools\FireFoxTools\obj\Debug\FireFoxTools.csproj.CoreCompileInputs.cache
+E:\Project\FireFoxTools\FireFoxTools\obj\Debug\FireFoxTools.exe
+E:\Project\FireFoxTools\FireFoxTools\obj\Debug\FireFoxTools.pdb
+E:\Project\FireFoxTools\FireFoxTools\bin\Debug\System.Data.SQLite.dll

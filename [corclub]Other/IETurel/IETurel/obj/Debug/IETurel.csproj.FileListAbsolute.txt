@@ -1,0 +1,7 @@
+E:\Project\IETurel\IETurel\obj\Debug\IETurel.csproj.CoreCompileInputs.cache
+E:\Project\IETurel\IETurel\bin\Debug\IETurel.exe.config
+E:\Project\IETurel\IETurel\bin\Debug\IETurel.exe
+E:\Project\IETurel\IETurel\bin\Debug\IETurel.pdb
+E:\Project\IETurel\IETurel\obj\Debug\IETurel.exe
+E:\Project\IETurel\IETurel\obj\Debug\IETurel.pdb
+E:\Project\IETurel\IETurel\obj\Debug\IETurel.csprojResolveAssemblyReference.cache

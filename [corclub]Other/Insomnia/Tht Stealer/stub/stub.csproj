@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!--Project was exported from assembly: C:\Users\ZetSving\Desktop\На разбор Стиллеров\Tht Stealer\Tht Stealer\stub.exe-->
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{6DFB4DE2-18AD-48E7-89C0-C5CDC6B6807F}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AssemblyName>winlogan.exe</AssemblyName>
+    <ApplicationVersion>1.0.0.0</ApplicationVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CType_Renamed.cs" />
+    <Compile Include="CUtils.cs" />
+    <Compile Include="CTypes.cs" />
+    <Compile Include="Ftp.cs" />
+    <Compile Include="Form1.cs" />
+    <Compile Include="CSubTypes.cs" />
+    <Compile Include="CSubType.cs" />
+    <Compile Include="CProtectStore.cs" />
+    <Compile Include="CItems.cs" />
+    <Compile Include="CItem.cs" />
+    <Compile Include="operaa.cs" />
+    <Compile Include="CIEPasswords.cs" />
+    <Compile Include="CIEPassword.cs" />
+    <Compile Include="MSN.cs" />
+    <Compile Include="PalTalk.cs" />
+    <Compile Include="Pidgin.cs" />
+    <Compile Include="Diger.cs" />
+    <Compile Include="PStoreLib\ConstPStore.cs" />
+    <Compile Include="PStoreLib\guidProvider.cs" />
+    <Compile Include="PStoreLib\IEnumPStoreItems.cs" />
+    <Compile Include="PStoreLib\IEnumPStoreTypes.cs" />
+    <Compile Include="PStoreLib\IPStore.cs" />
+    <Compile Include="PStoreLib\PST_ACCESSRULESET.cs" />
+    <Compile Include="PStoreLib\PST_KEY.cs" />
+    <Compile Include="PStoreLib\PST_PROMPTINFO.cs" />
+    <Compile Include="PStoreLib\PST_TYPEINFO.cs" />
+    <Compile Include="My\MyApplication.cs" />
+    <Compile Include="My\MyComputer.cs" />
+    <Compile Include="My\MyProject.cs" />
+    <Compile Include="My\MySettings.cs" />
+    <Compile Include="My\MySettingsProperty.cs" />
+    <Compile Include="My\Resources\Resources.cs" />
+    <Compile Include="AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Form1.resx" />
+    <EmbeddedResource Include="Resources.resx" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+</Project>

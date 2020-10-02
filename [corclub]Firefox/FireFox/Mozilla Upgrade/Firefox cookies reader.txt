@@ -1,0 +1,139 @@
+﻿Динамическая загрузка Dll
+
+DllImportAttribute и до сих пор используют Windows API, мы можем построить динамическую загрузку неуправляемых Dll функциональные классы DllInvoke: 
+
+public class DllInvoke
+    {
+        private IntPtr hLib;
+        
+        [DllImport("kernel32.dll")]
+        public extern static bool FreeLibrary(IntPtr lib);
+
+        [DllImport("kernel32.dll")]
+        public extern static IntPtr LoadLibrary(String path);
+
+        [DllImport("kernel32.dll")]
+        public extern static IntPtr GetProcAddress(IntPtr lib, String funcName);
+
+        public DllInvoke(String DllFile)
+        {
+            hLib = LoadLibrary(DllFile);
+        }
+
+        ~DllInvoke()
+        {
+            FreeLibrary(hLib);
+        }
+        
+        public Delegate Invoke(String ApiName, Type t)
+        {
+            IntPtr api = GetProcAddress(hLib, ApiName);
+            return (Delegate)Marshal.GetDelegateForFunctionPointer(api, t);
+        }
+    }
+
+ delegate int invoke_sqlite3_open(IntPtr fileName, out IntPtr database);
+
+        private int sqlite3_open(IntPtr fileName, out IntPtr database)
+        {
+            invoke_sqlite3_open invoke = (invoke_sqlite3_open)dllSqlLite.Invoke("sqlite3_open", typeof(invoke_sqlite3_open));
+            return invoke(fileName, out database);
+        }
+
+Вот весь код для чтения реестра для получения и установки FireFox профиля пути, а также прочитать Cookie: 
+
+
+    static string ffProfilePath;
+        static string FfProfilePath
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(ffProfilePath))
+                {
+                    RegistryKey key = Registry.CurrentUser.OpenSubKey(@"SoftwareMicrosoftWindowsCurrentVersionExplorerShell Folders");
+                    if (key != null)
+                    {
+                        string ffCfgPath = Path.Combine(key.GetValue("AppData").ToString(), "Mozilla\Firefox\Profiles");
+                        if (Directory.Exists(ffCfgPath))
+                        {
+                            ffProfilePath = ffCfgPath;
+                        }
+                    }
+                }
+                return ffProfilePath;
+            }
+        }
+
+        static string[] ffConfigFiles;
+        static string[] FfConfigFiles
+        {
+            get
+            {
+                if (ffConfigFiles == null)
+                {
+                    ffConfigFiles = Directory.GetFiles(FfProfilePath, "prefs.js", SearchOption.AllDirectories);
+                }
+                return ffConfigFiles;
+            }
+        }
+
+        static string[] ffCookieFiles;
+        static string[] FfCookieFiles
+        {
+            get
+            {
+                if (ffCookieFiles == null)
+                {
+                    ffCookieFiles = Directory.GetFiles(FfProfilePath, "cookies.sqlite", SearchOption.AllDirectories);
+                }
+                return ffCookieFiles;
+            }
+        }
+
+        static string ffInstallFolder;
+        static string FfInstallFolder
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(ffInstallFolder))
+                {
+                    ffInstallFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), "Mozilla Firefox");
+
+                    string ffPath = @"SOFTWAREMozillaMozilla Firefox";
+                    RegistryKey key = Registry.LocalMachine.OpenSubKey(ffPath);
+                    if (key != null)
+                    {
+                        ffPath += @"" + key.GetValue("CurrentVersion").ToString() + @"Main";
+                        RegistryKey keyInstall = Registry.LocalMachine.OpenSubKey(ffPath);
+                        if (keyInstall != null)
+                        {
+                            ffInstallFolder = keyInstall.GetValue("Install Directory").ToString();
+                        }
+                    }
+                }
+                return ffInstallFolder;
+            }
+        }
+读取Cookie代码片段：
+
+                        if (Directory.Exists(FfInstallFolder))
+                        {
+                            string dllMoz = Path.Combine(FfInstallFolder, "mozcrt19.dll");
+                            string dllSqlite = Path.Combine(FfInstallFolder, "sqlite3.dll");
+                            if (File.Exists(dllMoz) && File.Exists(dllSqlite))
+                            {
+                                DllInvoke.LoadLibrary(dllMoz);
+                                if (FfCookieFiles != null)
+                                {
+                                    foreach (string ckFile in FfCookieFiles)
+                                    {
+                                        SqliteWrapper sqlCookie = new SqliteWrapper(dllSqlite, ckFile);
+                                        DataTable dt = sqlCookie.ExecuteQuery(string.Format(defaultCulture, "select * from moz_cookies where name='{0}'", MINIMISE_ME_COOKIE_NAME));
+                                        if (dt.Rows.Count > 0)
+                                        {
+                                            cabId = dt.Rows[0]["value"].ToString();
+                                        }
+                                    }
+                                }
+                            }
+                        }

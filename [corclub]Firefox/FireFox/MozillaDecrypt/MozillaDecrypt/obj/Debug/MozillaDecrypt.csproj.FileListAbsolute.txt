@@ -1,0 +1,12 @@
+E:\Project\MozillaDecrypt\MozillaDecrypt\bin\Debug\MozillaDecrypt.exe
+E:\Project\MozillaDecrypt\MozillaDecrypt\bin\Debug\MozillaDecrypt.pdb
+E:\Project\MozillaDecrypt\MozillaDecrypt\obj\Debug\MozillaDecrypt.csproj.CoreCompileInputs.cache
+E:\Project\MozillaDecrypt\MozillaDecrypt\obj\Debug\MozillaDecrypt.exe
+E:\Project\MozillaDecrypt\MozillaDecrypt\obj\Debug\MozillaDecrypt.pdb
+E:\Project\MozillaDecrypt\MozillaDecrypt\bin\Debug\MozillaDecrypt.exe.config
+E:\Project\MozillaDecrypt\MozillaDecrypt\bin\Debug\System.Data.SQLite.dll
+E:\Project\MozillaDecrypt\MozillaDecrypt\bin\Debug\System.Data.SQLite.xml
+E:\Project\MozillaDecrypt\MozillaDecrypt\bin\Debug\System.Data.SQLite.dll.config
+E:\Project\MozillaDecrypt\MozillaDecrypt\obj\Debug\MozillaDecrypt.csprojResolveAssemblyReference.cache
+E:\Project\MozillaDecrypt\MozillaDecrypt\bin\Debug\Newtonsoft.Json.dll
+E:\Project\MozillaDecrypt\MozillaDecrypt\bin\Debug\Newtonsoft.Json.xml

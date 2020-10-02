@@ -1,0 +1,7 @@
+C:\Users\TriX\Desktop\FirePwd.Net-master\firepwd\bin\Debug\firepwd.net.exe
+C:\Users\TriX\Desktop\FirePwd.Net-master\firepwd\bin\Debug\firepwd.net.pdb
+C:\Users\TriX\Desktop\FirePwd.Net-master\firepwd\bin\Debug\System.Data.SQLite.dll
+C:\Users\TriX\Desktop\FirePwd.Net-master\firepwd\bin\Debug\System.Data.SQLite.Linq.dll
+C:\Users\TriX\Desktop\FirePwd.Net-master\firepwd\obj\x86\Debug\firepwd.net.csprojResolveAssemblyReference.cache
+C:\Users\TriX\Desktop\FirePwd.Net-master\firepwd\obj\x86\Debug\firepwd.net.exe
+C:\Users\TriX\Desktop\FirePwd.Net-master\firepwd\obj\x86\Debug\firepwd.net.pdb

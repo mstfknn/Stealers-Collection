@@ -1,0 +1,4 @@
+E:\Project\TestCopySubdirectory\TestCopySubdirectory\bin\Debug\TestCopySubdirectory.exe
+E:\Project\TestCopySubdirectory\TestCopySubdirectory\bin\Debug\TestCopySubdirectory.pdb
+E:\Project\TestCopySubdirectory\TestCopySubdirectory\obj\x86\Debug\TestCopySubdirectory.exe
+E:\Project\TestCopySubdirectory\TestCopySubdirectory\obj\x86\Debug\TestCopySubdirectory.pdb

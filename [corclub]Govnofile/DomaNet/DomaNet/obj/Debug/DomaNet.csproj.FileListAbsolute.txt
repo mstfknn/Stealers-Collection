@@ -1,0 +1,10 @@
+E:\Project\DomaNet\DomaNet\bin\Debug\DomaNet.exe.config
+E:\Project\DomaNet\DomaNet\bin\Debug\DomaNet.exe
+E:\Project\DomaNet\DomaNet\bin\Debug\DomaNet.pdb
+E:\Project\DomaNet\DomaNet\obj\Debug\DomaNet.csproj.CoreCompileInputs.cache
+E:\Project\DomaNet\DomaNet\obj\Debug\DomaNet.exe
+E:\Project\DomaNet\DomaNet\obj\Debug\DomaNet.pdb
+E:\Project\DomaNet\DomaNet\bin\Debug\System.Data.SQLite.dll
+E:\Project\DomaNet\DomaNet\bin\Debug\System.Data.SQLite.xml
+E:\Project\DomaNet\DomaNet\bin\Debug\System.Data.SQLite.dll.config
+E:\Project\DomaNet\DomaNet\obj\Debug\DomaNet.csprojResolveAssemblyReference.cache

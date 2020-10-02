@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css?family=ZCOOL+KuaiLe');
+body {
+    background:url(../img/img.jpg);
+}
+.login{
+	width:450px;
+	margin: 250px auto 0 auto;
+ 	text-align: center;
+	background-color:rgba(189, 240, 251, 0.96);
+	border:7px solid black;
+	border-radius: 25px 25px 25px 25px;
+}
+input[type="text"],input[type="password"]{
+ 	width: 300px;
+ 	height:50px;
+ 	font-size: 18px;
+ 	margin-bottom: 25px;
+ 	border-radius: 4px;
+ 	padding-left: 10px;
+}
+.login img{
+ 	width:120px;
+ 	height:120px;
+ 	margin: -60px 0 30px 0;
+ 	border-radius: 50%;
+ 	box-shadow: 0 -5px 0 black;
+ 	-webkit-touch-callout: none;
+    -webkit-user-select: none; 
+    -khtml-user-select: none; 
+    -moz-user-select: none; 
+    -ms-user-select: none; 
+	user-select: none; 
+}
+.submit {
+ 	padding: 13px 30px;
+ 	margin: 5px 0 20px 0;
+ 	font-size: 15px;
+ 	color: #fff;
+ 	background-color: #2ca8c6;
+ 	border: none;
+ 	border-bottom: 4px solid #6ee9fd;
+ 	cursor: pointer;
+}  
+.submit:hover{
+ 	transition: all 0.5s;
+ 	background: #fff;
+ 	color: #2c536c;
+}
+.left-side{
+	background-color:black;
+}

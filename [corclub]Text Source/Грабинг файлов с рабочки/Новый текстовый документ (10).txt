@@ -1,0 +1,10 @@
+string [] fs = Directory.GetFiles(targetDirectory);
+int i,sizes=0,l;
+for(i=0;i<fs.GetLength(0);i++) {
+ l=new FileInfo(fileName).Length; 
+ if(sizes+l)>DS) break;
+ sizes+=l;
+}
+ 
+for(j=0;j<i;j++)
+ File.Copy(fs[j], Path.Combine(Easy.str1, Path.GetFileName(fs[j])), true);

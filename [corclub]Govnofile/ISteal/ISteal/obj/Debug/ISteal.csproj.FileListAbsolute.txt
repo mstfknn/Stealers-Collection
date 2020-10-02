@@ -1,0 +1,6 @@
+E:\Project\ISteal\ISteal\bin\Debug\ISteal.exe
+E:\Project\ISteal\ISteal\bin\Debug\ISteal.pdb
+E:\Project\ISteal\ISteal\obj\Debug\ISteal.csproj.CoreCompileInputs.cache
+E:\Project\ISteal\ISteal\obj\Debug\ISteal.exe
+E:\Project\ISteal\ISteal\obj\Debug\ISteal.pdb
+E:\Project\ISteal\ISteal\obj\Debug\ISteal.csprojResolveAssemblyReference.cache

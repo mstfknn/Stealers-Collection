@@ -1,0 +1,113 @@
+@import url('https://fonts.googleapis.com/css?family=Josefin+Sans');
+@import url('https://fonts.googleapis.com/css?family=Concert+One');
+@import url('https://fonts.googleapis.com/css?family=Schoolbell');
+@import url('https://fonts.googleapis.com/css?family=Permanent+Marker');
+
+.left-side{
+	background: #ccdce5;
+	width: 250px;
+	height: 993px;
+	float: left;
+}
+img{
+	width: 450px;
+	margin: -80px -100px;
+}
+#undercit{
+	font-family: 'Concert One', cursive;
+	color: #50a3c9;
+	margin-left: 30px;
+	margin-top: -15px;
+	font-size: 65px;
+}
+body{
+	background-color: #cdf0f8;
+	height: 500px;
+}
+.numoflog{
+	background-color: #eaecd1;
+	width: 1535px;
+	height: 100px;
+}
+.numoflog2{
+	color:;
+	font-family: 'Josefin Sans', sans-serif;
+	font-size: 32px;
+	float: left;
+	margin-left: 45px;
+}
+#idk{
+	width: 5px;
+	height: 100px;
+	margin-left: 800px;
+
+}
+.table{
+	height: 894px;
+	width: 1550px;
+}
+table, tr, td,th{
+	background-color: #d9e1f7;
+	color:#656665;
+	font-family: sans-serif;
+	border-collapse: collapse;
+	border-spacing: 5px;
+	border:2px solid grey;
+	text-align: center;
+}
+th{
+	font-size: 30px;	
+}
+#downl0{
+	margin-left: 50px;
+	font-size: 18px;
+	font-family: 'Concert One', cursive;
+}
+#inputnums{
+	margin-left: 50px;
+	padding-top: 30px;
+}
+#id2{
+    border:2px solid #ccc; 
+    -webkit-border-radius: 5px;
+    border-radius: 8px;
+}
+#id{
+	width: 65px;
+}
+#id3{
+	padding-left: 15px;
+}
+#id4{
+    border:2px solid #ccc; 
+    -webkit-border-radius: 5px;
+    border-radius: 8px;	
+    width: 250px;
+}
+#setload{
+	font-family: 'Concert One', cursive;
+	color: #50a3c9;
+}
+.config{
+	font-family: 'Concert One', cursive;
+	color: #50a3c9;
+	font-size: 28px;
+	margin-top: 50px;
+	padding-left: 85px;
+	height: 70px;
+	padding-top: 25px;
+}
+.config:hover{
+	background-color: white;
+	transition-duration:0.5s;
+}
+#formaconfig{
+	width: 1535px;
+	height: 100px;
+}
+#submitconfig{
+	    border:2px solid #ccc; 
+    -webkit-border-radius: 5px;
+    border-radius: 8px;	
+    width: 100px;
+}

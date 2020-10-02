@@ -1,0 +1,173 @@
+﻿#region
+
+using System;
+using System.Collections.Generic;
+using dnlib.DotNet;
+using dnlib.DotNet.Emit;
+
+#endregion
+
+namespace KoiVM
+{
+    public class GenericInstantiation
+    {
+        private readonly Dictionary<MethodSpec, MethodDef> instantiations =
+            new Dictionary<MethodSpec, MethodDef>(MethodEqualityComparer.CompareDeclaringTypes);
+
+        public event Func<MethodSpec, bool> ShouldInstantiate;
+
+        public void EnsureInstantiation(MethodDef method, Action<MethodSpec, MethodDef> onInstantiated)
+        {
+            foreach(Instruction instr in method.Body.Instructions)
+                if (instr.Operand is MethodSpec spec)
+                {
+                    if (ShouldInstantiate != null && !ShouldInstantiate(spec))
+                        continue;
+
+                    if (!this.Instantiate(spec, out MethodDef instantiation))
+                        onInstantiated(spec, instantiation);
+                    instr.Operand = instantiation;
+                }
+        }
+
+        public bool Instantiate(MethodSpec methodSpec, out MethodDef def)
+        {
+            if(this.instantiations.TryGetValue(methodSpec, out def))
+                return true;
+
+            var genericArguments = new GenericArguments();
+            genericArguments.PushMethodArgs(methodSpec.GenericInstMethodSig.GenericArguments);
+            MethodDef originDef = methodSpec.Method.ResolveMethodDefThrow();
+
+            MethodSig newSig = this.ResolveMethod(originDef.MethodSig, genericArguments);
+            newSig.Generic = false;
+            newSig.GenParamCount = 0;
+
+            string newName = originDef.Name;
+            foreach(TypeSig typeArg in methodSpec.GenericInstMethodSig.GenericArguments)
+                newName += $";{typeArg.TypeName}";
+
+            def = new MethodDefUser(newName, newSig, originDef.ImplAttributes, originDef.Attributes);
+            TypeSig thisParam = originDef.HasThis ? originDef.Parameters[0].Type : null;
+            def.DeclaringType2 = originDef.DeclaringType2;
+            if(thisParam != null) def.Parameters[0].Type = thisParam;
+
+            foreach(DeclSecurity declSec in originDef.DeclSecurities)
+                def.DeclSecurities.Add(declSec);
+            def.ImplMap = originDef.ImplMap;
+            foreach(MethodOverride ov in originDef.Overrides)
+                def.Overrides.Add(ov);
+
+            def.Body = new CilBody();
+            def.Body.InitLocals = originDef.Body.InitLocals;
+            def.Body.MaxStack = originDef.Body.MaxStack;
+            foreach(Local variable in originDef.Body.Variables)
+            {
+                var newVar = new Local(variable.Type);
+                def.Body.Variables.Add(newVar);
+            }
+
+            var instrMap = new Dictionary<Instruction, Instruction>();
+            foreach(Instruction instr in originDef.Body.Instructions)
+            {
+                var newInstr = new Instruction(instr.OpCode, this.ResolveOperand(instr.Operand, genericArguments));
+                def.Body.Instructions.Add(newInstr);
+                instrMap[instr] = newInstr;
+            }
+            foreach(Instruction instr in def.Body.Instructions)
+                if(instr.Operand is Instruction)
+                {
+                    instr.Operand = instrMap[(Instruction) instr.Operand];
+                }
+                else if(instr.Operand is Instruction[])
+                {
+                    var targets = (Instruction[]) ((Instruction[]) instr.Operand).Clone();
+                    for(int i = 0; i < targets.Length; i++)
+                        targets[i] = instrMap[targets[i]];
+                    instr.Operand = targets;
+                }
+            def.Body.UpdateInstructionOffsets();
+
+            foreach(ExceptionHandler eh in originDef.Body.ExceptionHandlers)
+            {
+                var newEH = new ExceptionHandler(eh.HandlerType)
+                {
+                    TryStart = instrMap[eh.TryStart],
+                    HandlerStart = instrMap[eh.HandlerStart]
+                };
+                if (eh.TryEnd != null)
+                    newEH.TryEnd = instrMap[eh.TryEnd];
+                if(eh.HandlerEnd != null)
+                    newEH.HandlerEnd = instrMap[eh.HandlerEnd];
+                if(eh.CatchType != null)
+                    newEH.CatchType = genericArguments.Resolve(newEH.CatchType.ToTypeSig()).ToTypeDefOrRef();
+                else if(eh.FilterStart != null)
+                    newEH.FilterStart = instrMap[eh.FilterStart];
+
+                def.Body.ExceptionHandlers.Add(newEH);
+            }
+
+            this.instantiations[methodSpec] = def;
+            return false;
+        }
+
+        private FieldSig ResolveField(FieldSig sig, GenericArguments genericArgs)
+        {
+            FieldSig newSig = sig.Clone();
+            newSig.Type = genericArgs.ResolveType(newSig.Type);
+            return newSig;
+        }
+
+        private GenericInstMethodSig ResolveInst(GenericInstMethodSig sig, GenericArguments genericArgs)
+        {
+            GenericInstMethodSig newSig = sig.Clone();
+            for(int i = 0; i < newSig.GenericArguments.Count; i++)
+                newSig.GenericArguments[i] = genericArgs.ResolveType(newSig.GenericArguments[i]);
+            return newSig;
+        }
+
+        private MethodSig ResolveMethod(MethodSig sig, GenericArguments genericArgs)
+        {
+            MethodSig newSig = sig.Clone();
+
+            for(int i = 0; i < newSig.Params.Count; i++)
+                newSig.Params[i] = genericArgs.ResolveType(newSig.Params[i]);
+
+            if(newSig.ParamsAfterSentinel != null)
+                for(int i = 0; i < newSig.ParamsAfterSentinel.Count; i++)
+                    newSig.ParamsAfterSentinel[i] = genericArgs.ResolveType(newSig.ParamsAfterSentinel[i]);
+
+            newSig.RetType = genericArgs.ResolveType(newSig.RetType);
+            return newSig;
+        }
+
+        private object ResolveOperand(object operand, GenericArguments genericArgs)
+        {
+            if (operand is MemberRef memberRef)
+            {
+                if (memberRef.IsFieldRef)
+                {
+                    FieldSig field = this.ResolveField(memberRef.FieldSig, genericArgs);
+                    memberRef = new MemberRefUser(memberRef.Module, memberRef.Name, field, memberRef.Class);
+                }
+                else
+                {
+                    MethodSig method = this.ResolveMethod(memberRef.MethodSig, genericArgs);
+                    memberRef = new MemberRefUser(memberRef.Module, memberRef.Name, method, memberRef.Class);
+                }
+                return memberRef;
+            }
+            if (operand is TypeSpec)
+            {
+                TypeSig sig = ((TypeSpec) operand).TypeSig;
+                return genericArgs.ResolveType(sig).ToTypeDefOrRef();
+            }
+            if (operand is MethodSpec spec)
+            {
+                spec = new MethodSpecUser(spec.Method, this.ResolveInst(spec.GenericInstMethodSig, genericArgs));
+                return spec;
+            }
+            return operand;
+        }
+    }
+}

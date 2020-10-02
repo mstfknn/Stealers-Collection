@@ -1,0 +1,10 @@
+c:\users\bashka\documents\visual studio 2013\Projects\VK StealerPro\VK StealerPro\bin\Debug\VK StealerPro.exe.config
+c:\users\bashka\documents\visual studio 2013\Projects\VK StealerPro\VK StealerPro\bin\Debug\VK StealerPro.exe
+c:\users\bashka\documents\visual studio 2013\Projects\VK StealerPro\VK StealerPro\bin\Debug\VK StealerPro.pdb
+c:\users\bashka\documents\visual studio 2013\Projects\VK StealerPro\VK StealerPro\obj\Debug\VK StealerPro.csprojResolveAssemblyReference.cache
+c:\users\bashka\documents\visual studio 2013\Projects\VK StealerPro\VK StealerPro\obj\Debug\VK_StealerPro.Properties.Resources.resources
+c:\users\bashka\documents\visual studio 2013\Projects\VK StealerPro\VK StealerPro\obj\Debug\VK StealerPro.csproj.GenerateResource.Cache
+c:\users\bashka\documents\visual studio 2013\Projects\VK StealerPro\VK StealerPro\obj\Debug\VK StealerPro.exe
+c:\users\bashka\documents\visual studio 2013\Projects\VK StealerPro\VK StealerPro\obj\Debug\VK StealerPro.pdb
+c:\users\bashka\documents\visual studio 2013\Projects\VK StealerPro\VK StealerPro\obj\Debug\VK_StealerPro.HideWindow.resources
+c:\users\bashka\documents\visual studio 2013\Projects\VK StealerPro\VK StealerPro\bin\Debug\AutoHotkey.Interop.dll

@@ -1,0 +1,12 @@
+C:\Users\Admin\Desktop\Pwrec\DONE\bin\Debug\DONE.exe.config
+C:\Users\Admin\Desktop\Pwrec\DONE\bin\Debug\DONE.exe
+C:\Users\Admin\Desktop\Pwrec\DONE\bin\Debug\DONE.pdb
+C:\Users\Admin\Desktop\Pwrec\DONE\obj\Debug\DONE.exe
+C:\Users\Admin\Desktop\Pwrec\DONE\obj\Debug\DONE.pdb
+D:\Файлы с браузеров\Chrome--Simple-Password-Recovery-master\Chrome--Simple-Password-Recovery-master\DONE\bin\Debug\DONE.exe.config
+D:\Файлы с браузеров\Chrome--Simple-Password-Recovery-master\Chrome--Simple-Password-Recovery-master\DONE\bin\Debug\DONE.exe
+D:\Файлы с браузеров\Chrome--Simple-Password-Recovery-master\Chrome--Simple-Password-Recovery-master\DONE\bin\Debug\DONE.pdb
+D:\Файлы с браузеров\Chrome--Simple-Password-Recovery-master\Chrome--Simple-Password-Recovery-master\DONE\obj\Debug\SimpleChromePwrec.csprojAssemblyReference.cache
+D:\Файлы с браузеров\Chrome--Simple-Password-Recovery-master\Chrome--Simple-Password-Recovery-master\DONE\obj\Debug\SimpleChromePwrec.csproj.CoreCompileInputs.cache
+D:\Файлы с браузеров\Chrome--Simple-Password-Recovery-master\Chrome--Simple-Password-Recovery-master\DONE\obj\Debug\DONE.exe
+D:\Файлы с браузеров\Chrome--Simple-Password-Recovery-master\Chrome--Simple-Password-Recovery-master\DONE\obj\Debug\DONE.pdb

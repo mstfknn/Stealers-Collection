@@ -1,0 +1,91 @@
+private static string Decrypt(string cypherText)
+    {
+        StringBuilder sb = new StringBuilder(cypherText);
+        int hi2 = NSSBase64_DecodeBuffer(IntPtr.Zero, IntPtr.Zero, sb, sb.Length);
+        TSECItem tSecDec = new TSECItem();
+        TSECItem item = (TSECItem)Marshal.PtrToStructure(new IntPtr(hi2), typeof(TSECItem));
+        if (PK11SDR_Decrypt(ref item, ref tSecDec, 0) == 0)
+        {
+            if (tSecDec.SECItemLen != 0)
+            {
+                byte[] bvRet = new byte[tSecDec.SECItemLen];
+                Marshal.Copy(new IntPtr(tSecDec.SECItemData), bvRet, 0, tSecDec.SECItemLen);
+                string returnValue = Encoding.UTF8.GetString(bvRet);
+            }
+        }
+        return returnValue;
+    }
+
+
+2
+
+private static string Decrypt(string cypherText)
+    {
+        StringBuilder sb = new StringBuilder(cypherText);
+        int hi2 = NSSBase64_DecodeBuffer(IntPtr.Zero, IntPtr.Zero, sb, sb.Length);
+        TSECItem tSecDec = new TSECItem();
+        TSECItem item = (TSECItem)Marshal.PtrToStructure(new IntPtr(hi2), typeof(TSECItem));
+        if (PK11SDR_Decrypt(ref item, ref tSecDec, 0) == 0)
+        {
+            if (tSecDec.SECItemLen != 0)
+            {
+                byte[] bvRet = new byte[tSecDec.SECItemLen];
+                Marshal.Copy(new IntPtr(tSecDec.SECItemData), bvRet, 0, tSecDec.SECItemLen);
+                string returnValue = Encoding.UTF8.GetString(bvRet);
+            }
+        }
+        return Encoding.UTF8.GetString(bvRet);
+    }
+
+
+3
+
+
+public static string Decrypt(string encryptedText)
+		{
+			byte[] cipherTextBytes = Convert.FromBase64String(encryptedText);
+			byte[] keyBytes = new Rfc2898DeriveBytes(PasswordHash, Encoding.ASCII.GetBytes(SaltKey)).GetBytes(256 / 8);
+			var symmetricKey = new RijndaelManaged() { Mode = CipherMode.CBC, Padding = PaddingMode.None };
+
+			var decryptor = symmetricKey.CreateDecryptor(keyBytes, Encoding.ASCII.GetBytes(VIKey));
+			var memoryStream = new MemoryStream(cipherTextBytes);
+			var cryptoStream = new CryptoStream(memoryStream, decryptor, CryptoStreamMode.Read);
+			byte[] plainTextBytes = new byte[cipherTextBytes.Length];
+
+			int decryptedByteCount = cryptoStream.Read(plainTextBytes, 0, plainTextBytes.Length);
+			memoryStream.Close();
+			cryptoStream.Close();
+			return Encoding.UTF8.GetString(plainTextBytes, 0, decryptedByteCount).TrimEnd("\0".ToCharArray());
+		}
+
+
+4
+
+
+public static string Encrypt(string data)
+{
+    TripleDESCryptoServiceProvider DES = new TripleDESCryptoServiceProvider();
+
+    DES.Mode = CipherMode.ECB;
+    DES.Key = GetKey("a1!B78s!5(");
+
+    DES.Padding = PaddingMode.PKCS7;
+    ICryptoTransform DESEncrypt = DES.CreateEncryptor();
+    Byte[] Buffer = ASCIIEncoding.ASCII.GetBytes(data);
+
+    return Convert.ToBase64String(DESEncrypt.TransformFinalBlock(Buffer, 0, Buffer.Length));
+}
+
+public static string Decrypt(string data)
+{
+    TripleDESCryptoServiceProvider DES = new TripleDESCryptoServiceProvider();
+
+    DES.Mode = CipherMode.ECB;
+    DES.Key = GetKey("a1!B78s!5(");
+   
+    DES.Padding = PaddingMode.PKCS7;
+    ICryptoTransform DESEncrypt = DES.CreateDecryptor();
+    Byte[] Buffer = Convert.FromBase64String(data.Replace(" ","+"));
+
+    return Encoding.UTF8.GetString(DESEncrypt.TransformFinalBlock(Buffer, 0, Buffer.Length));
+}

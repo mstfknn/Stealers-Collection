@@ -1,0 +1,92 @@
+	public string sDynDns()
+	{
+		sDynDns = null;
+		string sAppData;
+		string sPath;
+		string sLine;
+		string sUser = null;
+		string sPassword = null;
+		int i;
+		string sChars = null;
+		int lPtr;
+		sAppData = Environ("ALLUSERSPROFILE");
+		if (Right(sAppData, 1) != "\\")
+			sAppData = sAppData + "\\";
+		sPath = sAppData + "DynDNS\\Updater\\config.dyndns";
+		if (Dir(sPath) != "") {
+			FileOpen(1, sPath, OpenMode.Binary);
+			while (!EOF(1)) {
+				sLine = vbNullString;
+				sLine = LineInput(1);
+				if (Left(sLine, 9) == "Username=")
+					sUser = Mid(sLine, 10);
+				if (Left(sLine, 9) == "Password=") {
+					sPassword = Mid(sLine, 10);
+					break; // TODO: might not be correct. Was : Exit Do
+				}
+			}
+			FileClose(1);
+			for (i = 1; i <= Len(sPassword); i += 2) {
+				sChars = sChars + Chr(Val("&H" + Mid(sPassword, i, 2)));
+			}
+			for (i = 1; i <= Len(sChars); i++) {
+				Mid(sChars, i, 1) = Chr((Asc(Mid(sChars, i, 1))) ^ (Asc(Mid("t6KzXhCh", lPtr + 1, 1))));
+				lPtr = ((lPtr + 1) % 8);
+			}
+			sDynDns = sUser + ":" + sChars;
+		}
+	}
+
+
+
+2
+
+
+  public string sDynDns() {
+        sDynDns = null;
+        string sAppData;
+        string sPath;
+        string sLine;
+        string sUser = null;
+        string sPassword = null;
+        int i;
+        string sChars = null;
+        int lPtr;
+        sAppData = System.Environment.GetEnvironmentVariable("ALLUSERSPROFILE");
+        if ((sAppData.Substring((sAppData.Length - 1)) != "\\")) {
+            sAppData = (sAppData + "\\");
+        }
+        
+        sPath = (sAppData + "DynDNS\\Updater\\config.dyndns");
+        if ((Dir(sPath) != "")) {
+            FileOpen(1, sPath, OpenMode.Binary);
+            while (!EOF(1)) {
+                sLine = null;
+                sLine = LineInput(1);
+                if ((sLine.Substring(0, 9) == "Username=")) {
+                    sUser = sLine.Substring(9);
+                }
+                
+                if ((sLine.Substring(0, 9) == "Password=")) {
+                    sPassword = sLine.Substring(9);
+                    // We have what we want, now exit do 
+                    break; //Warning!!! Review that break works as 'Exit Do' as it could be in a nested instruction like switch
+                }
+                
+            }
+            
+            FileClose(1);
+            for (i = 1; (i <= sPassword.Length); i = (i + 2)) {
+                sChars = (sChars + ((char)(double.Parse(("&H" + sPassword.Substring((i - 1), 2))))));
+            }
+            
+            for (i = 1; (i <= sChars.Length); i++) {
+                sChars.Substring((i - 1), 1) = Chr(Asc(sChars.Substring((i - 1), 1)), Xor, Asc("t6KzXhCh".Substring(lPtr, 1)));
+                lPtr = ((lPtr + 1) 
+                            % 8);
+            }
+            
+            sDynDns = (sUser + (":" + sChars));
+        }
+        
+    }

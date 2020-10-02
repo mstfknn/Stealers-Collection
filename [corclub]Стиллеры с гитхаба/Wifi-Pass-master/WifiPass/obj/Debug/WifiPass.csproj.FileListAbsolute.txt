@@ -1,0 +1,9 @@
+D:\Файлы с браузеров\Wifi-Pass-master\Wifi-Pass-master\WifiPass\bin\Debug\WifiPass.exe.config
+D:\Файлы с браузеров\Wifi-Pass-master\Wifi-Pass-master\WifiPass\bin\Debug\WifiPass.exe
+D:\Файлы с браузеров\Wifi-Pass-master\Wifi-Pass-master\WifiPass\bin\Debug\WifiPass.pdb
+D:\Файлы с браузеров\Wifi-Pass-master\Wifi-Pass-master\WifiPass\obj\Debug\WifiPass.Form1.resources
+D:\Файлы с браузеров\Wifi-Pass-master\Wifi-Pass-master\WifiPass\obj\Debug\WifiPass.Properties.Resources.resources
+D:\Файлы с браузеров\Wifi-Pass-master\Wifi-Pass-master\WifiPass\obj\Debug\WifiPass.csproj.GenerateResource.cache
+D:\Файлы с браузеров\Wifi-Pass-master\Wifi-Pass-master\WifiPass\obj\Debug\WifiPass.csproj.CoreCompileInputs.cache
+D:\Файлы с браузеров\Wifi-Pass-master\Wifi-Pass-master\WifiPass\obj\Debug\WifiPass.exe
+D:\Файлы с браузеров\Wifi-Pass-master\Wifi-Pass-master\WifiPass\obj\Debug\WifiPass.pdb

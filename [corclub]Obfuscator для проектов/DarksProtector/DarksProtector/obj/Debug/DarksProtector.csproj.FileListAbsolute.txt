@@ -1,0 +1,33 @@
+D:\Dev\Released\DarksProtector\Debug\bin\DarksProtector.exe.config
+D:\Dev\Released\DarksProtector\Debug\bin\DarksProtector.exe
+D:\Dev\Released\DarksProtector\Debug\bin\DarksProtector.pdb
+D:\Dev\Released\DarksProtector\DarksProtector\obj\Debug\DarksProtector.csprojAssemblyReference.cache
+D:\Dev\Released\DarksProtector\DarksProtector\obj\Debug\DarksProtector.DarksProtectorForm.resources
+D:\Dev\Released\DarksProtector\DarksProtector\obj\Debug\DarksProtector.Properties.Resources.resources
+D:\Dev\Released\DarksProtector\DarksProtector\obj\Debug\DarksProtector.csproj.GenerateResource.cache
+D:\Dev\Released\DarksProtector\DarksProtector\obj\Debug\DarksProtector.csproj.CoreCompileInputs.cache
+D:\Dev\Released\DarksProtector\DarksProtector\obj\Debug\DarksProtector.csproj.CopyComplete
+D:\Dev\Released\DarksProtector\DarksProtector\obj\Debug\DarksProtector.exe
+D:\Dev\Released\DarksProtector\DarksProtector\obj\Debug\DarksProtector.pdb
+C:\Users\admin\Desktop\DarksProtector\DarksProtector\Debug\bin\DarksProtector.exe.config
+C:\Users\admin\Desktop\DarksProtector\DarksProtector\Debug\bin\DarksProtector.exe
+C:\Users\admin\Desktop\DarksProtector\DarksProtector\Debug\bin\DarksProtector.pdb
+C:\Users\admin\Desktop\DarksProtector\DarksProtector\DarksProtector\obj\Debug\DarksProtector.csprojAssemblyReference.cache
+C:\Users\admin\Desktop\DarksProtector\DarksProtector\DarksProtector\obj\Debug\DarksProtector.DarksProtectorForm.resources
+C:\Users\admin\Desktop\DarksProtector\DarksProtector\DarksProtector\obj\Debug\DarksProtector.Properties.Resources.resources
+C:\Users\admin\Desktop\DarksProtector\DarksProtector\DarksProtector\obj\Debug\DarksProtector.csproj.GenerateResource.cache
+C:\Users\admin\Desktop\DarksProtector\DarksProtector\DarksProtector\obj\Debug\DarksProtector.csproj.CoreCompileInputs.cache
+C:\Users\admin\Desktop\DarksProtector\DarksProtector\DarksProtector\obj\Debug\DarksProtector.csproj.CopyComplete
+C:\Users\admin\Desktop\DarksProtector\DarksProtector\DarksProtector\obj\Debug\DarksProtector.exe
+C:\Users\admin\Desktop\DarksProtector\DarksProtector\DarksProtector\obj\Debug\DarksProtector.pdb
+D:\Файлы с браузеров\[In4.Bz] DarksProtector\DarksProtector\Debug\bin\DarksProtector.exe.config
+D:\Файлы с браузеров\[In4.Bz] DarksProtector\DarksProtector\Debug\bin\DarksProtector.exe
+D:\Файлы с браузеров\[In4.Bz] DarksProtector\DarksProtector\Debug\bin\DarksProtector.pdb
+D:\Файлы с браузеров\[In4.Bz] DarksProtector\DarksProtector\DarksProtector\obj\Debug\DarksProtector.csprojAssemblyReference.cache
+D:\Файлы с браузеров\[In4.Bz] DarksProtector\DarksProtector\DarksProtector\obj\Debug\DarksProtector.DarksProtectorForm.resources
+D:\Файлы с браузеров\[In4.Bz] DarksProtector\DarksProtector\DarksProtector\obj\Debug\DarksProtector.Properties.Resources.resources
+D:\Файлы с браузеров\[In4.Bz] DarksProtector\DarksProtector\DarksProtector\obj\Debug\DarksProtector.csproj.GenerateResource.cache
+D:\Файлы с браузеров\[In4.Bz] DarksProtector\DarksProtector\DarksProtector\obj\Debug\DarksProtector.csproj.CoreCompileInputs.cache
+D:\Файлы с браузеров\[In4.Bz] DarksProtector\DarksProtector\DarksProtector\obj\Debug\DarksProtector.csproj.CopyComplete
+D:\Файлы с браузеров\[In4.Bz] DarksProtector\DarksProtector\DarksProtector\obj\Debug\DarksProtector.exe
+D:\Файлы с браузеров\[In4.Bz] DarksProtector\DarksProtector\DarksProtector\obj\Debug\DarksProtector.pdb

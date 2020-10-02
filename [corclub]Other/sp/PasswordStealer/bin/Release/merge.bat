@@ -1,0 +1,1 @@
+ILMerge.exe /target:winexe /targetplatform:"v4,C:\Windows\Microsoft.NET\Framework\v4.0.30319" /out:AnimeNEW.exe Anime.exe ICSharpCode.SharpZipLib.dll

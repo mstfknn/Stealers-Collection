@@ -1,0 +1,12 @@
+ ManagementObjectSearcher searcher = 
+                    new ManagementObjectSearcher("root\\CIMV2", 
+                    "SELECT * FROM Win32_VideoController WHERE Caption = 'ATI Mobility Radeon HD 4250    '"); 
+
+                foreach (ManagementObject queryObj in searcher.Get())
+                {
+                    Console.WriteLine("-----------------------------------");
+                    Console.WriteLine("Win32_VideoController instance");
+                    Console.WriteLine("-----------------------------------");
+                    Console.WriteLine("Видеокарта: {0}", queryObj["Caption"]);
+                
+                    Console.ReadKey();

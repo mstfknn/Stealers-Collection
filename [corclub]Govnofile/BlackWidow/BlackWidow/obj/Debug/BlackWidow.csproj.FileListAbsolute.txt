@@ -1,0 +1,8 @@
+C:\Users\admin\Desktop\Dev Steal\BlackWidow\BlackWidow\BlackWidow\bin\Debug\BlackWidow.exe.config
+C:\Users\admin\Desktop\Dev Steal\BlackWidow\BlackWidow\BlackWidow\bin\Debug\BlackWidow.exe
+C:\Users\admin\Desktop\Dev Steal\BlackWidow\BlackWidow\BlackWidow\bin\Debug\BlackWidow.pdb
+C:\Users\admin\Desktop\Dev Steal\BlackWidow\BlackWidow\BlackWidow\obj\Debug\BlackWidow.bWidow.resources
+C:\Users\admin\Desktop\Dev Steal\BlackWidow\BlackWidow\BlackWidow\obj\Debug\BlackWidow.Properties.Resources.resources
+C:\Users\admin\Desktop\Dev Steal\BlackWidow\BlackWidow\BlackWidow\obj\Debug\BlackWidow.csproj.GenerateResource.Cache
+C:\Users\admin\Desktop\Dev Steal\BlackWidow\BlackWidow\BlackWidow\obj\Debug\BlackWidow.exe
+C:\Users\admin\Desktop\Dev Steal\BlackWidow\BlackWidow\BlackWidow\obj\Debug\BlackWidow.pdb

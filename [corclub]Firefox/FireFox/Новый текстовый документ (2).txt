@@ -1,0 +1,67 @@
+﻿int app_count = 0;
+ 14         public frm_Main()
+ 15         {
+ 16             InitializeComponent();
+ 17         }
+ 18 
+ 19         #region 火狐设置
+ 20         private void Firefox_Set_button_Click(object sender, EventArgs e)
+ 21         {
+ 22             //主页设置
+ 23             string Set_Path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\Mozilla\Firefox\profiles.ini";
+ 24             string Path2 = "";
+ 25             List<string> str = new List<string>();
+ 26             using (StreamReader reader = File.OpenText(Set_Path))
+ 27             {
+ 28                 string line = "";
+ 29                 while ((line = reader.ReadLine()) != null)
+ 30                 {
+ 31                     str.Add(line);
+ 32                 }            
+ 33             }
+ 34             string NewPath = "";
+ 35             if (str.Where(n => n.Equals("[Profile0]")).ToArray().Length > 0)
+ 36             {
+ 37                 string temp=str.Where(n => n.Contains("Path")).ToArray()[0];
+ 38                 Path2 = temp.Substring(5, temp.Length - 5);
+ 39                 NewPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\Mozilla\Firefox\" + Path2 + @"\prefs.js";
+ 40             }
+ 41             if (str.Where(n => n.Equals("[Profile1]")).ToArray().Length > 0)
+ 42             {
+ 43                 string temp = str.Where(n => n.Contains("Path")).ToArray()[0];
+ 44                 Path2 = temp.Substring(5, temp.Length - 5);
+ 45                 NewPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\Mozilla\Firefox\" + Path2 ;
+ 46             }
+ 47 
+ 48             StringBuilder builder = new StringBuilder();
+ 49             using (StreamReader reader = File.OpenText(NewPath))
+ 50             {
+ 51                 string line = "";
+ 52                 bool flag = true;
+ 53                 while ((line = reader.ReadLine()) != null)
+ 54                 {
+ 55                     if (line.Contains("\"browser.startup.homepage\"")&&flag==true)
+ 56                     {
+ 57                         builder.Append("user_pref(\"browser.startup.homepage\", \""+this.HomePage_textBox.Text.Trim()+"\");\n");
+ 58                         flag = false;
+ 59                     }
+ 60                     else
+ 61                     {
+ 62                         builder.Append(line+"\n");
+ 63                     }
+ 64                 }
+ 65             }
+ 66             File.WriteAllText(NewPath, builder.ToString());
+ 67            
+ 68             if(File.Exists(@"C:\Program Files (x86)\Mozilla Firefox\firefox.exe"))
+ 69             {
+ 70                 Process pro = Process.Start(@"C:\Program Files (x86)\Mozilla Firefox\firefox.exe");
+ 71                 pro.StartInfo.WindowStyle = ProcessWindowStyle.Maximized;
+ 72                 pro.WaitForInputIdle(1);
+ 73                 if (pro.Responding)
+ 74                 {
+ 75                     SendKeys.SendWait("{F11}");
+ 76                 }
+ 77             }
+ 78         }
+ 79         #endregion

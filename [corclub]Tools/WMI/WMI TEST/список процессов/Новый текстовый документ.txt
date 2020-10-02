@@ -1,0 +1,10 @@
+ ManagementObjectSearcher searcher =
+        new ManagementObjectSearcher("root\\CIMV2",
+           "Select Name, CommandLine From Win32_Process");
+
+            foreach (ManagementObject instance in searcher.Get())
+            {
+                Console.WriteLine("{0}", instance["Name"]);
+            }
+            Console.Write("Press any key to continue . . . ");
+            Console.ReadKey(true);

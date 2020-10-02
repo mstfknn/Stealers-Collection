@@ -1,0 +1,16 @@
+E:\Project\FFS\FFS\obj\x86\Debug\FFS.Properties.Resources.resources
+E:\Project\FFS\FFS\obj\x86\Debug\FFS.csproj.GenerateResource.Cache
+E:\Project\FFS\FFS\bin\Debug\FFS.exe
+E:\Project\FFS\FFS\bin\Debug\FFS.pdb
+E:\Project\FFS\FFS\obj\x86\Debug\FFS.exe
+E:\Project\FFS\FFS\obj\x86\Debug\FFS.pdb
+E:\Project\FFS\FFS\obj\x86\Debug\FFS.Form1.resources
+G:\Project\FFS\FFS\bin\Debug\FFS.exe
+G:\Project\FFS\FFS\bin\Debug\FFS.pdb
+G:\Project\FFS\FFS\obj\x86\Debug\FFS.csprojResolveAssemblyReference.cache
+G:\Project\FFS\FFS\obj\x86\Debug\FFS.Form1.resources
+G:\Project\FFS\FFS\obj\x86\Debug\FFS.Properties.Resources.resources
+G:\Project\FFS\FFS\obj\x86\Debug\FFS.csproj.GenerateResource.cache
+G:\Project\FFS\FFS\obj\x86\Debug\FFS.csproj.CoreCompileInputs.cache
+G:\Project\FFS\FFS\obj\x86\Debug\FFS.exe
+G:\Project\FFS\FFS\obj\x86\Debug\FFS.pdb

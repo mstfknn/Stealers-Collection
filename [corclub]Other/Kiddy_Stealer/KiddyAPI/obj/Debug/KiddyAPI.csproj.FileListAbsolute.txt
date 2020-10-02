@@ -1,0 +1,6 @@
+C:\Users\Norwand\source\repos\KiddyAPI\KiddyAPI\obj\Debug\KiddyAPI.csprojAssemblyReference.cache
+C:\Users\Norwand\source\repos\KiddyAPI\KiddyAPI\obj\Debug\KiddyAPI.csproj.CoreCompileInputs.cache
+C:\Users\Norwand\source\repos\KiddyAPI\KiddyAPI\bin\Debug\KiddyAPI.pdb
+C:\Users\Norwand\source\repos\KiddyAPI\KiddyAPI\obj\Debug\KiddyAPI.dll
+C:\Users\Norwand\source\repos\KiddyAPI\KiddyAPI\obj\Debug\KiddyAPI.pdb
+C:\Users\Norwand\source\repos\KiddyAPI\KiddyAPI\obj\Debug\KiddyAPI.csproj.CopyComplete

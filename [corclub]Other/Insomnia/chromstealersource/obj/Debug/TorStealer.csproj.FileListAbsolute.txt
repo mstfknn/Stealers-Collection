@@ -1,0 +1,15 @@
+C:\Users\William\Desktop\TorStealer\obj\Debug\TorStealer.csprojResolveAssemblyReference.cache
+C:\Users\William\Desktop\TorStealer\bin\Debug\TorStealer.exe.config
+C:\Users\William\Desktop\TorStealer\bin\Debug\TorStealer.exe
+C:\Users\William\Desktop\TorStealer\bin\Debug\TorStealer.pdb
+C:\Users\William\Desktop\TorStealer\obj\Debug\TorStealer.exe
+C:\Users\William\Desktop\TorStealer\obj\Debug\TorStealer.pdb
+C:\Users\William\Desktop\TorStealer\bin\Debug\System.Data.SQLite.dll
+C:\Users\William\Desktop\New folder\TorStealer\bin\Debug\TorStealer.exe.config
+C:\Users\William\Desktop\New folder\TorStealer\obj\Debug\TorStealer.exe
+C:\Users\William\Desktop\New folder\TorStealer\obj\Debug\TorStealer.pdb
+C:\Users\William\Desktop\New folder\TorStealer\bin\Debug\TorStealer.exe
+C:\Users\William\Desktop\New folder\TorStealer\bin\Debug\TorStealer.pdb
+C:\Users\William\Desktop\New folder\TorStealer\bin\Debug\System.Data.SQLite.dll
+C:\Users\William\Desktop\New folder\TorStealer\obj\Debug\TorStealer.csprojResolveAssemblyReference.cache
+C:\Users\William\Desktop\TorStealer\bin\Debug\ChromeStealer.exe.config

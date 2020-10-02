@@ -1,0 +1,8 @@
+E:\Project\FoxGrabber\FoxGrabber\bin\Debug\FoxGrabber.exe
+E:\Project\FoxGrabber\FoxGrabber\bin\Debug\FoxGrabber.pdb
+E:\Project\FoxGrabber\FoxGrabber\obj\Debug\FoxGrabber.csproj.CoreCompileInputs.cache
+E:\Project\FoxGrabber\FoxGrabber\obj\Debug\FoxGrabber.exe
+E:\Project\FoxGrabber\FoxGrabber\obj\Debug\FoxGrabber.pdb
+E:\Project\FoxGrabber\FoxGrabber\bin\Debug\Newtonsoft.Json.dll
+E:\Project\FoxGrabber\FoxGrabber\obj\Debug\FoxGrabber.csproj.CopyComplete
+E:\Project\FoxGrabber\FoxGrabber\obj\Debug\FoxGrabber.csprojAssemblyReference.cache

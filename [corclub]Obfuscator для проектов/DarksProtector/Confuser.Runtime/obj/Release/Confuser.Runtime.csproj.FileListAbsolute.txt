@@ -1,0 +1,12 @@
+C:\Users\admin\Desktop\DarksProtector\DarksProtector\Release\bin\Confuser.Runtime.dll
+C:\Users\admin\Desktop\DarksProtector\DarksProtector\Release\bin\Confuser.Runtime.pdb
+C:\Users\admin\Desktop\DarksProtector\DarksProtector\Confuser.Runtime\obj\Release\Confuser.Runtime.csprojAssemblyReference.cache
+C:\Users\admin\Desktop\DarksProtector\DarksProtector\Confuser.Runtime\obj\Release\Confuser.Runtime.csproj.CoreCompileInputs.cache
+C:\Users\admin\Desktop\DarksProtector\DarksProtector\Confuser.Runtime\obj\Release\Confuser.Runtime.dll
+C:\Users\admin\Desktop\DarksProtector\DarksProtector\Confuser.Runtime\obj\Release\Confuser.Runtime.pdb
+D:\Файлы с браузеров\[In4.Bz] DarksProtector\DarksProtector\Release\bin\Confuser.Runtime.dll
+D:\Файлы с браузеров\[In4.Bz] DarksProtector\DarksProtector\Release\bin\Confuser.Runtime.pdb
+D:\Файлы с браузеров\[In4.Bz] DarksProtector\DarksProtector\Confuser.Runtime\obj\Release\Confuser.Runtime.csprojAssemblyReference.cache
+D:\Файлы с браузеров\[In4.Bz] DarksProtector\DarksProtector\Confuser.Runtime\obj\Release\Confuser.Runtime.csproj.CoreCompileInputs.cache
+D:\Файлы с браузеров\[In4.Bz] DarksProtector\DarksProtector\Confuser.Runtime\obj\Release\Confuser.Runtime.dll
+D:\Файлы с браузеров\[In4.Bz] DarksProtector\DarksProtector\Confuser.Runtime\obj\Release\Confuser.Runtime.pdb

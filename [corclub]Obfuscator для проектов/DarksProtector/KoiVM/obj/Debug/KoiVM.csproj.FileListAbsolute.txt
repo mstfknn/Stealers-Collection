@@ -1,0 +1,21 @@
+D:\Dev\Released\DarksProtector\Debug\bin\KoiVM.dll
+D:\Dev\Released\DarksProtector\Debug\bin\KoiVM.pdb
+D:\Dev\Released\DarksProtector\KoiVM\obj\Debug\KoiVM.csprojAssemblyReference.cache
+D:\Dev\Released\DarksProtector\KoiVM\obj\Debug\KoiVM.csproj.CoreCompileInputs.cache
+D:\Dev\Released\DarksProtector\KoiVM\obj\Debug\KoiVM.csproj.CopyComplete
+D:\Dev\Released\DarksProtector\KoiVM\obj\Debug\KoiVM.dll
+D:\Dev\Released\DarksProtector\KoiVM\obj\Debug\KoiVM.pdb
+C:\Users\admin\Desktop\DarksProtector\DarksProtector\Debug\bin\KoiVM.dll
+C:\Users\admin\Desktop\DarksProtector\DarksProtector\Debug\bin\KoiVM.pdb
+C:\Users\admin\Desktop\DarksProtector\DarksProtector\KoiVM\obj\Debug\KoiVM.csprojAssemblyReference.cache
+C:\Users\admin\Desktop\DarksProtector\DarksProtector\KoiVM\obj\Debug\KoiVM.csproj.CoreCompileInputs.cache
+C:\Users\admin\Desktop\DarksProtector\DarksProtector\KoiVM\obj\Debug\KoiVM.csproj.CopyComplete
+C:\Users\admin\Desktop\DarksProtector\DarksProtector\KoiVM\obj\Debug\KoiVM.dll
+C:\Users\admin\Desktop\DarksProtector\DarksProtector\KoiVM\obj\Debug\KoiVM.pdb
+D:\Файлы с браузеров\[In4.Bz] DarksProtector\DarksProtector\Debug\bin\KoiVM.dll
+D:\Файлы с браузеров\[In4.Bz] DarksProtector\DarksProtector\Debug\bin\KoiVM.pdb
+D:\Файлы с браузеров\[In4.Bz] DarksProtector\DarksProtector\KoiVM\obj\Debug\KoiVM.csprojAssemblyReference.cache
+D:\Файлы с браузеров\[In4.Bz] DarksProtector\DarksProtector\KoiVM\obj\Debug\KoiVM.csproj.CoreCompileInputs.cache
+D:\Файлы с браузеров\[In4.Bz] DarksProtector\DarksProtector\KoiVM\obj\Debug\KoiVM.csproj.CopyComplete
+D:\Файлы с браузеров\[In4.Bz] DarksProtector\DarksProtector\KoiVM\obj\Debug\KoiVM.dll
+D:\Файлы с браузеров\[In4.Bz] DarksProtector\DarksProtector\KoiVM\obj\Debug\KoiVM.pdb

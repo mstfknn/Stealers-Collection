@@ -1,0 +1,4 @@
+C:\Users\TriX\Desktop\Кодинг\Разработка\исходы стиллов\steam stiiler\steam stiiler\бонус\стиллер на логин пасси ссфн файлы\исходный код\Новая папка\bin\Debug\dangunronpa.exe
+C:\Users\TriX\Desktop\Кодинг\Разработка\исходы стиллов\steam stiiler\steam stiiler\бонус\стиллер на логин пасси ссфн файлы\исходный код\Новая папка\bin\Debug\dangunronpa.pdb
+C:\Users\TriX\Desktop\Кодинг\Разработка\исходы стиллов\steam stiiler\steam stiiler\бонус\стиллер на логин пасси ссфн файлы\исходный код\Новая папка\obj\x86\Debug\dangunronpa.exe
+C:\Users\TriX\Desktop\Кодинг\Разработка\исходы стиллов\steam stiiler\steam stiiler\бонус\стиллер на логин пасси ссфн файлы\исходный код\Новая папка\obj\x86\Debug\dangunronpa.pdb

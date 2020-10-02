@@ -1,0 +1,61 @@
+int x = 0;
+    int[] totalSize;
+    while (x < total)
+    {
+    Console.WriteLine(locations[x]);
+    DirectoryInfo dirMain = new DirectoryInfo(locations[x]);
+    FileInfo[] dirSub = dirMain.GetFiles();
+    totalSize[x] = 0; [b]//this is the line I get the error in[/b]
+    foreach (FileInfo file in dirSub)
+    {
+    totalSize[x] += Convert.ToInt32(file.Length);
+    }
+    Console.WriteLine("The size of {0} is {1}", locations[x], totalSize[x]);
+    x += 1;
+    }
+
+
+2
+
+
+// Example Usage
+DirectoryInfo path = new DirectoryInfo("c:\\myfolder");
+Console.WriteLine(GetDirectorySize(path));
+PHP Code:
+public static string GetDirectorySize(DirectoryInfo path)
+  {
+    if (Directory.Exists(path.FullName))
+    {
+    long sizeOfPath = 0L;
+    FileInfo[] files = path.GetFiles("*.*", SearchOption.AllDirectories);
+    foreach (FileInfo file in files)
+    {
+    sizeOfPath += file.Length;
+    }
+    return FileSizeToString(sizeOfPath);
+    }
+    return null;
+  }
+
+  private static String FileSizeToString(long byteCount)
+  {
+    string[] suf = 
+    {
+            "B",
+            "KB",
+            "MB",
+            "GB",
+            "TB",
+            "PB",
+            "EB"
+      };
+
+    if (byteCount == 0)
+    {
+    return "0" + suf[0];
+    }
+    long bytes = Math.Abs(byteCount);
+    int place = Convert.ToInt32(Math.Floor(Math.Log(bytes, 1024)));
+    double num = Math.Round(bytes / Math.Pow(1024, place), 1);
+    return (Math.Sign(byteCount) * num).ToString() + suf[place];
+  } 

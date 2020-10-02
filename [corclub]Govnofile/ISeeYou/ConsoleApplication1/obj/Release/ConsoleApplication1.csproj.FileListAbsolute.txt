@@ -1,0 +1,5 @@
+C:\Users\admin\Desktop\Server\ISeeYou\ConsoleApplication1\bin\Release\ConsoleApplication1.exe.config
+C:\Users\admin\Desktop\Server\ISeeYou\ConsoleApplication1\bin\Release\ConsoleApplication1.exe
+C:\Users\admin\Desktop\Server\ISeeYou\ConsoleApplication1\bin\Release\ConsoleApplication1.pdb
+C:\Users\admin\Desktop\Server\ISeeYou\ConsoleApplication1\obj\Release\ConsoleApplication1.exe
+C:\Users\admin\Desktop\Server\ISeeYou\ConsoleApplication1\obj\Release\ConsoleApplication1.pdb

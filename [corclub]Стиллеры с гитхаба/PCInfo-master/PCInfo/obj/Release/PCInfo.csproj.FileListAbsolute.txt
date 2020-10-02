@@ -1,0 +1,6 @@
+E:\Project\PCInfo\PCInfo\bin\Release\PCInfo.exe
+E:\Project\PCInfo\PCInfo\bin\Release\PCInfo.pdb
+E:\Project\PCInfo\PCInfo\obj\Release\PCInfo.csprojAssemblyReference.cache
+E:\Project\PCInfo\PCInfo\obj\Release\PCInfo.csproj.CoreCompileInputs.cache
+E:\Project\PCInfo\PCInfo\obj\Release\PCInfo.exe
+E:\Project\PCInfo\PCInfo\obj\Release\PCInfo.pdb

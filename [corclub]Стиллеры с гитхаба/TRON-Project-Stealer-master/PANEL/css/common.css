@@ -1,0 +1,56 @@
+body {
+	background-color: #111;
+	font-family: 'TRON LEGACY', sans-serif;
+	font-size: 13pt;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+}
+
+@font-face {
+	font-family: 'TRON LEGACY';
+	src: url('/css/tron1.ttf');
+}
+
+#main {
+	margin-top: 100px;
+	border: #15adce 1px solid;
+	padding: 3px 13px;
+	border-radius: 6px;
+	box-shadow: 0 0 10px #15adce;
+	display: flex;
+	align-items: center;
+	flex-direction: row;
+}
+
+a {
+	color: #b5b5b5;
+	text-decoration: none;
+}
+
+#project {
+	margin-top: 100px;
+	margin-bottom: 30px;
+	color: #15adce;
+	-webkit-animation: glow 1s ease-in-out infinite alternate;
+	-moz-animation: glow 1s ease-in-out infinite alternate;
+	animation: glow 1s ease-in-out infinite alternate;
+}
+
+@-webkit-keyframes glow {
+	from {
+		text-shadow: 0 0 0px #15adce, 0 0 20px #15adce;
+	}
+	to {
+		text-shadow: 0 0 20px #15adce, 0 0 30px #15adce;
+	}
+}
+
+@-webkit-keyframes glow1 {
+	from {
+		text-shadow: 0 0 5px #15adce, 0 0 15px #15adce;
+	}
+	to {
+		text-shadow: 0 0 10px #15adce, 0 0 20px #15adce;
+	}
+}

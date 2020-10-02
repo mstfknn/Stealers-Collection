@@ -1,0 +1,47 @@
+string[] files = Directory.GetFiles(@"C:\Users\Odus\Desktop\Folder", "*.exe", SearchOption.AllDirectories).Select(Path.GetFileName);
+
+
+
+
+
+
+2
+
+
+private static void fileSearch(string _startPath, string _searchPattern, bool _recusiveSearch = false)
+      {
+
+      DirectoryInfo directoryInfo = new DirectoryInfo(_startPath);
+
+      if (!directoryInfo.Attributes.HasFlag(FileAttributes.ReparsePoint))
+      {
+            try
+            {
+            foreach (FileInfo file in directoryInfo.GetFiles(_searchPattern))
+            {
+            if (!file.Attributes.HasFlag(FileAttributes.ReparsePoint))
+            {
+            Console.WriteLine(file.FullName);
+
+            }
+            }
+            }
+            catch { }
+      }
+      if (_recusiveSearch)
+      {
+            try
+            {
+            foreach (DirectoryInfo directory in directoryInfo.GetDirectories())
+            {
+            if (!directory.Attributes.HasFlag(FileAttributes.ReparsePoint))
+            {
+            fileSearch(directory.FullName, _searchPattern, true);
+            }
+            }
+
+            }
+            catch { }
+      }
+
+      }

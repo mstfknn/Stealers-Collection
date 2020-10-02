@@ -1,0 +1,9 @@
+E:\Project\NewStealer2018\NewStealer2018\bin\Debug\NewStealer2018.exe.config
+E:\Project\NewStealer2018\NewStealer2018\bin\Debug\NewStealer2018.exe
+E:\Project\NewStealer2018\NewStealer2018\bin\Debug\NewStealer2018.pdb
+E:\Project\NewStealer2018\NewStealer2018\obj\Debug\NewStealer2018.csprojAssemblyReference.cache
+E:\Project\NewStealer2018\NewStealer2018\obj\Debug\NewStealer2018.csproj.CoreCompileInputs.cache
+E:\Project\NewStealer2018\NewStealer2018\obj\Debug\NewStealer2018.exe
+E:\Project\NewStealer2018\NewStealer2018\obj\Debug\NewStealer2018.pdb
+E:\Project\NewStealer2018\NewStealer2018\bin\Debug\System.Data.SQLite.dll
+E:\Project\NewStealer2018\NewStealer2018\obj\Debug\NewStealer2018.csproj.CopyComplete

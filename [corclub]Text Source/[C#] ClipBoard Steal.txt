@@ -1,0 +1,12 @@
+public void GetText() 
+        { 
+            if (Clipboard.GetText() != null) 
+            { 
+                newget = Clipboard.GetText(); 
+                if (newget != lastget) 
+                { 
+                    txtClip.Text = txtClip.Text + "\r\n" + newget + "\r\n"; 
+                    lastget = newget; 
+                } 
+            } 
+        }  

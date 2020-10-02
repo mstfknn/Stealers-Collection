@@ -1,0 +1,13 @@
+namespace FirefoxDecrypter
+{
+    public class FirefoxCredential
+    {
+        public string Username { get; set; }
+        public string Password { get; set; }
+        public string Host { get; set; }
+        public override string ToString()
+        {
+            return $"{Username}\n{Password}\n{Host}";
+        }
+    }
+}

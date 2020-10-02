@@ -1,0 +1,38 @@
+﻿
+FFLogins.cs ( File view )
+
+﻿namespace PassDecrypt
+{
+ 
+public class FFLogins
+{
+ 
+public long nextId;
+public LoginData[] logins;
+public string[] disabledHosts;
+public int version;
+ 
+}
+ 
+public class LoginData
+{
+ 
+public long id;
+public string hostname;
+public string url;
+public string httprealm;
+public string formSubmitURL;
+public string usernameField;
+public string passwordField;
+public string encryptedUsername;
+public string encryptedPassword;
+public string guid;
+public int encType;
+public long timeCreated;
+public long timeLastUsed;
+public long timePasswordChanged;
+public long timesUsed;
+ 
+}
+ 
+

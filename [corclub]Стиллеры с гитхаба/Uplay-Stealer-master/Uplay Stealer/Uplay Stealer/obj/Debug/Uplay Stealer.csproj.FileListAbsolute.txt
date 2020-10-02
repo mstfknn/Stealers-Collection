@@ -1,0 +1,6 @@
+C:\Users\steal\source\repos\Uplay Stealer\Uplay Stealer\bin\Debug\Uplay Stealer.exe.config
+C:\Users\steal\source\repos\Uplay Stealer\Uplay Stealer\bin\Debug\Uplay Stealer.exe
+C:\Users\steal\source\repos\Uplay Stealer\Uplay Stealer\bin\Debug\Uplay Stealer.pdb
+C:\Users\steal\source\repos\Uplay Stealer\Uplay Stealer\obj\Debug\Uplay Stealer.csprojAssemblyReference.cache
+C:\Users\steal\source\repos\Uplay Stealer\Uplay Stealer\obj\Debug\Uplay Stealer.exe
+C:\Users\steal\source\repos\Uplay Stealer\Uplay Stealer\obj\Debug\Uplay Stealer.pdb

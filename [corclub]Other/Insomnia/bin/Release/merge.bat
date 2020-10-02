@@ -1,0 +1,1 @@
+ilmerge.exe /target:winexe /out:merged.exe insomnia.exe Interop.UPNPLib.dll SQLiteHandler.dll

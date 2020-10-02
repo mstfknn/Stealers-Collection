@@ -1,0 +1,4 @@
+6tk25599.default
+C:\Program Files\Mozilla Firefox
+Profiles/6tk25599.default
+C:\Users\Antlion\AppData\Roaming\Mozilla\Firefox\Profiles\6tk25599.default

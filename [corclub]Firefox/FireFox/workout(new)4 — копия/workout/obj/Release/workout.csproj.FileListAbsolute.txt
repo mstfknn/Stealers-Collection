@@ -1,0 +1,34 @@
+c:\users\администратор\documents\visual studio 2015\Projects\workout\workout\bin\Release\workout.exe
+c:\users\администратор\documents\visual studio 2015\Projects\workout\workout\bin\Release\workout.pdb
+c:\users\администратор\documents\visual studio 2015\Projects\workout\workout\bin\Release\System.Net.Http.dll
+c:\users\администратор\documents\visual studio 2015\Projects\workout\workout\bin\Release\System.Net.Http.xml
+c:\users\администратор\documents\visual studio 2015\Projects\workout\workout\obj\Release\workout.csprojResolveAssemblyReference.cache
+c:\users\администратор\documents\visual studio 2015\Projects\workout\workout\obj\Release\workout.Form1.resources
+c:\users\администратор\documents\visual studio 2015\Projects\workout\workout\obj\Release\workout.Properties.Resources.resources
+c:\users\администратор\documents\visual studio 2015\Projects\workout\workout\obj\Release\workout.csproj.GenerateResource.Cache
+c:\users\администратор\documents\visual studio 2015\Projects\workout\workout\obj\Release\workout.exe
+c:\users\администратор\documents\visual studio 2015\Projects\workout\workout\obj\Release\workout.pdb
+E:\Program\workout(new)4\workout\obj\Release\workout.exe
+E:\Program\workout(new)4\workout\obj\Release\workout.pdb
+E:\Program\workout(new)4\workout\bin\Release\workout.exe
+E:\Program\workout(new)4\workout\bin\Release\workout.pdb
+E:\Program\workout(new)4\workout\bin\Release\System.Net.Http.dll
+E:\Program\workout(new)4\workout\bin\Release\System.Net.Http.xml
+E:\Program\workout(new)4\workout\obj\Release\workout.csprojResolveAssemblyReference.cache
+E:\Program\workout(new)4\workout\obj\Release\workout.Form1.resources
+E:\Program\workout(new)4\workout\obj\Release\workout.Properties.Resources.resources
+E:\Program\workout(new)4\workout\obj\Release\workout.csproj.GenerateResource.Cache
+E:\Program\workout(new)4\workout\obj\Release\workout.csproj.CoreCompileInputs.cache
+E:\Program\workout(new)4\workout\obj\Release\workout.csproj.CopyComplete
+E:\Program\workout(new)4 — копия\workout\bin\Release\workout.exe
+E:\Program\workout(new)4 — копия\workout\bin\Release\workout.pdb
+E:\Program\workout(new)4 — копия\workout\bin\Release\System.Net.Http.dll
+E:\Program\workout(new)4 — копия\workout\bin\Release\System.Net.Http.xml
+E:\Program\workout(new)4 — копия\workout\obj\Release\workout.csprojResolveAssemblyReference.cache
+E:\Program\workout(new)4 — копия\workout\obj\Release\workout.Form1.resources
+E:\Program\workout(new)4 — копия\workout\obj\Release\workout.Properties.Resources.resources
+E:\Program\workout(new)4 — копия\workout\obj\Release\workout.csproj.GenerateResource.cache
+E:\Program\workout(new)4 — копия\workout\obj\Release\workout.csproj.CoreCompileInputs.cache
+E:\Program\workout(new)4 — копия\workout\obj\Release\workout.csproj.CopyComplete
+E:\Program\workout(new)4 — копия\workout\obj\Release\workout.exe
+E:\Program\workout(new)4 — копия\workout\obj\Release\workout.pdb

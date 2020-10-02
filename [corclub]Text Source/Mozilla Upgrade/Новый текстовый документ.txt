@@ -1,0 +1,70 @@
+For this, I used a solution readily available in C# which I found here, but I have updated it to work with the most recent version of Firefox and repacked into FFDecryptor class. This is wrapper around functions which Firefox use to store and retrieve passwords, and which are exported from nss3.dll. There are no wrappers for these in .NET so interop with P/Invoke has to be utilised. Functions have the following signatures:
+
+long NSS_Init(string configdir);
+int PK11SDR_Decrypt(ref TSECItem data, ref TSECItem result, int cx);
+long PK11_GetInternalKeySlot();
+long PK11_Authenticate(long slot, bool loadCerts, long wincx);
+int NSSBase64_DecodeBuffer(IntPtr arenaOpt, IntPtr outItemOpt, StringBuilder inStr, int inLen);
+
+
+and structure TSECItem referenced in PK11SDR_Decrypt has the following declaration:
+
+private struct TSECItem
+{
+    public int SECItemType;
+    public int SECItemData;
+    public int SECItemLen;
+}
+
+
+
+To aquire these functions, we load nss3.dll (which has the following dependencies: msvcr100.dll, msvcp100.dll, mozglue.dll) by using LoadLibrary from Win32 API (kernel32.dll), and initialize decrypter by calling NSS_Init. All of this is done in Init() function of FFDecryptor class. Folder which contains the database, %APPDATA% profile folder, is passed as a parameter.
+
+
+
+public static void Init(string configDir)
+{
+    string mozillaPath = Environment.GetEnvironmentVariable("ProgramFiles(x86)") + @"\Mozilla Firefox\";
+
+    if (!Directory.Exists(mozillaPath))
+        mozillaPath = Environment.GetFolderPath
+        (Environment.SpecialFolder.ProgramFiles) + @"\Mozilla Firefox\";
+
+    if (!Directory.Exists(mozillaPath))
+        throw new ArgumentException
+        ("Mozilla Firefox install folder cannot be found.");
+    LoadLibrary(mozillaPath + "msvcr100.dll");
+    LoadLibrary(mozillaPath + "msvcp100.dll");
+    LoadLibrary(mozillaPath + "mozglue.dll");
+    _nss3DllPtr = LoadLibrary(mozillaPath + "nss3.dll");
+    IntPtr pProc = GetProcAddress(_nss3DllPtr, "NSS_Init");
+    NSS_InitPtr NSS_Init = 
+    (NSS_InitPtr)Marshal.GetDelegateForFunctionPointer(pProc, typeof(NSS_InitPtr));
+    NSS_Init(configDir);
+
+    long keySlot = PK11_GetInternalKeySlot();
+    PK11_Authenticate(keySlot, true, 0);
+}
+
+
+
+User name and password are stored as an encrypted string. To decrypt it, the following function from static FFDecryptor class is used:
+
+
+public static string Decrypt(string cypherText)
+{
+    StringBuilder sb = new StringBuilder(cypherText);
+    int hi2 = NSSBase64_DecodeBuffer(IntPtr.Zero, IntPtr.Zero, sb, sb.Length);
+    TSECItem tSecDec = new TSECItem();
+    TSECItem item = (TSECItem)Marshal.PtrToStructure(new IntPtr(hi2), typeof(TSECItem));
+    if (PK11SDR_Decrypt(ref item, ref tSecDec, 0) == 0)
+    {
+        if (tSecDec.SECItemLen != 0)
+        {
+            byte[] bvRet = new byte[tSecDec.SECItemLen];
+            Marshal.Copy(new IntPtr(tSecDec.SECItemData), bvRet, 0, tSecDec.SECItemLen);
+            return Encoding.ASCII.GetString(bvRet);
+        }
+    }
+    return null;
+}

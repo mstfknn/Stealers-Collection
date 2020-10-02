@@ -1,0 +1,71 @@
+#sidenav {
+	background-color: #111;
+	height: 70vh;
+	width: 185px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	display: block;
+	border: #15adce 1px solid;
+}
+
+#sidenav a {
+	padding: 12px 12px 12px 12px;
+	font-size: 20pt;
+	color: #15adce;
+	display: block;
+	text-align: center;
+	letter-spacing: 2px;
+}
+
+#sidenav a:hover {
+	text-shadow: 0 0 10px #15adce;
+}
+
+table {
+	background: #111;
+	font-family: Andale Mono, monospace;
+	font-size: 18px;
+	text-align: center;
+	border-collapse: collapse;
+	height: 70vh;
+	overflow-x: hidden;
+	overflow-y: auto;
+	display: block;
+	border: #15adce 1px solid;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	margin-left: 10px;
+}
+
+th {
+	font-size: 20pt;
+	font-weight: 400;
+	letter-spacing: 2px;
+	font-family: 'TRON LEGACY', sans-serif;
+	width: 200px;
+	color: #15adce;
+	border-bottom: 1px solid #15adce;
+	text-shadow: 0 0 20px;
+}
+
+td {
+	padding: 10px 5px;
+}
+
+td:nth-child(-n+3) {
+	text-align: center;
+}
+
+::-webkit-scrollbar {
+	width: 5px;
+}
+
+::-webkit-scrollbar-track {
+	background: #111;
+	border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+	background: #15adce;
+	border-radius: 5px;
+}

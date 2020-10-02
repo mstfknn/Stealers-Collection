@@ -1,0 +1,6 @@
+C:\Users\Rudnight\Desktop\loki\C#_Source\bin\x86\Debug\loki.exe.config
+C:\Users\Rudnight\Desktop\loki\C#_Source\bin\x86\Debug\loki.exe
+C:\Users\Rudnight\Desktop\loki\C#_Source\bin\x86\Debug\loki.pdb
+C:\Users\Rudnight\Desktop\loki\C#_Source\obj\x86\Debug\loki.csprojAssemblyReference.cache
+C:\Users\Rudnight\Desktop\loki\C#_Source\obj\x86\Debug\loki.exe
+C:\Users\Rudnight\Desktop\loki\C#_Source\obj\x86\Debug\loki.pdb

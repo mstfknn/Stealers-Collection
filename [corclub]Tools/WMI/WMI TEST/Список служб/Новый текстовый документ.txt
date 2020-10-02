@@ -1,0 +1,19 @@
+ ManagementObjectSearcher searcher3 =
+        new ManagementObjectSearcher("root\\CIMV2",
+            "SELECT * FROM Win32_Service");
+
+            foreach (ManagementObject queryObj in searcher3.Get())
+            {
+                Console.WriteLine("-----------------------------------");
+                Console.WriteLine("Win32_Service instance");
+                Console.WriteLine("-----------------------------------");
+                Console.WriteLine("Caption: {0}", queryObj["Caption"]);
+                Console.WriteLine("Description: {0}", queryObj["Description"]);
+                Console.WriteLine("DisplayName: {0}", queryObj["DisplayName"]);
+                Console.WriteLine("Name: {0}", queryObj["Name"]);
+                Console.WriteLine("PathName: {0}", queryObj["PathName"]);
+                Console.WriteLine("Started: {0}", queryObj["Started"]);
+            }
+
+            Console.Write("Press any key to continue . . . ");
+            Console.ReadKey(true);

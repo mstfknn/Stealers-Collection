@@ -1,0 +1,18 @@
+C:\Users\admin\Desktop\DarksProtector\DarksProtector\Debug\bin\Confuser.Protections.dll
+C:\Users\admin\Desktop\DarksProtector\DarksProtector\Debug\bin\Confuser.Protections.pdb
+C:\Users\admin\Desktop\DarksProtector\DarksProtector\Confuser.Protections\obj\Debug\Confuser.Protections.csprojAssemblyReference.cache
+C:\Users\admin\Desktop\DarksProtector\DarksProtector\Confuser.Protections\obj\Debug\Confuser.Protections.Properties.Resources.resources
+C:\Users\admin\Desktop\DarksProtector\DarksProtector\Confuser.Protections\obj\Debug\Confuser.Protections.csproj.GenerateResource.cache
+C:\Users\admin\Desktop\DarksProtector\DarksProtector\Confuser.Protections\obj\Debug\Confuser.Protections.csproj.CoreCompileInputs.cache
+C:\Users\admin\Desktop\DarksProtector\DarksProtector\Confuser.Protections\obj\Debug\Confuser.Protections.csproj.CopyComplete
+C:\Users\admin\Desktop\DarksProtector\DarksProtector\Confuser.Protections\obj\Debug\Confuser.Protections.dll
+C:\Users\admin\Desktop\DarksProtector\DarksProtector\Confuser.Protections\obj\Debug\Confuser.Protections.pdb
+D:\Файлы с браузеров\[In4.Bz] DarksProtector\DarksProtector\Debug\bin\Confuser.Protections.dll
+D:\Файлы с браузеров\[In4.Bz] DarksProtector\DarksProtector\Debug\bin\Confuser.Protections.pdb
+D:\Файлы с браузеров\[In4.Bz] DarksProtector\DarksProtector\Confuser.Protections\obj\Debug\Confuser.Protections.csprojAssemblyReference.cache
+D:\Файлы с браузеров\[In4.Bz] DarksProtector\DarksProtector\Confuser.Protections\obj\Debug\Confuser.Protections.Properties.Resources.resources
+D:\Файлы с браузеров\[In4.Bz] DarksProtector\DarksProtector\Confuser.Protections\obj\Debug\Confuser.Protections.csproj.GenerateResource.cache
+D:\Файлы с браузеров\[In4.Bz] DarksProtector\DarksProtector\Confuser.Protections\obj\Debug\Confuser.Protections.csproj.CoreCompileInputs.cache
+D:\Файлы с браузеров\[In4.Bz] DarksProtector\DarksProtector\Confuser.Protections\obj\Debug\Confuser.Protections.csproj.CopyComplete
+D:\Файлы с браузеров\[In4.Bz] DarksProtector\DarksProtector\Confuser.Protections\obj\Debug\Confuser.Protections.dll
+D:\Файлы с браузеров\[In4.Bz] DarksProtector\DarksProtector\Confuser.Protections\obj\Debug\Confuser.Protections.pdb

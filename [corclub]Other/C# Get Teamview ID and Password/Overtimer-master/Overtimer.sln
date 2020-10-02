@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2026
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Overtimer", "Overtimer\Overtimer.csproj", "{BBEC2FED-30A4-47D5-8ADF-67F31C0A02C9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Timeviewer", "Timeviewer\Timeviewer.csproj", "{35C9BB65-BE90-4A69-817F-7A35DDA0AAAF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BBEC2FED-30A4-47D5-8ADF-67F31C0A02C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBEC2FED-30A4-47D5-8ADF-67F31C0A02C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBEC2FED-30A4-47D5-8ADF-67F31C0A02C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBEC2FED-30A4-47D5-8ADF-67F31C0A02C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35C9BB65-BE90-4A69-817F-7A35DDA0AAAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35C9BB65-BE90-4A69-817F-7A35DDA0AAAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35C9BB65-BE90-4A69-817F-7A35DDA0AAAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35C9BB65-BE90-4A69-817F-7A35DDA0AAAF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {836EE4C6-6331-410C-8FBD-EE718914FF17}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,9 @@
+C:\Users\admin\Desktop\Server\ISeeYou\ISeeYou\bin\Debug\ISeeYou.exe.config
+C:\Users\admin\Desktop\Server\ISeeYou\ISeeYou\obj\Debug\ISeeYou.csprojResolveAssemblyReference.cache
+C:\Users\admin\Desktop\Server\ISeeYou\ISeeYou\obj\Debug\ISeeYou.Form1.resources
+C:\Users\admin\Desktop\Server\ISeeYou\ISeeYou\obj\Debug\ISeeYou.Properties.Resources.resources
+C:\Users\admin\Desktop\Server\ISeeYou\ISeeYou\obj\Debug\ISeeYou.csproj.GenerateResource.Cache
+C:\Users\admin\Desktop\Server\ISeeYou\ISeeYou\bin\Debug\ISeeYou.exe
+C:\Users\admin\Desktop\Server\ISeeYou\ISeeYou\bin\Debug\ISeeYou.pdb
+C:\Users\admin\Desktop\Server\ISeeYou\ISeeYou\obj\Debug\ISeeYou.exe
+C:\Users\admin\Desktop\Server\ISeeYou\ISeeYou\obj\Debug\ISeeYou.pdb

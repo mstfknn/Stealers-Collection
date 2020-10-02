@@ -1,0 +1,15 @@
+private string GetActiveWindowTitle()
+{
+	IntPtr hWnd = IntPtr.Zero;
+	StringBuilder stringBuilder = new StringBuilder(256);
+	hWnd = Pinlogger.GetForegroundWindow();
+	if (Pinlogger.GetWindowText(hWnd, stringBuilder, 256) > 0)
+	{
+		return stringBuilder.ToString();
+	}
+	return null;
+}
+[DllImport("user32.dll")]
+private static extern IntPtr GetForegroundWindow();
+[DllImport("user32.dll")]
+private static extern int GetWindowText(IntPtr hWnd, StringBuilder text, int count);

@@ -1,0 +1,8 @@
+ManagementObjectSearcher searcher = 
+                    new ManagementObjectSearcher("root\\CIMV2", 
+                    "SELECT * FROM Win32_BIOS"); 
+
+                foreach (ManagementObject queryObj in searcher.Get())
+                {
+                    Console.WriteLine("ม่๎๑ {0}", queryObj["Name"]);
+                }

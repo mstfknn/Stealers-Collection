@@ -1,0 +1,5 @@
+E:\Project\FireFoxStealer\FireFoxStealer\bin\Debug\FireFoxStealer.exe
+E:\Project\FireFoxStealer\FireFoxStealer\bin\Debug\FireFoxStealer.pdb
+E:\Project\FireFoxStealer\FireFoxStealer\obj\x86\Debug\FireFoxStealer.exe
+E:\Project\FireFoxStealer\FireFoxStealer\obj\x86\Debug\FireFoxStealer.pdb
+E:\Project\FireFoxStealer\FireFoxStealer\bin\Debug\Newtonsoft.Json.Net20.dll

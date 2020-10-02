@@ -1,0 +1,18 @@
+D:\MY PROJECTS\ChromeStealer\chrstealer\chrstealer\bin\Debug\chrstealer.exe.config
+D:\MY PROJECTS\ChromeStealer\chrstealer\chrstealer\obj\Debug\chrstealer.csprojResolveAssemblyReference.cache
+D:\MY PROJECTS\ChromeStealer\chrstealer\chrstealer\obj\Debug\chrstealer.Properties.Resources.resources
+D:\MY PROJECTS\ChromeStealer\chrstealer\chrstealer\obj\Debug\chrstealer.csproj.GenerateResource.Cache
+D:\MY PROJECTS\ChromeStealer\chrstealer\chrstealer\bin\Debug\chrstealer.exe
+D:\MY PROJECTS\ChromeStealer\chrstealer\chrstealer\bin\Debug\chrstealer.pdb
+D:\MY PROJECTS\ChromeStealer\chrstealer\chrstealer\bin\Debug\System.Data.SQLite.dll
+D:\MY PROJECTS\ChromeStealer\chrstealer\chrstealer\bin\Debug\System.Data.SQLite.xml
+D:\MY PROJECTS\ChromeStealer\chrstealer\chrstealer\obj\Debug\chrstealer.exe
+D:\MY PROJECTS\ChromeStealer\chrstealer\chrstealer\obj\Debug\chrstealer.pdb
+D:\MY PROJECTS\ChromeStealer\chrstealer\chrstealer\obj\Debug\chrstealer.frmMain.resources
+D:\MY PROJECTS\ChromeStealer\chrstealer\chrstealer\obj\Debug\chrstealer.frmAbout.resources
+C:\Users\TriX\Desktop\chrstealer [bin source_c#]\chrstealer\chrstealer\bin\Debug\chrstealer.exe.config
+C:\Users\TriX\Desktop\chrstealer [bin source_c#]\chrstealer\chrstealer\obj\Debug\chrstealer.pdb
+C:\Users\TriX\Desktop\chrstealer [bin source_c#]\chrstealer\chrstealer\obj\Debug\chrstealer.csprojResolveAssemblyReference.cache
+C:\Users\TriX\Desktop\chrstealer [bin source_c#]\chrstealer\chrstealer\obj\Debug\chrstealer.csproj.GenerateResource.Cache
+C:\Users\TriX\Desktop\chrstealer [bin source_c#]\chrstealer\chrstealer\obj\Debug\chrstealer.frmMain.resources
+C:\Users\TriX\Desktop\chrstealer [bin source_c#]\chrstealer\chrstealer\obj\Debug\chrstealer.frmAbout.resources
